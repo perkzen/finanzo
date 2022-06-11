@@ -9,11 +9,7 @@ const Home: NextPage = () => {
   const handleSignOut = async () => {
     await signOut({
       redirect: true,
-      callbackUrl: `${
-        process.env.NEXT_PUBLIC_VERCEL_URL
-          ? process.env.NEXT_PUBLIC_VERCEL_URL
-          : 'http://localhost:3000'
-      }/`,
+      callbackUrl: '/',
     });
   };
 
