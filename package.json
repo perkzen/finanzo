@@ -17,11 +17,15 @@
     "@trpc/next": "^9.24.0",
     "@trpc/react": "^9.24.0",
     "@trpc/server": "^9.24.0",
+    "chart.js": "^3.8.0",
     "daisyui": "^2.15.3",
+    "faker": "^6.6.6",
     "next": "12.1.6",
     "next-auth": "^4.4.0",
     "react": "18.1.0",
+    "react-chartjs-2": "^4.2.0",
     "react-dom": "18.1.0",
+    "react-hook-form": "^7.32.0",
     "react-icons": "^4.4.0",
     "react-query": "^3.39.1",
     "sass": "^1.52.3",
@@ -29,6 +33,7 @@
     "zod": "^3.17.3"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.2.0",
     "@types/node": "17.0.42",
     "@types/react": "18.0.12",
     "@types/react-dom": "18.0.5",

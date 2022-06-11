@@ -1,0 +1,12 @@
+
+@import "src/styles/mixin.scss";
+.Container {
+  @apply rounded-lg h-fit;
+
+  thead {
+    th {
+      @apply bg-accent;
+    }
+  }
+
+}

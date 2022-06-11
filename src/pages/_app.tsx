@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { withTRPC } from '@trpc/next';
 import superjson from 'superjson';
 import { AppRouter } from '../backend/router';
+import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -17,7 +18,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <meta name="description" content="Self finance management app." />
       </Head>
       <SessionProvider>
-        <Component {...pageProps} />
+        <LayoutProvider>
+          <Component {...pageProps} />
+        </LayoutProvider>
       </SessionProvider>
     </>
   );

@@ -1,0 +1,26 @@
+.Container {
+  @apply flex flex-col w-full justify-evenly;
+
+  @media (min-width: 768px) {
+    @apply flex-row;
+  }
+
+
+  .Table {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      @apply w-1/2;
+    }
+  }
+
+  .Form {
+    width: 100%;
+    @apply mt-5;
+
+    @media (min-width: 768px) {
+      @apply w-1/4 mt-20;
+    }
+  }
+
+}

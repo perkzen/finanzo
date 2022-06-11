@@ -1,0 +1,6 @@
+@import "src/styles/mixin.scss";
+
+.Container {
+  @include glass;
+@apply  shadow p-2 h-fit rounded-lg;
+}

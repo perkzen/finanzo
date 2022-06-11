@@ -1,0 +1,19 @@
+@import "src/styles/mixin.scss";
+
+.Container {
+  @apply flex flex-col w-full justify-evenly;
+
+  @media (min-width: 768px) {
+    @apply flex-row;
+  }
+
+  .TableContainer {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      @apply w-1/2;
+    }
+  }
+
+
+}
