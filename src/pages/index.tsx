@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import classes from '../styles/index.module.scss';
-import { FcGoogle } from 'react-icons/fc';
-import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const handleLoginWithGoogle = async () => {
-    await signIn();
+  const router = useRouter();
+  const handleClick = async () => {
+    await router.push('/home');
   };
 
   return (
@@ -15,9 +15,8 @@ const Home: NextPage = () => {
         <h2 className={'font-bold'}>
           manage your monthly expenses and incomes
         </h2>
-        <button className={'btn'} onClick={handleLoginWithGoogle}>
-          <FcGoogle />
-          Login with Google
+        <button className={'btn'} onClick={handleClick}>
+          Let`&lsquo;`s get started
         </button>
       </div>
     </div>
