@@ -1,12 +1,22 @@
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <>
+      <Head>
+        <title>Finanzo</title>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="English" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Self finance management app." />
+      </Head>
+      <SessionProvider>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </>
   );
 }
 

@@ -10,7 +10,7 @@ export default NextAuth({
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/login',
+    signIn: '/',
   },
   providers: [
     // ...add more providers here
