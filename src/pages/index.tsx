@@ -7,7 +7,11 @@ const Home: NextPage = () => {
   const handleLoginWithGoogle = async () => {
     await signIn('google', {
       redirect: true,
-      callbackUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}/home`,
+      callbackUrl: `${
+        process.env.NEXT_PUBLIC_VERCEL_URL
+          ? process.env.NEXT_PUBLIC_VERCEL_URL
+          : 'http://localhost:3000'
+      }/home`,
     });
   };
 
