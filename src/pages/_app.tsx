@@ -1,9 +1,12 @@
 import '../styles/globals.scss';
-import type { AppProps } from 'next/app';
+import { AppType } from 'next/dist/shared/lib/utils';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
+import { withTRPC } from '@trpc/next';
+import superjson from 'superjson';
+import { AppRouter } from '../backend/router';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
@@ -18,6 +21,29 @@ function MyApp({ Component, pageProps }: AppProps) {
       </SessionProvider>
     </>
   );
-}
+};
 
-export default MyApp;
+export default withTRPC<AppRouter>({
+  config({ ctx }) {
+    /**
+     * If you want to use SSR, you need to use the server's full URL
+     * @link https://trpc.io/docs/ssr
+     */
+    const url = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}/api/trpc`
+      : 'http://localhost:3000/api/trpc';
+
+    return {
+      url,
+      transformer: superjson,
+      /**
+       * @link https://react-query.tanstack.com/reference/QueryClient
+       */
+      // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+    };
+  },
+  /**
+   * @link https://trpc.io/docs/ssr
+   */
+  ssr: false,
+})(MyApp);

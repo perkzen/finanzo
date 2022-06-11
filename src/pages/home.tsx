@@ -1,9 +1,10 @@
 import React from 'react';
 import { NextPage } from 'next';
-import { useSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
-  const session = useSession();
+  const { data } = trpc.useQuery(['hello.get-greeting']);
 
   const handleSignOut = async () => {
     await signOut({ redirect: true, callbackUrl: '/' });
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <code>{JSON.stringify(session.data)}</code>
+      <h1>{data?.greeting}</h1>
       <button className={'btn'} onClick={handleSignOut}>
         Logout
       </button>
