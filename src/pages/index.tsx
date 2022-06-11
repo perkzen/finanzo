@@ -5,14 +5,7 @@ import { signIn } from 'next-auth/react';
 
 const Home: NextPage = () => {
   const handleLoginWithGoogle = async () => {
-    await signIn('google', {
-      redirect: true,
-      callbackUrl: `${
-        process.env.NEXT_PUBLIC_VERCEL_URL
-          ? process.env.NEXT_PUBLIC_VERCEL_URL
-          : 'http://localhost:3000'
-      }/home`,
-    });
+    await signIn('google');
   };
 
   return (
