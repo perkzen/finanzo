@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Finanzo</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="language" content="English" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="description" content="Self finance management app." />
       </Head>
       <SessionProvider>

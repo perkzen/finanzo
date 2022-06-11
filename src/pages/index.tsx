@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react';
 
 const Home: NextPage = () => {
   const handleLoginWithGoogle = async () => {
-    await signIn('google');
+    await signIn('google', { redirect: true, callbackUrl: '/home' });
   };
 
   return (
