@@ -29,6 +29,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
@@ -37,6 +38,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model User {
@@ -48,6 +51,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   MonthlyReport MonthlyReport[]
+
+  @@map("users")
 }
 
 model VerificationToken {
@@ -56,6 +61,7 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_tokens")
 }
 
 model Expense {
@@ -66,6 +72,8 @@ model Expense {
   createdAt       DateTime      @default(now())
   monthylReportId String
   monthylReport   MonthlyReport @relation(fields: [monthylReportId], references: [id], onDelete: Cascade)
+
+  @@map("expenses")
 }
 
 model MonthlyReport {
@@ -75,4 +83,6 @@ model MonthlyReport {
   userId  String
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   Expense Expense[]
+
+  @@map("monthly_reports")
 }
