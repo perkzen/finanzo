@@ -49,11 +49,12 @@ const Home: NextPage = () => {
             headers={headers}
             data={data}
             onRowClick={handleRowClick}
-            title={'Yearly Report'}
+            title={''}
           />
+          <Stats income={400} expense={600} />
         </div>
 
-        <div className={'flex flex-col justify-evenly gap-5 mt-10'}>
+        <div className={'flex flex-col justify-evenly mb-20'}>
           <Card>
             <div className="tabs">
               <a
@@ -77,7 +78,6 @@ const Home: NextPage = () => {
             </div>
             <PieChart title={'Income Analysis'} />
           </Card>
-          <Stats income={400} expense={600} />
         </div>
       </div>
     </>

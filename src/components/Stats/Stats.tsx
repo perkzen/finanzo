@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import cash from '../../assets/cash.png';
 import dollar from '../../assets/dollar.png';
 import donate from '../../assets/donate.png';
-
 import Image from 'next/image';
 
 interface StatsProps {
