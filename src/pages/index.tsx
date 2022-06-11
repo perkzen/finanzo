@@ -16,7 +16,7 @@ const Home: NextPage = () => {
           manage your monthly expenses and incomes
         </h2>
         <button className={'btn'} onClick={handleClick}>
-          Let`&lsquo;`s get started
+          Let&lsquo;s get started
         </button>
       </div>
     </div>
