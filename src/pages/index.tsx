@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     await signIn('google', { redirect: true, callbackUrl: '/home' });
   };
 
-  console.log(process.env.VERCEL_URL);
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
   return (
     <div className={classes.Container}>
       <div className={classes.Card}>
