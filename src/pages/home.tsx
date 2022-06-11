@@ -7,7 +7,10 @@ const Home: NextPage = () => {
   const { data } = trpc.useQuery(['hello.get-greeting']);
 
   const handleSignOut = async () => {
-    await signOut({ redirect: true, callbackUrl: '/' });
+    await signOut({
+      redirect: true,
+      callbackUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}/`,
+    });
   };
 
   return (

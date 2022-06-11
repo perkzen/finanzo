@@ -5,10 +5,12 @@ import { signIn } from 'next-auth/react';
 
 const Home: NextPage = () => {
   const handleLoginWithGoogle = async () => {
-    await signIn('google', { redirect: true, callbackUrl: '/home' });
+    await signIn('google', {
+      redirect: true,
+      callbackUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}/home`,
+    });
   };
 
-  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
   return (
     <div className={classes.Container}>
       <div className={classes.Card}>
