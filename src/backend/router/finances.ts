@@ -35,6 +35,7 @@ export const financeRouter = createRouter()
         const income = getSum(monthlyReport, 'Income');
         const expense = getSum(monthlyReport, 'Expense');
         return {
+          id: monthlyReport.id,
           month: monthlyReport.month,
           income: income,
           expense: expense,
@@ -43,9 +44,9 @@ export const financeRouter = createRouter()
       });
     },
   })
-  .query('get-monthly-report', {
+  .query('get-monthly-report-by-id', {
     input: z.object({
-      month: z.string(),
+      id: z.string(),
     }),
     async resolve({ input, ctx }) {
       const userId = (ctx.session as UserSession).user.id;
@@ -53,8 +54,7 @@ export const financeRouter = createRouter()
 
       return await prisma.monthlyReport.findFirst({
         where: {
-          month: input.month,
-          userId,
+          id: input.id,
         },
         select: {
           Expense: {

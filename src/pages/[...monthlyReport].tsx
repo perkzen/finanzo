@@ -21,11 +21,11 @@ const headers: TableHeader<{
   { label: 'Type', accessor: 'type' },
 ];
 
-const Month = () => {
+const MonthlyReport = () => {
   const router = useRouter();
   const { data } = trpc.useQuery([
-    'finances.get-monthly-report',
-    { month: router.query.month as string },
+    'finances.get-monthly-report-by-id',
+    { id: router.query.monthlyReport?.[1] as string },
   ]);
 
   const tableData = data?.Expense.map((item) => ({
@@ -40,7 +40,7 @@ const Month = () => {
         <Table
           data={tableData ? tableData : []}
           headers={headers}
-          title={(router.query.month as string) + ' report'}
+          title={router.query.monthlyReport?.[0] + ' report'}
         />
       </div>
       <Card className={classes.Form}>
@@ -72,4 +72,4 @@ const Month = () => {
   );
 };
 
-export default Month;
+export default MonthlyReport;

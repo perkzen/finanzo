@@ -30,7 +30,7 @@ const Finances: NextPage = () => {
   const router = useRouter();
 
   const handleRowClick = async (item: any) => {
-    await router.push(`/[month]`, `/${item.month}`);
+    await router.push(`/[...monthlyReport]`, `/${item.month}/${item.id}`);
   };
 
   const tableData = data?.map((item) => {
