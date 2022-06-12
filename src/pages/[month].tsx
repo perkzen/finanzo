@@ -24,7 +24,7 @@ const headers: TableHeader<{
 const Month = () => {
   const router = useRouter();
   const { data } = trpc.useQuery([
-    'finance.get-monthly-report',
+    'finances.get-monthly-report',
     { month: router.query.month as string },
   ]);
 

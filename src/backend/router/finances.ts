@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { prisma } from '../../db/client';
 import { createRouter } from './context';
 import { UserSession } from '../../pages/api/auth/[...nextauth]';
-import { MonthlyReportTable } from '../../types/finances';
 import { getSum } from '../helpers/getSum';
 
 export const financeRouter = createRouter()

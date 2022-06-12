@@ -1,5 +1,5 @@
 .Container {
-  @apply self-center;
+  @apply self-center w-full;
 
   @media (min-width: 768px) {
     @apply flex flex-row;

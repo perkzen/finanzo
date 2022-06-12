@@ -22,7 +22,10 @@ const headers: TableHeader<MonthlyReportTable>[] = [
 ];
 
 const Finances: NextPage = () => {
-  const { data } = trpc.useQuery(['finance.get-yearly-report', { year: 2022 }]);
+  const { data } = trpc.useQuery([
+    'finances.get-yearly-report',
+    { year: 2022 },
+  ]);
   const [selected, setSelected] = useState('Income Analysis');
   const router = useRouter();
 
@@ -38,6 +41,9 @@ const Finances: NextPage = () => {
       balance: `${item.income - item.expense} €`,
     };
   });
+
+  const income = data?.reduce((acc, item) => acc + item.income, 0) || 0;
+  const expense = data?.reduce((acc, item) => acc + item.expense, 0) || 0;
 
   return (
     <>
@@ -84,7 +90,7 @@ const Finances: NextPage = () => {
             </div>
             <PieChart title={'Income Analysis'} />
           </Card>
-          <Stats income={400} expense={600} />
+          <Stats income={income} expense={expense} />
         </div>
       </div>
     </>

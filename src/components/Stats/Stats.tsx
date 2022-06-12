@@ -19,16 +19,14 @@ const Stats: FC<StatsProps> = ({ income, expense }) => {
           <Image src={dollar} width={50} height={50} alt={'Dollar'} />
         </div>
         <div className="stat-title">Income</div>
-        <div className="stat-value">{income}</div>
-        <div className="stat-desc">Jan 1st - Feb 1st</div>
+        <div className="stat-value">{income}€</div>
       </div>
       <div className="stat">
         <div className="stat-figure ">
           <Image src={donate} width={50} height={50} alt={'Donate'} />
         </div>
         <div className="stat-title">Expenses</div>
-        <div className="stat-value">{expense}</div>
-        <div className="stat-desc">↗︎ 400 (22%)</div>
+        <div className="stat-value">{expense}€</div>
       </div>
 
       <div className="stat">
@@ -36,8 +34,7 @@ const Stats: FC<StatsProps> = ({ income, expense }) => {
           <Image src={cash} width={50} height={50} alt={'Cash'} />
         </div>
         <div className="stat-title">Difference</div>
-        <div className="stat-value">{Math.abs(income - expense)}</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-value">{Math.abs(income - expense)}€</div>
       </div>
     </Card>
   );
