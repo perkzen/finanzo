@@ -15,6 +15,7 @@ export const expensesRouter = createRouter().mutation('create-expense', {
         type: input.type,
         amount: input.amount,
         description: input.description,
+        createdAt: input.createdAt ? input.createdAt : new Date(),
       },
     });
   },

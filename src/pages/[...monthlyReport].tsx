@@ -30,24 +30,26 @@ const MonthlyReport = () => {
     { id: router.query.monthlyReport?.[1] as string },
   ]);
 
-  const { mutate } = trpc.useMutation('expenses.create-expense', {
-    onSuccess: async () => {
-      await refetch();
-    },
-  });
-
   const tableData = data?.Expense.map((item) => ({
     ...item,
     amount: `${item.amount} €`,
     createdAt: format(item.createdAt, 'dd.MM.yyyy'),
   }));
 
-  const { register, handleSubmit } = useForm<CreateExpenseInputType>({
+  const { register, handleSubmit, reset } = useForm<CreateExpenseInputType>({
     defaultValues: {
       amount: undefined,
       description: '',
       type: 'Expense',
       monthlyReportId: router.query.monthlyReport?.[1] as string,
+      createdAt: undefined,
+    },
+  });
+
+  const { mutate } = trpc.useMutation('expenses.create-expense', {
+    onSuccess: async () => {
+      await refetch();
+      reset();
     },
   });
 
@@ -95,6 +97,12 @@ const MonthlyReport = () => {
             <option>Expense</option>
             <option>Income</option>
           </select>
+
+          <input
+            {...register('createdAt', { required: false, valueAsDate: true })}
+            type={'date'}
+            className="input input-bordered input-accent w-full "
+          />
 
           <button className={'btn btn-accent'} type={'submit'}>
             SAVE
