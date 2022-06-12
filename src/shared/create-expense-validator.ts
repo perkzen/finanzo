@@ -6,3 +6,5 @@ export const createExpenseValidator = z.object({
   description: z.string(),
   monthlyReportId: z.string(),
 });
+
+export type CreateExpenseInputType = z.infer<typeof createExpenseValidator>;
