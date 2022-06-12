@@ -86,6 +86,7 @@ If you are on a Mac you need to install the CLI first :
 $ brew install planetscale/tap/pscale
 ```
 
+You need privileges from admin to run the following command :
 ```bash
 $ pscale connect finanzo
 ```
