@@ -63,7 +63,6 @@ const Finances: NextPage = () => {
   const expenseLabels = expenseGraph?.data?.map((item) => item[0]) || [];
   const expenseData = expenseGraph?.data?.map((item) => item[1]) || [];
 
-  console.log(data);
   const bar1data = data?.map((item) => item.expense) || [];
   const bar2data = data?.map((item) => item.income) || [];
   const lineData = data?.map((item) => item.income - item.expense) || [];

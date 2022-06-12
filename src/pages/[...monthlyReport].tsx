@@ -7,6 +7,7 @@ import { trpc } from '../utils/trpc';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { CreateExpenseInputType } from '../shared/create-expense-validator';
+import { toast } from 'react-hot-toast';
 
 const headers: TableHeader<{
   createdAt: string;
@@ -46,7 +47,7 @@ const MonthlyReport = () => {
     },
   });
 
-  const { mutate } = trpc.useMutation('expenses.create-expense', {
+  const { mutateAsync } = trpc.useMutation('expenses.create-expense', {
     onSuccess: async () => {
       await refetch();
       reset();
@@ -60,11 +61,19 @@ const MonthlyReport = () => {
   });
 
   const onSubmit = async (data: CreateExpenseInputType) => {
-    mutate(data);
+    await toast.promise(mutateAsync(data), {
+      loading: 'Creating item...',
+      success: 'Expense created!',
+      error: 'Error creating expense',
+    });
   };
 
-  const handleDelete = (item: { id: string }) => {
-    deleteExpense.mutate({ id: item.id });
+  const handleDelete = async (item: { id: string }) => {
+    await toast.promise(deleteExpense.mutateAsync({ id: item.id }), {
+      loading: 'Deleting...',
+      success: 'Deleted',
+      error: 'Error',
+    });
   };
 
   return (
