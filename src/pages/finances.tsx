@@ -137,7 +137,11 @@ const Finances: NextPage = () => {
                 Balance Analysis
               </a>
             </div>
-            {renderGraph()}
+            <MultiTypeChart
+              lineData={lineData}
+              bar2Data={bar2data}
+              bar1Data={bar1data}
+            />
           </Card>
         </div>
       </div>
