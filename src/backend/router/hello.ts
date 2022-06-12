@@ -7,7 +7,8 @@ export const helloRouter = trpc.router().query('get-greeting', {
       text: z.string().nullish(),
     })
     .nullish(),
-  resolve({ input }) {
+  resolve({ input, ctx }) {
+    console.log(ctx);
     return {
       greeting: `hello ${input?.text ?? 'domen'}`,
     };
