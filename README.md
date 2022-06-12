@@ -6,7 +6,15 @@
 Just as a company needs to take care of their finances, so each individual must take responsibility for their finances
 if they want to make some progress in the financial field.
 
-
+# Features
+- Create expense item
+- Create income item
+- Delete expense item
+- Delete income item
+- List all expenses and incomes for a specific month
+- List all expenses and incomes for a specific year
+- Expense analysis graph for year
+- Income analysis graph for year
 
 [//]: # (<img src="pictures/Screenshot 2022-06-12 at 22.54.16 &#40;2&#41;.png" />)
 
