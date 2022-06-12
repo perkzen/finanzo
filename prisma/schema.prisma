@@ -23,6 +23,8 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
@@ -32,16 +34,20 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String          @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?         @unique
   emailVerified DateTime?
   image         String?
+  accounts      Account[]
+  sessions      Session[]
+  MonthlyReport MonthlyReport[]
 
   @@map("users")
 }
@@ -56,21 +62,24 @@ model VerificationToken {
 }
 
 model Expense {
-  id              String   @id @default(cuid())
+  id              String        @id @default(cuid())
   type            String
   description     String?
   amount          Int
-  createdAt       DateTime @default(now())
+  createdAt       DateTime      @default(now())
   monthlyReportId String
+  monthlyReport   MonthlyReport @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
 
   @@map("expenses")
 }
 
 model MonthlyReport {
-  id     String @id @default(cuid())
-  month  String
-  year   Int
-  userId String
+  id      String    @id @default(cuid())
+  month   String
+  year    Int
+  userId  String
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Expense Expense[]
 
   @@map("monthly_reports")
 }
