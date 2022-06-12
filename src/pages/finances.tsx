@@ -73,14 +73,14 @@ const Finances: NextPage = () => {
         return <PieChart numbers={incomeData} labels={incomeLabels} />;
       case 'Expenses Analysis':
         return <PieChart numbers={expenseData} labels={expenseLabels} />;
-      case 'Balance Analysis':
-        return (
-          <MultiTypeChart
-            lineData={lineData}
-            bar2Data={bar2data}
-            bar1Data={bar1data}
-          />
-        );
+      // case 'Balance Analysis':
+      //   return (
+      //     <MultiTypeChart
+      //       lineData={lineData}
+      //       bar2Data={bar2data}
+      //       bar1Data={bar1data}
+      //     />
+      //   );
     }
   };
 
@@ -127,21 +127,17 @@ const Finances: NextPage = () => {
               >
                 Expenses Analysis
               </a>
-              <a
-                className={classNames(
-                  'tab tab-bordered',
-                  selected === 'Balance Analysis' ? 'tab-active' : ''
-                )}
-                onClick={() => setSelected('Balance Analysis')}
-              >
-                Balance Analysis
-              </a>
+              {/*<a*/}
+              {/*  className={classNames(*/}
+              {/*    'tab tab-bordered',*/}
+              {/*    selected === 'Balance Analysis' ? 'tab-active' : ''*/}
+              {/*  )}*/}
+              {/*  onClick={() => setSelected('Balance Analysis')}*/}
+              {/*>*/}
+              {/*  Balance Analysis*/}
+              {/*</a>*/}
             </div>
-            <MultiTypeChart
-              lineData={lineData}
-              bar2Data={bar2data}
-              bar1Data={bar1data}
-            />
+            {renderGraph()}
           </Card>
         </div>
       </div>
