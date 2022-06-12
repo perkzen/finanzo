@@ -42,6 +42,16 @@ const Finances: NextPage = () => {
     };
   });
 
+  const incomeGraph = trpc.useQuery([
+    'analytics.get-income-report',
+    { year: 2022 },
+  ]);
+
+  const expenseGraph = trpc.useQuery([
+    'analytics.get-expense-report',
+    { year: 2022 },
+  ]);
+
   const income = data?.reduce((acc, item) => acc + item.income, 0) || 0;
   const expense = data?.reduce((acc, item) => acc + item.expense, 0) || 0;
 

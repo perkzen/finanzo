@@ -16,7 +16,7 @@ export const expensesRouter = createRouter()
           monthlyReportId: input.monthlyReportId,
           type: input.type,
           amount: input.amount,
-          description: input.description,
+          category: input.category,
           createdAt: input.createdAt ? input.createdAt : new Date(),
         },
       });
