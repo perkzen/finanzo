@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Table.module.scss';
 import { classNames } from '../../utils/classNames';
+import { AiFillDelete, AiTwotoneEdit } from 'react-icons/ai';
 
 export interface TableHeader<T> {
   label: string;
@@ -12,9 +13,18 @@ interface TableProps<T> {
   headers: TableHeader<T>[];
   title?: string;
   onRowClick?: (item: T) => void;
+  onDelete?: (item: T) => void;
+  onEdit?: (item: T) => void;
 }
 
-const Table = <T,>({ data, headers, title, onRowClick }: TableProps<T>) => {
+const Table = <T,>({
+  data,
+  headers,
+  title,
+  onRowClick,
+  onDelete,
+  onEdit,
+}: TableProps<T>) => {
   return (
     <>
       <h1 className={'text-2xl text-center font-bold my-2'}>{title}</h1>
@@ -27,6 +37,8 @@ const Table = <T,>({ data, headers, title, onRowClick }: TableProps<T>) => {
               {headers.map(({ label }) => (
                 <th key={label}>{label}</th>
               ))}
+              {onDelete && <th />}
+              {onEdit && <th />}
             </tr>
           </thead>
 
@@ -42,6 +54,21 @@ const Table = <T,>({ data, headers, title, onRowClick }: TableProps<T>) => {
                     {dataItem[header.accessor] as unknown as string}
                   </td>
                 ))}
+
+                {onEdit && (
+                  <td>
+                    <button onClick={() => onEdit && onEdit(dataItem)}>
+                      <AiTwotoneEdit className={'text-green-600'} />
+                    </button>
+                  </td>
+                )}
+                {onDelete && (
+                  <td>
+                    <button onClick={() => onDelete(dataItem)}>
+                      <AiFillDelete className={'text-red-600'} />
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

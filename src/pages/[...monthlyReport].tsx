@@ -53,8 +53,18 @@ const MonthlyReport = () => {
     },
   });
 
+  const deleteExpense = trpc.useMutation('expenses.delete-expense', {
+    onSuccess: async () => {
+      await refetch();
+    },
+  });
+
   const onSubmit = async (data: CreateExpenseInputType) => {
     mutate(data);
+  };
+
+  const handleDelete = (item: { id: string }) => {
+    deleteExpense.mutate({ id: item.id });
   };
 
   return (
@@ -64,6 +74,8 @@ const MonthlyReport = () => {
           data={tableData ? tableData : []}
           headers={headers}
           title={router.query.monthlyReport?.[0] + ' report'}
+          onDelete={handleDelete}
+          onEdit={() => console.log('edit')}
         />
       </div>
       <Card className={classes.Form}>
