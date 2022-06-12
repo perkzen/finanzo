@@ -6,6 +6,7 @@ import { withTRPC } from '@trpc/next';
 import superjson from 'superjson';
 import { AppRouter } from '../backend/router';
 import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
+import AuthProvider from '../components/AuthProvider/AuthProvider';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -18,9 +19,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <meta name="description" content="Self finance management app." />
       </Head>
       <SessionProvider>
-        <LayoutProvider>
-          <Component {...pageProps} />
-        </LayoutProvider>
+        <AuthProvider>
+          <LayoutProvider>
+            <Component {...pageProps} />
+          </LayoutProvider>
+        </AuthProvider>
       </SessionProvider>
     </>
   );

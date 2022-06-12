@@ -34,7 +34,7 @@ const data = [
   { month: 'December', income: '$1200', expense: '$600', balance: '$500' },
 ];
 
-const Home: NextPage = () => {
+const Finances: NextPage = () => {
   const [selected, setSelected] = useState('Income Analysis');
   const router = useRouter();
 
@@ -94,4 +94,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Finances;
