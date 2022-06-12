@@ -2,9 +2,10 @@
 
 <img src="pictures/Screenshot 2022-06-12 at 22.30.22 (2).png" alt="logo"/>
 
+# Why Finanzo?
+Just as a company needs to take care of their finances, so each individual must take responsibility for their finances
+if they want to make some progress in the financial field.
 
-# What is Finanzo?
-Finanzo is a financial management tool. It helps you to manage your finances in an easy and simple way.
 
 
 [//]: # (<img src="pictures/Screenshot 2022-06-12 at 22.54.16 &#40;2&#41;.png" />)
@@ -12,6 +13,7 @@ Finanzo is a financial management tool. It helps you to manage your finances in 
 [//]: # (<img src="pictures/Screenshot 2022-06-12 at 22.54.43 &#40;2&#41;.png"/>)
 
 [//]: # ()
+
 [//]: # ()
 
 # Tech stack:
@@ -71,14 +73,15 @@ $ npx prisma db push
 ```
 
 To view database tables run :
+
 ```bash
 $ npx prisma studio
 ```
 
-
 ### Start database
 
 If you are on a Mac you need to install the CLI first :
+
 ```bash
 $ brew install planetscale/tap/pscale
 ```
