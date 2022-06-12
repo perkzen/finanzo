@@ -22,7 +22,7 @@ const headers: TableHeader<MonthlyReportTable>[] = [
 ];
 
 const Finances: NextPage = () => {
-  const { data } = trpc.useQuery([
+  const { data, isLoading } = trpc.useQuery([
     'finances.get-yearly-report',
     { year: 2022 },
   ]);
@@ -94,7 +94,7 @@ const Finances: NextPage = () => {
             headers={headers}
             data={tableData ? tableData : []}
             onRowClick={handleRowClick}
-            title={''}
+            isLoading={isLoading}
           />
           <Stats income={income} expense={expense} />
         </div>

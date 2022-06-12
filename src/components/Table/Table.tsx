@@ -2,6 +2,8 @@ import React from 'react';
 import classes from './Table.module.scss';
 import { classNames } from '../../utils/classNames';
 import { AiFillDelete } from 'react-icons/ai';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import EmptyTable from './EmptyTable/EmptyTable';
 
 export interface TableHeader<T> {
   label: string;
@@ -14,6 +16,7 @@ interface TableProps<T> {
   title?: string;
   onRowClick?: (item: T) => void;
   onDelete?: (item: T) => void;
+  isLoading?: boolean;
 }
 
 const Table = <T,>({
@@ -22,6 +25,7 @@ const Table = <T,>({
   title,
   onRowClick,
   onDelete,
+  isLoading,
 }: TableProps<T>) => {
   return (
     <>
@@ -40,26 +44,52 @@ const Table = <T,>({
           </thead>
 
           <tbody>
-            {data.map((dataItem, index) => (
-              <tr
-                className={onRowClick && 'hover:cursor-pointer hover'}
-                key={index}
-                onClick={() => onRowClick && onRowClick(dataItem)}
-              >
-                {headers.map((header, index) => (
-                  <td key={index}>
-                    {dataItem[header.accessor] as unknown as string}
-                  </td>
-                ))}
-                {onDelete && (
-                  <td>
-                    <button onClick={() => onDelete(dataItem)}>
-                      <AiFillDelete className={'text-red-600'} />
-                    </button>
-                  </td>
-                )}
+            {isLoading ? (
+              <tr>
+                <td colSpan={headers.length + 1}>
+                  <div
+                    className={
+                      'flex flex-col justify-center items-center h-[400px]'
+                    }
+                  >
+                    <LoadingSpinner />
+                  </div>
+                </td>
               </tr>
-            ))}
+            ) : (
+              <>
+                {data.length > 0 ? (
+                  <>
+                    {data.map((dataItem, index) => (
+                      <tr
+                        className={onRowClick && 'hover:cursor-pointer hover'}
+                        key={index}
+                        onClick={() => onRowClick && onRowClick(dataItem)}
+                      >
+                        {headers.map((header, index) => (
+                          <td key={index}>
+                            {dataItem[header.accessor] as unknown as string}
+                          </td>
+                        ))}
+                        {onDelete && (
+                          <td>
+                            <button onClick={() => onDelete(dataItem)}>
+                              <AiFillDelete className={'text-red-600'} />
+                            </button>
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                  </>
+                ) : (
+                  <tr>
+                    <td colSpan={headers.length + 1}>
+                      <EmptyTable />
+                    </td>
+                  </tr>
+                )}
+              </>
+            )}
           </tbody>
         </table>
       </div>

@@ -26,7 +26,7 @@ const headers: TableHeader<{
 
 const MonthlyReport = () => {
   const router = useRouter();
-  const { data, refetch } = trpc.useQuery([
+  const { data, isLoading, refetch } = trpc.useQuery([
     'finances.get-monthly-report-by-id',
     { id: router.query.monthlyReport?.[1] as string },
   ]);
@@ -84,6 +84,7 @@ const MonthlyReport = () => {
           headers={headers}
           title={router.query.monthlyReport?.[0] + ' report'}
           onDelete={handleDelete}
+          isLoading={isLoading}
         />
       </div>
       <Card className={classes.Form}>
@@ -100,6 +101,7 @@ const MonthlyReport = () => {
             })}
             type="number"
             placeholder="Amount"
+            // step={'0.01'}
             className="input input-bordered input-accent w-full "
           />
           <input
