@@ -1,9 +1,18 @@
-import NextAuth from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+
+export interface UserSession extends Session {
+  user: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+    id?: string | null | undefined;
+  };
+}
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -20,7 +29,7 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    session: ({ session, user }) => {
+    session: ({ session, user }): UserSession => {
       return {
         ...session,
         user,

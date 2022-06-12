@@ -3,9 +3,16 @@ import { useRouter } from 'next/router';
 import Table, { TableHeader } from '../components/Table/Table';
 import Card from '../components/Card/Card';
 import classes from '../styles/Month.module.scss';
+import { trpc } from '../utils/trpc';
+import { format } from 'date-fns';
 
-const headers: TableHeader<any>[] = [
-  { label: 'Date', accessor: 'date' },
+const headers: TableHeader<{
+  createdAt: string;
+  amount: string;
+  description: string | null;
+  type: string;
+}>[] = [
+  { label: 'Date', accessor: 'createdAt' },
   {
     label: 'Amount',
     accessor: 'amount',
@@ -14,43 +21,24 @@ const headers: TableHeader<any>[] = [
   { label: 'Type', accessor: 'type' },
 ];
 
-const data = [
-  { date: '2020-01-01', amount: '$100', description: 'Salary', type: 'Income' },
-  { date: '2020-01-02', amount: '$200', description: 'Rent', type: 'Expense' },
-  { date: '2020-01-03', amount: '$300', description: 'Food', type: 'Expense' },
-  {
-    date: '2020-01-04',
-    amount: '$400',
-    description: 'Grocery',
-    type: 'Expense',
-  },
-  {
-    date: '2020-01-05',
-    amount: '$500',
-    description: 'Clothes',
-    type: 'Expense',
-  },
-  {
-    date: '2020-01-06',
-    amount: '$600',
-    description: 'Entertainment',
-    type: 'Expense',
-  },
-  {
-    date: '2020-01-07',
-    amount: '$700',
-    description: 'Transport',
-    type: 'Expense',
-  },
-];
-
 const Month = () => {
   const router = useRouter();
+  const { data } = trpc.useQuery([
+    'finance.get-monthly-report',
+    { month: router.query.month as string },
+  ]);
+
+  const tableData = data?.Expense.map((item) => ({
+    ...item,
+    amount: `${item.amount} €`,
+    createdAt: format(item.createdAt, 'dd.MM.yyyy'),
+  }));
+
   return (
     <div className={classes.Container}>
       <div className={classes.Table}>
         <Table
-          data={data}
+          data={tableData ? tableData : []}
           headers={headers}
           title={(router.query.month as string) + ' report'}
         />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-import classes from '../styles/Home.module.scss';
+import classes from '../styles/Finances.module.scss';
 import Card from '../components/Card/Card';
 import Table, { TableHeader } from '../components/Table/Table';
 import Stats from '../components/Stats/Stats';
@@ -8,8 +8,10 @@ import PieChart from '../components/PieChart/PieChart';
 import { useRouter } from 'next/router';
 import { classNames } from '../utils/classNames';
 import { signOut } from 'next-auth/react';
+import { trpc } from '../utils/trpc';
+import { MonthlyReportTable } from '../types/finances';
 
-const headers: TableHeader<any>[] = [
+const headers: TableHeader<MonthlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
   {
     label: 'Income',
@@ -19,28 +21,23 @@ const headers: TableHeader<any>[] = [
   { label: 'Balance', accessor: 'balance' },
 ];
 
-const data = [
-  { month: 'January', income: '$100', expense: '$50', balance: '$50' },
-  { month: 'February', income: '$200', expense: '$100', balance: '$100' },
-  { month: 'March', income: '$300', expense: '$150', balance: '$50' },
-  { month: 'April', income: '$400', expense: '$200', balance: '$100' },
-  { month: 'May', income: '$500', expense: '$250', balance: '$150' },
-  { month: 'June', income: '$600', expense: '$300', balance: '$200' },
-  { month: 'July', income: '$700', expense: '$350', balance: '$250' },
-  { month: 'August', income: '$800', expense: '$400', balance: '$300' },
-  { month: 'September', income: '$900', expense: '$450', balance: '$350' },
-  { month: 'October', income: '$1000', expense: '$500', balance: '$400' },
-  { month: 'November', income: '$1100', expense: '$550', balance: '$450' },
-  { month: 'December', income: '$1200', expense: '$600', balance: '$500' },
-];
-
 const Finances: NextPage = () => {
+  const { data } = trpc.useQuery(['finance.get-yearly-report', { year: 2022 }]);
   const [selected, setSelected] = useState('Income Analysis');
   const router = useRouter();
 
   const handleRowClick = async (item: any) => {
     await router.push(`/[month]`, `/${item.month}`);
   };
+
+  const tableData = data?.map((item) => {
+    return {
+      ...item,
+      income: `${item.income} €`,
+      expense: `${item.expense} €`,
+      balance: `${item.income - item.expense} €`,
+    };
+  });
 
   return (
     <>
@@ -51,7 +48,7 @@ const Finances: NextPage = () => {
           </select>
           <Table
             headers={headers}
-            data={data}
+            data={tableData ? tableData : []}
             onRowClick={handleRowClick}
             title={''}
           />
