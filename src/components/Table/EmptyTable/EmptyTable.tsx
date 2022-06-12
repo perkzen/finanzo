@@ -8,7 +8,7 @@ const EmptyTable = () => {
         <TbDatabaseOff
           className={'h-[48px] w-[48px] bg-gray-100 rounded-full p-2'}
         />
-        <div className={'mt-4 text-center text-lg font-semibold'}>
+        <div className={'mt-4 text-center text-lg font-semibold text-gray-500'}>
           No data to display
         </div>
       </div>
