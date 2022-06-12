@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { FC } from 'react';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -12,9 +11,6 @@ import {
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
-import { faker } from '@faker-js/faker';
-import Card from '../Card/Card';
-
 ChartJS.register(
   LinearScale,
   CategoryScale,
@@ -25,42 +21,57 @@ ChartJS.register(
   Tooltip
 );
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      type: 'line' as const,
-      label: 'Dataset 1',
-      borderColor: 'rgb(255, 99, 132)',
-      borderWidth: 2,
-      fill: false,
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-    },
-    {
-      type: 'bar' as const,
-      label: 'Dataset 2',
-      backgroundColor: 'rgb(75, 192, 192)',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'white',
-      borderWidth: 2,
-    },
-    {
-      type: 'bar' as const,
-      label: 'Dataset 3',
-      backgroundColor: 'rgb(53, 162, 235)',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-    },
-  ],
-};
+interface Props {
+  lineData: number[];
+  bar1Data: number[];
+  bar2Data: number[];
+}
 
-const MultiTypeChart = () => {
-  return (
-    <Card>
-      <Chart type="bar" data={data} />{' '}
-    </Card>
-  );
+const MultiTypeChart: FC<Props> = ({ lineData, bar1Data, bar2Data }) => {
+  const data = {
+    labels,
+    datasets: [
+      {
+        type: 'line' as const,
+        label: 'Difference',
+        borderColor: 'rgb(53, 162, 235)',
+        borderWidth: 2,
+        fill: false,
+        data: lineData,
+      },
+      {
+        type: 'bar' as const,
+        label: 'Expenses',
+        backgroundColor: 'rgb(255, 99, 132)',
+        data: bar1Data,
+        borderColor: 'white',
+        borderWidth: 2,
+      },
+      {
+        type: 'bar' as const,
+        label: 'Income',
+        backgroundColor: 'rgb(75, 192, 192)',
+        data: bar2Data,
+      },
+    ],
+  };
+
+  return <Chart type="bar" data={data} width={500} height={500} />;
 };
 
 export default MultiTypeChart;

@@ -5,12 +5,11 @@ import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface Props {
-  title: string;
   labels: string[];
   numbers: number[];
 }
 
-const PieChart: FC<Props> = ({ title, labels, numbers }) => {
+const PieChart: FC<Props> = ({ labels, numbers }) => {
   const data = {
     labels: labels,
     datasets: [

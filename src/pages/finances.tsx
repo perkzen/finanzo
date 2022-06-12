@@ -10,6 +10,7 @@ import { classNames } from '../utils/classNames';
 import { signOut } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import { MonthlyReportTable } from '../types/finances';
+import MultiTypeChart from '../components/MultiTypeChart/MultiTypeChart';
 
 const headers: TableHeader<MonthlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
@@ -27,7 +28,7 @@ const Finances: NextPage = () => {
     { year: 2022 },
   ]);
   const [selected, setSelected] = useState<
-    'Income Analysis' | 'Expenses Analysis'
+    'Income Analysis' | 'Expenses Analysis' | 'Balance Analysis'
   >('Income Analysis');
   const router = useRouter();
 
@@ -61,6 +62,28 @@ const Finances: NextPage = () => {
   const incomeData = incomeGraph?.data?.map((item) => item[1]) || [];
   const expenseLabels = expenseGraph?.data?.map((item) => item[0]) || [];
   const expenseData = expenseGraph?.data?.map((item) => item[1]) || [];
+
+  console.log(data);
+  const bar1data = data?.map((item) => item.expense) || [];
+  const bar2data = data?.map((item) => item.income) || [];
+  const lineData = data?.map((item) => item.income - item.expense) || [];
+
+  const renderGraph = () => {
+    switch (selected) {
+      case 'Income Analysis':
+        return <PieChart numbers={incomeData} labels={incomeLabels} />;
+      case 'Expenses Analysis':
+        return <PieChart numbers={expenseData} labels={expenseLabels} />;
+      case 'Balance Analysis':
+        return (
+          <MultiTypeChart
+            lineData={lineData}
+            bar2Data={bar2data}
+            bar1Data={bar1data}
+          />
+        );
+    }
+  };
 
   return (
     <>
@@ -105,16 +128,17 @@ const Finances: NextPage = () => {
               >
                 Expenses Analysis
               </a>
+              <a
+                className={classNames(
+                  'tab tab-bordered',
+                  selected === 'Balance Analysis' ? 'tab-active' : ''
+                )}
+                onClick={() => setSelected('Balance Analysis')}
+              >
+                Balance Analysis
+              </a>
             </div>
-            <PieChart
-              labels={
-                selected === 'Expenses Analysis' ? expenseLabels : incomeLabels
-              }
-              numbers={
-                selected === 'Expenses Analysis' ? expenseData : incomeData
-              }
-              title={selected}
-            />
+            {renderGraph()}
           </Card>
         </div>
       </div>
