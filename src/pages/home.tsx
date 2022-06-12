@@ -45,17 +45,19 @@ const Home: NextPage = () => {
     <>
       <div className={classes.Container}>
         <div className={classes.TableContainer}>
+          <select className="select select-accent w-full" defaultValue={'2022'}>
+            <option>2022</option>
+          </select>
           <Table
             headers={headers}
             data={data}
             onRowClick={handleRowClick}
             title={''}
           />
-          <Stats income={400} expense={600} />
         </div>
 
-        <div className={'flex flex-col justify-evenly mb-20'}>
-          <Card>
+        <div className={'flex flex-col justify-evenly   gap-5 '}>
+          <Card className={'p-2'}>
             <div className="tabs">
               <a
                 className={classNames(
@@ -78,6 +80,7 @@ const Home: NextPage = () => {
             </div>
             <PieChart title={'Income Analysis'} />
           </Card>
+          <Stats income={400} expense={600} />
         </div>
       </div>
     </>

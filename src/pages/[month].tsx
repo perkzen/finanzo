@@ -69,10 +69,10 @@ const Month = () => {
             className="input input-bordered input-accent w-full "
           />
 
-          <select className="select select-accent w-full ">
-            <option disabled selected>
-              Item type
-            </option>
+          <select
+            className="select select-accent w-full"
+            defaultValue={'Expense'}
+          >
             <option>Expense</option>
             <option>Income</option>
           </select>

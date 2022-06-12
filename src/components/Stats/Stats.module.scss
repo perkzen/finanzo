@@ -1,0 +1,7 @@
+.Container {
+  @apply self-center;
+
+  @media (min-width: 768px) {
+    @apply flex flex-row;
+  }
+}

@@ -15,8 +15,8 @@
   }
 
   .Form {
-    width: 100%;
-    @apply mt-5;
+    @apply m-5;
+    @apply p-5;
 
     @media (min-width: 768px) {
       @apply w-1/4 mt-20;

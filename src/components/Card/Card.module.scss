@@ -2,5 +2,5 @@
 
 .Container {
   @include glass;
-@apply  shadow p-2 h-fit rounded-lg;
+  @apply shadow  h-fit rounded-lg;
 }

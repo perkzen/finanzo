@@ -1,7 +1,16 @@
-
 @import "src/styles/mixin.scss";
+
 .Container {
   @apply rounded-lg h-fit;
+
+  table {
+    @apply table-compact;
+
+    @media (min-width: 768px) {
+      @apply table-normal;
+    }
+
+  }
 
   thead {
     th {

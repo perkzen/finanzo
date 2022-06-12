@@ -1,10 +1,10 @@
 @import "src/styles/mixin.scss";
 
 .Container {
-  @apply flex flex-col w-full justify-evenly;
+  @apply flex flex-col w-full gap-5 py-5;
 
   @media (min-width: 768px) {
-    @apply flex-row;
+    @apply flex-row justify-evenly;
   }
 
   .TableContainer {

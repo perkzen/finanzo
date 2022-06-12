@@ -3,6 +3,8 @@ import cash from '../../assets/cash.png';
 import dollar from '../../assets/dollar.png';
 import donate from '../../assets/donate.png';
 import Image from 'next/image';
+import Card from '../Card/Card';
+import classes from './Stats.module.scss';
 
 interface StatsProps {
   income: number;
@@ -11,7 +13,7 @@ interface StatsProps {
 
 const Stats: FC<StatsProps> = ({ income, expense }) => {
   return (
-    <div className="stats shadow flex flex-row justify-center items-center mt-5">
+    <Card className={classes.Container}>
       <div className="stat">
         <div className="stat-figure">
           <Image src={dollar} width={50} height={50} alt={'Dollar'} />
@@ -20,7 +22,6 @@ const Stats: FC<StatsProps> = ({ income, expense }) => {
         <div className="stat-value">{income}</div>
         <div className="stat-desc">Jan 1st - Feb 1st</div>
       </div>
-
       <div className="stat">
         <div className="stat-figure ">
           <Image src={donate} width={50} height={50} alt={'Donate'} />
@@ -38,7 +39,7 @@ const Stats: FC<StatsProps> = ({ income, expense }) => {
         <div className="stat-value">{Math.abs(income - expense)}</div>
         <div className="stat-desc">↘︎ 90 (14%)</div>
       </div>
-    </div>
+    </Card>
   );
 };
 export default Stats;

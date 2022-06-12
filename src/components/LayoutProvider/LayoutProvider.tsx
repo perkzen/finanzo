@@ -6,7 +6,7 @@ interface LayoutProviderProps {
 
 const LayoutProvider: FC<LayoutProviderProps> = ({ children }) => {
   return (
-    <div className={'flex flex-col h-screen px-10 py-5'}>
+    <div className={'flex flex-col h-screen'}>
       <main>{children}</main>
     </div>
   );
