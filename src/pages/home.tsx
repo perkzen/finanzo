@@ -7,6 +7,7 @@ import Stats from '../components/Stats/Stats';
 import PieChart from '../components/PieChart/PieChart';
 import { useRouter } from 'next/router';
 import { classNames } from '../utils/classNames';
+import { signOut } from 'next-auth/react';
 
 const headers: TableHeader<any>[] = [
   { label: 'Month', accessor: 'month' },
@@ -56,7 +57,13 @@ const Home: NextPage = () => {
           />
         </div>
 
-        <div className={'flex flex-col justify-evenly   gap-5 '}>
+        <div className={'flex flex-col justify-evenly gap-5 '}>
+          <button
+            className={'btn self-end'}
+            onClick={() => signOut({ redirect: true, callbackUrl: '/' })}
+          >
+            Logout
+          </button>
           <Card className={'p-2'}>
             <div className="tabs">
               <a

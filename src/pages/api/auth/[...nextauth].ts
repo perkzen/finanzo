@@ -9,7 +9,9 @@ export default NextAuth({
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
-
+  pages: {
+    signIn: '/',
+  },
   providers: [
     // ...add more providers here
     GoogleProvider({

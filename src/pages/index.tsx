@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import classes from '../styles/index.module.scss';
-import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
+import { FcGoogle } from 'react-icons/fc';
 
 const Home: NextPage = () => {
-  const router = useRouter();
   const handleClick = async () => {
-    await router.push('/home');
+    await signIn('google', { redirect: true, callbackUrl: '/home' });
   };
 
   return (
@@ -16,7 +16,8 @@ const Home: NextPage = () => {
           manage your monthly expenses and incomes
         </h2>
         <button className={'btn'} onClick={handleClick}>
-          Let&lsquo;s get started
+          <FcGoogle />
+          Login with Google
         </button>
       </div>
     </div>
