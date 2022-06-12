@@ -61,7 +61,7 @@ export const financeRouter = createRouter()
             select: {
               id: true,
               createdAt: true,
-              description: true,
+              category: true,
               type: true,
               amount: true,
             },

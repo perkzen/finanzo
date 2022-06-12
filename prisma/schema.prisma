@@ -64,7 +64,7 @@ model VerificationToken {
 model Expense {
   id              String        @id @default(cuid())
   type            String
-  description     String?
+  category        String
   amount          Int
   createdAt       DateTime      @default(now())
   monthlyReportId String

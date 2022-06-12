@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Table.module.scss';
 import { classNames } from '../../utils/classNames';
-import { AiFillDelete, AiTwotoneEdit } from 'react-icons/ai';
+import { AiFillDelete } from 'react-icons/ai';
 
 export interface TableHeader<T> {
   label: string;
@@ -14,7 +14,6 @@ interface TableProps<T> {
   title?: string;
   onRowClick?: (item: T) => void;
   onDelete?: (item: T) => void;
-  onEdit?: (item: T) => void;
 }
 
 const Table = <T,>({
@@ -23,7 +22,6 @@ const Table = <T,>({
   title,
   onRowClick,
   onDelete,
-  onEdit,
 }: TableProps<T>) => {
   return (
     <>
@@ -38,7 +36,6 @@ const Table = <T,>({
                 <th key={label}>{label}</th>
               ))}
               {onDelete && <th />}
-              {onEdit && <th />}
             </tr>
           </thead>
 
@@ -54,14 +51,6 @@ const Table = <T,>({
                     {dataItem[header.accessor] as unknown as string}
                   </td>
                 ))}
-
-                {onEdit && (
-                  <td>
-                    <button onClick={() => onEdit && onEdit(dataItem)}>
-                      <AiTwotoneEdit className={'text-green-600'} />
-                    </button>
-                  </td>
-                )}
                 {onDelete && (
                   <td>
                     <button onClick={() => onDelete(dataItem)}>

@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const createExpenseValidator = z.object({
   type: z.string(),
   amount: z.number(),
-  description: z.string(),
+  category: z.string(),
   monthlyReportId: z.string(),
   createdAt: z.date().optional().nullish(),
 });

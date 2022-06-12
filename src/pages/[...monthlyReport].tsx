@@ -11,7 +11,7 @@ import { CreateExpenseInputType } from '../shared/create-expense-validator';
 const headers: TableHeader<{
   createdAt: string;
   amount: string;
-  description: string | null;
+  category: string;
   type: string;
 }>[] = [
   { label: 'Date', accessor: 'createdAt' },
@@ -19,7 +19,7 @@ const headers: TableHeader<{
     label: 'Amount',
     accessor: 'amount',
   },
-  { label: 'Description', accessor: 'description' },
+  { label: 'Category', accessor: 'category' },
   { label: 'Type', accessor: 'type' },
 ];
 
@@ -39,7 +39,7 @@ const MonthlyReport = () => {
   const { register, handleSubmit, reset } = useForm<CreateExpenseInputType>({
     defaultValues: {
       amount: undefined,
-      description: '',
+      category: '',
       type: 'Expense',
       monthlyReportId: router.query.monthlyReport?.[1] as string,
       createdAt: undefined,
@@ -75,7 +75,6 @@ const MonthlyReport = () => {
           headers={headers}
           title={router.query.monthlyReport?.[0] + ' report'}
           onDelete={handleDelete}
-          onEdit={() => console.log('edit')}
         />
       </div>
       <Card className={classes.Form}>
@@ -95,9 +94,9 @@ const MonthlyReport = () => {
             className="input input-bordered input-accent w-full "
           />
           <input
-            {...register('description', { required: true })}
+            {...register('category', { required: true })}
             type="text"
-            placeholder="Description"
+            placeholder="Category"
             className="input input-bordered input-accent w-full "
           />
 
