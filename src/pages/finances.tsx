@@ -10,7 +10,6 @@ import { classNames } from '../utils/classNames';
 import { signOut } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import { MonthlyReportTable } from '../types/finances';
-import MultiTypeChart from '../components/MultiTypeChart/MultiTypeChart';
 
 const headers: TableHeader<MonthlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
@@ -63,9 +62,9 @@ const Finances: NextPage = () => {
   const expenseLabels = expenseGraph?.data?.map((item) => item[0]) || [];
   const expenseData = expenseGraph?.data?.map((item) => item[1]) || [];
 
-  const bar1data = data?.map((item) => item.expense) || [];
-  const bar2data = data?.map((item) => item.income) || [];
-  const lineData = data?.map((item) => item.income - item.expense) || [];
+  // const bar1data = data?.map((item) => item.expense) || [];
+  // const bar2data = data?.map((item) => item.income) || [];
+  // const lineData = data?.map((item) => item.income - item.expense) || [];
 
   const renderGraph = () => {
     switch (selected) {
