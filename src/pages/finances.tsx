@@ -26,7 +26,9 @@ const Finances: NextPage = () => {
     'finances.get-yearly-report',
     { year: 2022 },
   ]);
-  const [selected, setSelected] = useState('Income Analysis');
+  const [selected, setSelected] = useState<
+    'Income Analysis' | 'Expenses Analysis'
+  >('Income Analysis');
   const router = useRouter();
 
   const handleRowClick = async (item: any) => {
@@ -55,6 +57,11 @@ const Finances: NextPage = () => {
   const income = data?.reduce((acc, item) => acc + item.income, 0) || 0;
   const expense = data?.reduce((acc, item) => acc + item.expense, 0) || 0;
 
+  const incomeLabels = incomeGraph?.data?.map((item) => item[0]) || [];
+  const incomeData = incomeGraph?.data?.map((item) => item[1]) || [];
+  const expenseLabels = expenseGraph?.data?.map((item) => item[0]) || [];
+  const expenseData = expenseGraph?.data?.map((item) => item[1]) || [];
+
   return (
     <>
       <div className={classes.Container}>
@@ -68,6 +75,7 @@ const Finances: NextPage = () => {
             onRowClick={handleRowClick}
             title={''}
           />
+          <Stats income={income} expense={expense} />
         </div>
 
         <div className={'flex flex-col justify-evenly gap-5 '}>
@@ -98,9 +106,16 @@ const Finances: NextPage = () => {
                 Expenses Analysis
               </a>
             </div>
-            <PieChart title={'Income Analysis'} />
+            <PieChart
+              labels={
+                selected === 'Expenses Analysis' ? expenseLabels : incomeLabels
+              }
+              numbers={
+                selected === 'Expenses Analysis' ? expenseData : incomeData
+              }
+              title={selected}
+            />
           </Card>
-          <Stats income={income} expense={expense} />
         </div>
       </div>
     </>
