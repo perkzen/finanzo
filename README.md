@@ -106,4 +106,6 @@ $ pscale connect finanzo
 - [ ] prettier ui
 - [ ] fix multiTypeChart (doesn't work in production)
 - [ ] optimize prisma schema and queries
+- [ ] add tests
+- [ ] make reusable components structure
 - [ ] create production and development database
