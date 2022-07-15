@@ -4,7 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { withTRPC } from '@trpc/next';
 import superjson from 'superjson';
-import { AppRouter } from '../backend/router';
+import { AppRouter } from '../server/router';
 import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
 import AuthProvider from '../components/AuthProvider/AuthProvider';
 
