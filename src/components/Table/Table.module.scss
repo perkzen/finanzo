@@ -3,14 +3,14 @@
 .Container {
   @apply rounded-lg h-fit;
 
-  table {
-    @apply table-compact;
-
-    @media (min-width: 768px) {
-      @apply table-compact;
-    }
-
-  }
+  //table {
+  //  @apply table-compact;
+  //
+  //  @media (min-width: 768px) {
+  //    @apply table-compact;
+  //  }
+  //
+  //}
 
   thead {
     th {

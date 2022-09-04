@@ -62,7 +62,9 @@ const Table = <T,>({
                   <>
                     {data.map((dataItem, index) => (
                       <tr
-                        className={onRowClick && 'hover:cursor-pointer hover'}
+                        className={
+                          onRowClick && 'hover:cursor-pointer hover opacity-70'
+                        }
                         key={index}
                         onClick={() => onRowClick && onRowClick(dataItem)}
                       >
