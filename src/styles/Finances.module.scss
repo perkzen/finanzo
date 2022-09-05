@@ -1,20 +1,20 @@
 @import "src/styles/mixin.scss";
 
 .Container {
-  @apply flex flex-col w-full gap-5 py-5 mt-10;
+  @apply flex flex-col pl-20 w-full gap-8 py-5 mt-10;
 
-  @media (min-width: 768px) {
-    @apply flex-row justify-evenly;
-  }
-
-  .TableContainer {
-    width: 100%;
-    @apply flex flex-col justify-evenly;
-
-    @media (min-width: 768px) {
-      @apply w-1/2;
-    }
-  }
+  //@media (min-width: 768px) {
+  //  @apply flex-col justify-evenly;
+  //}
+  //
+  //.TableContainer {
+  //  width: 100%;
+  //  @apply flex flex-col justify-evenly;
+  //
+  //  @media (min-width: 768px) {
+  //    @apply w-1/2;
+  //  }
+  //}
 
 
 }

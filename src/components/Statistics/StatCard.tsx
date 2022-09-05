@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import Card from '../Card/Card';
 import { Statistic } from '../../types/statistics';
 
@@ -7,7 +7,7 @@ const StatCard: FC<Statistic> = ({ icon, title, value }) => {
     <Card>
       <div className={'text-3xl'}>{icon}</div>
       <h1 className={'text-gray-500'}>{title}</h1>
-      <p>{value.toFixed(2)} €</p>
+      <p className={'font-bold'}>{value.toFixed(2)} €</p>
     </Card>
   );
 };

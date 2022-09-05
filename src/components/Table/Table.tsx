@@ -17,6 +17,7 @@ interface TableProps<T> {
   onRowClick?: (item: T) => void;
   onDelete?: (item: T) => void;
   isLoading?: boolean;
+  showHeader?: boolean;
 }
 
 const Table = <T,>({
@@ -26,6 +27,7 @@ const Table = <T,>({
   onRowClick,
   onDelete,
   isLoading,
+  showHeader = true,
 }: TableProps<T>) => {
   return (
     <>
@@ -33,14 +35,16 @@ const Table = <T,>({
       <div
         className={classNames(classes.Container as string, 'overflow-x-auto')}
       >
-        <table className=" table shadow w-full">
+        <table className="w-full">
           <thead>
-            <tr>
-              {headers.map(({ label }) => (
-                <th key={label}>{label}</th>
-              ))}
-              {onDelete && <th />}
-            </tr>
+            {showHeader && (
+              <tr>
+                {headers.map(({ label }) => (
+                  <th key={label}>{label}</th>
+                ))}
+                {onDelete && <th />}
+              </tr>
+            )}
           </thead>
 
           <tbody>
@@ -63,7 +67,8 @@ const Table = <T,>({
                     {data.map((dataItem, index) => (
                       <tr
                         className={
-                          onRowClick && 'hover:cursor-pointer hover opacity-70'
+                          onRowClick &&
+                          'hover:cursor-pointer hover:bg-white hover:shadow-sm'
                         }
                         key={index}
                         onClick={() => onRowClick && onRowClick(dataItem)}

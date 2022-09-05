@@ -4,3 +4,9 @@ export interface MonthlyReportTable {
   expense: string;
   balance: string;
 }
+
+export interface TransactionTable {
+  category: string;
+  amount: number;
+  createdAt: string;
+}
