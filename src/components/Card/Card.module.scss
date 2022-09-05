@@ -1,6 +1,6 @@
 @import "src/styles/mixin.scss";
 
 .Container {
-  @include glass;
-  @apply shadow  h-fit rounded-lg;
+  @apply flex flex-col gap-5 shadow-lg bg-white rounded-2xl py-5 px-10;
+  min-width: 250px;
 }

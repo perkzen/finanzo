@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { NextPage } from 'next';
 import classes from '../styles/Finances.module.scss';
-import Card from '../components/Card/Card';
 import Table, { TableHeader } from '../components/Table/Table';
-import Stats from '../components/Stats/Stats';
+import Statistics from '../components/Statistics/Statistics';
 import PieChart from '../components/PieChart/PieChart';
 import { useRouter } from 'next/router';
 import { classNames } from '../utils/classNames';
 import { signOut } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import { MonthlyReportTable } from '../types/finances';
+import { GiMoneyStack, GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
 
 const headers: TableHeader<MonthlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
@@ -83,64 +83,16 @@ const Finances: NextPage = () => {
     }
   };
 
-  return (
-    <>
-      <div className={classes.Container}>
-        <div className={classes.TableContainer}>
-          <select className="select select-accent w-full" defaultValue={'2022'}>
-            <option>2022</option>
-          </select>
-          <Table
-            headers={headers}
-            data={tableData ? tableData : []}
-            onRowClick={handleRowClick}
-            isLoading={isLoading}
-          />
-          <Stats income={income} expense={expense} />
-        </div>
+  const stats: { icon: ReactNode; title: string; value: number }[] = [
+    { icon: <GiPayMoney />, title: 'Expenses', value: expense },
+    { icon: <GiReceiveMoney />, title: 'Income', value: income },
+    { icon: <GiMoneyStack />, title: 'Balance', value: income - expense },
+  ];
 
-        <div className={'flex flex-col justify-evenly gap-5 '}>
-          <button
-            className={'btn self-end'}
-            onClick={() => signOut({ redirect: true, callbackUrl: '/' })}
-          >
-            Logout
-          </button>
-          <Card className={'p-2'}>
-            <div className="tabs">
-              <a
-                className={classNames(
-                  'tab tab-bordered',
-                  selected === 'Income Analysis' ? 'tab-active' : ''
-                )}
-                onClick={() => setSelected('Income Analysis')}
-              >
-                Income Analysis
-              </a>
-              <a
-                className={classNames(
-                  'tab tab-bordered',
-                  selected === 'Expenses Analysis' ? 'tab-active' : ''
-                )}
-                onClick={() => setSelected('Expenses Analysis')}
-              >
-                Expenses Analysis
-              </a>
-              {/*<a*/}
-              {/*  className={classNames(*/}
-              {/*    'tab tab-bordered',*/}
-              {/*    selected === 'Balance Analysis' ? 'tab-active' : ''*/}
-              {/*  )}*/}
-              {/*  onClick={() => setSelected('Balance Analysis')}*/}
-              {/*>*/}
-              {/*  Balance Analysis*/}
-              {/*</a>*/}
-            </div>
-            {renderGraph()}
-          </Card>
-        </div>
-      </div>
-    </>
+  return (
+    <div className={classes.Container}>
+      <Statistics stats={stats} />
+    </div>
   );
 };
 
