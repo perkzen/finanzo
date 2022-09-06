@@ -14,7 +14,7 @@ const History: FC = () => {
     <div className={'flex flex-col py-5'}>
       <h1 className={'font-bold text-2xl'}>History</h1>
       <h2 className={'text-gray-500'}>Last 3 transactions</h2>
-      <div className={'w-1/3'}>
+      <div className={'w-full'}>
         <Table
           data={[
             {

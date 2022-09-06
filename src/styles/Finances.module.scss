@@ -1,7 +1,6 @@
 @import "src/styles/mixin.scss";
 
 .Container {
-  @apply flex flex-col pl-20 w-full gap-8 py-5 mt-10;
 
   //@media (min-width: 768px) {
   //  @apply flex-col justify-evenly;

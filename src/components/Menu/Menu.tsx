@@ -8,7 +8,7 @@ const items: { icon: ReactNode }[] = [
 
 const Menu = () => {
   return (
-    <div className={'w-1/12 bg-secondary'}>
+    <div className={'w-1/12 bg-secondary h-screen sticky top-0'}>
       <div
         className={
           'w-full flex flex-col justify-center items-center gap-6 mt-20'

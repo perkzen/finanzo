@@ -6,6 +6,8 @@ import { trpc } from '../utils/trpc';
 
 import { GiMoneyStack, GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
 import History from '../components/History/History';
+import BarChart from '../components/BarChart/BarChart';
+import Title from '../components/Title/Title';
 
 const Finances: NextPage = () => {
   const { data, isLoading } = trpc.useQuery([
@@ -29,9 +31,17 @@ const Finances: NextPage = () => {
   ];
 
   return (
-    <div className={classes.Container}>
-      <Statistics stats={stats} />
+    <div className={'py-5 mt-10 px-20 flex flex-col w-5/6 gap-8 '}>
+      <div>
+        <Title
+          title={'Dashboard'}
+          subtitle={'Newest information about transactions'}
+          className={'mb-5'}
+        />
+        <Statistics stats={stats} />
+      </div>
       <History />
+      <BarChart />
     </div>
   );
 };

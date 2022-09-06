@@ -8,7 +8,7 @@ interface LayoutProviderProps {
 
 const LayoutProvider: FC<LayoutProviderProps> = ({ children }) => {
   return (
-    <div className={'flex flex-row h-screen w-full'}>
+    <div className={'flex flex-row w-full'}>
       <Menu />
       <main className={'w-full'}>{children}</main>
       <Toaster position={'top-right'} />

@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body,html {
   min-height: 100vh !important;
-  @apply bg-primary;
+  @apply bg-primary w-full;
   // background-size: 40px 40px !important;
   //background-color: rgba(126, 229, 170, 0.2) !important;
   //  background-image:
