@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 const Home: NextPage = () => {
   const handleClick = async () => {
-    await signIn('google', { redirect: true, callbackUrl: '/finances' });
+    await signIn('google', { redirect: true, callbackUrl: '/dashboard' });
   };
 
   return (

@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
 import { HiOutlineCalendar, HiOutlineHome } from 'react-icons/hi';
+import Link from 'next/link';
 
-const items: { icon: ReactNode }[] = [
-  { icon: <HiOutlineHome /> },
-  { icon: <HiOutlineCalendar /> },
+const items: { icon: ReactNode; url: string }[] = [
+  { icon: <HiOutlineHome />, url: '/dashboard' },
+  { icon: <HiOutlineCalendar />, url: '/' },
 ];
 
 const Menu = () => {
@@ -15,8 +16,10 @@ const Menu = () => {
         }
       >
         {items.map((item, index) => (
-          <div className={'text-2xl'} key={index}>
-            {item.icon}
+          <div className={'text-2xl hover:cursor-pointer'} key={index}>
+            <Link href={item.url}>
+              <a>{item.icon}</a>
+            </Link>
           </div>
         ))}
       </div>

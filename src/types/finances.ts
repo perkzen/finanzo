@@ -6,7 +6,7 @@ export interface MonthlyReportTable {
 }
 
 export interface TransactionTable {
-  category: string;
+  description: string;
   amount: number;
   createdAt: string;
 }

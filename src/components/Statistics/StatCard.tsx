@@ -1,13 +1,23 @@
 import React, { FC } from 'react';
 import Card from '../Card/Card';
 import { Statistic } from '../../types/statistics';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
-const StatCard: FC<Statistic> = ({ icon, title, value }) => {
+interface StatCardProps {
+  stat: Statistic;
+  isLoading: boolean;
+}
+
+const StatCard: FC<StatCardProps> = ({ stat, isLoading }) => {
   return (
     <Card>
-      <div className={'text-3xl'}>{icon}</div>
-      <h1 className={'text-gray-500'}>{title}</h1>
-      <p className={'font-bold'}>{value.toFixed(2)} €</p>
+      <div className={'text-3xl'}>{stat.icon}</div>
+      <h1 className={'text-gray-500'}>{stat.title}</h1>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <p className={'font-bold'}>{stat.value?.toFixed(2)} €</p>
+      )}
     </Card>
   );
 };

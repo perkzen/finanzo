@@ -48,6 +48,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   MonthlyReport MonthlyReport[]
+  Transaction   Transaction[]
 
   @@map("users")
 }
@@ -61,25 +62,26 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-model Expense {
+model Transaction {
   id              String        @id @default(cuid())
-  type            String
-  category        String
+  description     String
   amount          Int
   createdAt       DateTime      @default(now())
   monthlyReportId String
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   monthlyReport   MonthlyReport @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
 
-  @@map("expenses")
+  @@map("transactions")
 }
 
 model MonthlyReport {
-  id      String    @id @default(cuid())
-  month   String
-  year    Int
-  userId  String
-  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Expense Expense[]
+  id          String        @id @default(cuid())
+  month       String
+  year        Int
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Transaction Transaction[]
 
   @@map("monthly_reports")
 }
