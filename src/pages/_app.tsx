@@ -7,6 +7,7 @@ import superjson from 'superjson';
 import { AppRouter } from '../server/router';
 import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
 import AuthProvider from '../components/AuthProvider/AuthProvider';
+import { ModalProvider } from '../context/Modal/ModalProvider';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -21,7 +22,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <SessionProvider>
         <AuthProvider>
           <LayoutProvider>
-            <Component {...pageProps} />
+            <ModalProvider>
+              <Component {...pageProps} />
+            </ModalProvider>
           </LayoutProvider>
         </AuthProvider>
       </SessionProvider>
