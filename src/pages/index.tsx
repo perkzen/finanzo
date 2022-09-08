@@ -2,6 +2,8 @@ import type { NextPage } from 'next';
 import classes from '../styles/index.module.scss';
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
+import Card from '../components/Card/Card';
+import Footer from '../components/Footer/Footer';
 
 const Home: NextPage = () => {
   const handleClick = async () => {
@@ -9,23 +11,27 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className={'flex flex-col justify-center items-center pt-20'}>
-      <div
-        className={
-          'transform hover:scale-[1.01] transition-all rounded-xl w-full md:w-1/3 bg-gradient-to-r p-1 from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'
-        }
-      >
-        <div className={classes.Card}>
-          <h1 className={'text-6xl text-white text-center'}>Finanzo</h1>
-          <h2 className={'font-bold text-white'}>
-            manage your monthly expenses and incomes
-          </h2>
-          <button className={'btn'} onClick={handleClick}>
-            <FcGoogle />
-            Login with Google
-          </button>
-        </div>
+    <div
+      className={
+        'flex flex-col justify-center items-center pb-20 gap-5 h-screen'
+      }
+    >
+      <div>
+        <h1 className={'text-8xl text-center'}>Finanzo</h1>
+        <h2 className={'text-gray-500'}>
+          manage your monthly expenses and incomes
+        </h2>
       </div>
+      <button
+        className={
+          'flex flex-row items-center justify-center btn bg-neutral-800 gap-4 text-white rounded-lg px-5 py-2'
+        }
+        onClick={handleClick}
+      >
+        <FcGoogle />
+        Login with Google
+      </button>
+      <Footer />
     </div>
   );
 };
