@@ -8,15 +8,15 @@ import Title from '../components/Title/Title';
 
 const Dashboard: NextPage = () => {
   return (
-    <div className={'py-5 mt-10 px-20 flex flex-col w-5/6 gap-8 '}>
+    <div className={'py-5 mt-10  px-20 flex flex-col w-5/6 gap-8 '}>
       <Title
         title={'Dashboard'}
-        subtitle={'Overview about your finances'}
+        subtitle={'Payments updates'}
         className={'mb-5'}
       />
       <Statistics />
       <History />
-      <BarChart />
+      {/*<BarChart />*/}
     </div>
   );
 };

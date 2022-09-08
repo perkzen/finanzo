@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className={classes.Container}>
+    <div className={'flex flex-col justify-center items-center pt-20'}>
       <div
         className={
           'transform hover:scale-[1.01] transition-all rounded-xl w-full md:w-1/3 bg-gradient-to-r p-1 from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'

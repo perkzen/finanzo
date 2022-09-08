@@ -1,7 +1,5 @@
-@import "src/styles/mixin.scss";
-
 .Container {
- @apply py-5;
+  @apply py-5;
 
   td {
     @apply py-3 px-5;

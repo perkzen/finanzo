@@ -2,12 +2,18 @@ import React, { FC } from 'react';
 
 interface LoadingSpinnerProps {
   color?: 'white' | 'neutral-900';
+  height?: string;
+  width?: string;
 }
 
-const LoadingSpinner: FC<LoadingSpinnerProps> = ({ color = 'accent' }) => {
+const LoadingSpinner: FC<LoadingSpinnerProps> = ({
+  color = 'accent',
+  height = 12,
+  width = 12,
+}) => {
   return (
     <svg
-      className={`animate-spin -ml-1 mr-3 h-12 w-12 text-${color}`}
+      className={`animate-spin -ml-1 mr-3 h-${height} w-${width} text-${color}`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

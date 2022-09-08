@@ -53,10 +53,10 @@ const Table = <T,>({
                 <td colSpan={headers.length + 1}>
                   <div
                     className={
-                      'flex flex-col justify-center items-center h-[400px]'
+                      'flex flex-col justify-center items-center h-[100px]'
                     }
                   >
-                    <LoadingSpinner />
+                    <LoadingSpinner width={'8'} height={'8'} />
                   </div>
                 </td>
               </tr>

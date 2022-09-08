@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Table, { TableHeader } from '../Table/Table';
-import { TransactionTable } from '../../types/finances';
+import { TransactionTable } from '../../types/transaction';
 import { format } from 'date-fns';
 import { trpc } from '../../utils/trpc';
 
@@ -19,6 +19,7 @@ const History: FC = () => {
   const transactions = data?.map((item) => {
     return {
       ...item,
+      amount: item.amount.toFixed(2) + ' €',
       createdAt: format(new Date(item.createdAt), 'dd.MM.yyyy'),
     };
   });
