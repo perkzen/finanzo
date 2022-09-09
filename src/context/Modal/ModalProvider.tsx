@@ -23,7 +23,7 @@ interface ModalState {
   modal: IModal | null;
 }
 
-const initialState: ModalState = { isOpen: true, modal: null };
+const initialState: ModalState = { isOpen: false, modal: null };
 
 const ModalContext = createContext<ModalState>(initialState);
 const ModalDispatchContext = createContext<Dispatch<ModalAction>>(() => null);

@@ -19,13 +19,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="description" content="Self finance management app." />
       </Head>
+
       <SessionProvider>
         <AuthProvider>
-          <LayoutProvider>
-            <ModalProvider>
+          <ModalProvider>
+            <LayoutProvider>
               <Component {...pageProps} />
-            </ModalProvider>
-          </LayoutProvider>
+            </LayoutProvider>
+          </ModalProvider>
         </AuthProvider>
       </SessionProvider>
     </>
