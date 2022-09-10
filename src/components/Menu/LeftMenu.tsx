@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const items: { icon: ReactNode; url: string }[] = [
   { icon: <HiOutlineHome />, url: '/dashboard' },
-  { icon: <HiOutlineCalendar />, url: '/yearly-report' },
+  { icon: <HiOutlineCalendar />, url: `/report/${new Date().getFullYear()}` },
   { icon: <GoGraph />, url: '/analytics' },
 ];
 

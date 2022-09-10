@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-import Title from '../components/Title/Title';
-import Table, { TableHeader } from '../components/Table/Table';
-import { YearlyReportTable } from '../types/transaction';
-import { formatNumberAsCurrency } from '../utils/formatNumberAsCurrency';
-import Button from '../components/Button/Button';
+
+import { useRouter } from 'next/router';
+import { YearlyReportTable } from '../../../types/transaction';
+import Table, { TableHeader } from '../../../components/Table/Table';
+import { formatNumberAsCurrency } from '../../../utils/formatNumberAsCurrency';
+import Button from '../../../components/Button/Button';
+import Title from '../../../components/Title/Title';
 
 const headers: TableHeader<YearlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
@@ -45,6 +47,7 @@ const tdata = [
 ];
 
 const YearlyReport: NextPage = () => {
+  const router = useRouter();
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const tableData = tdata.map((data) => {
     return {
@@ -54,6 +57,10 @@ const YearlyReport: NextPage = () => {
       balance: formatNumberAsCurrency(data.balance),
     };
   });
+
+  const handleRowClick = async (row: YearlyReportTable) => {
+    await router.push(`/report?month=${row.month}&year=${year}`);
+  };
 
   return (
     <div className={'py-5 mt-10 px-20 flex flex-col w-5/6 gap-8'}>
@@ -73,7 +80,7 @@ const YearlyReport: NextPage = () => {
           data={tableData}
           headers={headers}
           align={'center'}
-          onRowClick={() => 1}
+          onRowClick={handleRowClick}
         />
       </div>
     </div>
