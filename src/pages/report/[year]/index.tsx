@@ -48,7 +48,10 @@ const tdata = [
 
 const YearlyReport: NextPage = () => {
   const router = useRouter();
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const query =
+    typeof router.query.year === 'string' ? router.query.year : undefined;
+
+  const [year, setYear] = useState(query || new Date().getFullYear());
   const tableData = tdata.map((data) => {
     return {
       ...data,
@@ -59,7 +62,7 @@ const YearlyReport: NextPage = () => {
   });
 
   const handleRowClick = async (row: YearlyReportTable) => {
-    await router.push(`/report?month=${row.month}&year=${year}`);
+    await router.push(`/report/${year}/${row.month}`);
   };
 
   return (
