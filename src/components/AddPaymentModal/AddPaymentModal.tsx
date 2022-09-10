@@ -3,6 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { TbFileInvoice } from 'react-icons/tb';
 import { RiCarLine, RiAccountCircleLine } from 'react-icons/ri';
 import { HiOutlineHome } from 'react-icons/hi';
+import Input from '../Input/Input';
 
 interface ModalProps {
   handleClose: () => void;
@@ -54,27 +55,11 @@ const AddPaymentModal: FC<ModalProps> = ({ handleClose }) => {
             </div>
           ))}
         </div>
-
-        <h3 className="leading-6 text-gray-500 text-sm mt-2">Title</h3>
-        <input
-          className={
-            'outline outline-1 shadow-md px-2 py-2 mt-2 outline-neutral-800 rounded-lg w-full'
-          }
-        />
-        <h3 className="leading-6 text-gray-500 text-sm mt-2">Amount</h3>
-        <input
-          type={'number'}
-          className={
-            'outline outline-1 shadow-md px-2 py-2 mt-2 outline-neutral-800 rounded-lg w-full'
-          }
-        />
-        <h3 className="leading-6 text-gray-500 text-sm mt-2">Date</h3>
-        <input
-          type={'date'}
-          className={
-            'outline outline-1 shadow-md px-2 py-2 mt-2 outline-neutral-800 rounded-lg w-full'
-          }
-        />
+        <form>
+          <Input label={'Title'} />
+          <Input label={'Amount'} type={'number'} />
+          <Input label={'Date'} type={'date'} />
+        </form>
       </div>
 
       <div className="mt-8">
