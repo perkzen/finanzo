@@ -1,9 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Statistics from '../components/Statistics/Statistics';
-
 import History from '../components/History/History';
-import BarChart from '../components/BarChart/BarChart';
 import Title from '../components/Title/Title';
 
 const Dashboard: NextPage = () => {

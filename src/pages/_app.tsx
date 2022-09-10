@@ -8,6 +8,7 @@ import { AppRouter } from '../server/router';
 import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
 import AuthProvider from '../components/AuthProvider/AuthProvider';
 import { ModalProvider } from '../context/Modal/ModalProvider';
+import '../i18next/i18next';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
