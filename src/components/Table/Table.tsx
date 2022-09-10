@@ -18,6 +18,9 @@ interface TableProps<T> {
   onDelete?: (item: T) => void;
   isLoading?: boolean;
   showHeader?: boolean;
+  align?: 'left' | 'center' | 'right';
+  buttonLabel?: string;
+  buttonAction?: () => void;
 }
 
 const Table = <T,>({
@@ -27,11 +30,17 @@ const Table = <T,>({
   onRowClick,
   onDelete,
   isLoading,
+  align,
+  buttonAction,
+  buttonLabel,
   showHeader = true,
 }: TableProps<T>) => {
   return (
     <>
       <h1 className={'text-2xl text-center font-bold my-2'}>{title}</h1>
+      <div>
+        {buttonLabel && <button onClick={buttonAction}>{buttonLabel}</button>}
+      </div>
       <div
         className={classNames(classes.Container as string, 'overflow-x-auto')}
       >
@@ -68,13 +77,13 @@ const Table = <T,>({
                       <tr
                         className={
                           onRowClick &&
-                          'hover:cursor-pointer hover:bg-white hover:shadow-sm'
+                          'hover:cursor-pointer hover:bg-primary hover:shadow-sm'
                         }
                         key={index}
                         onClick={() => onRowClick && onRowClick(dataItem)}
                       >
                         {headers.map((header, index) => (
-                          <td key={index}>
+                          <td key={index} align={align}>
                             {dataItem[header.accessor] as unknown as string}
                           </td>
                         ))}

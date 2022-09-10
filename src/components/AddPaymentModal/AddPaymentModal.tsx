@@ -4,6 +4,7 @@ import { TbFileInvoice } from 'react-icons/tb';
 import { RiCarLine, RiAccountCircleLine } from 'react-icons/ri';
 import { HiOutlineHome } from 'react-icons/hi';
 import Input from '../Input/Input';
+import Button from '../Button/Button';
 
 interface ModalProps {
   handleClose: () => void;
@@ -63,20 +64,8 @@ const AddPaymentModal: FC<ModalProps> = ({ handleClose }) => {
       </div>
 
       <div className="mt-8">
-        <button
-          type="button"
-          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-          onClick={handleClose}
-        >
-          Save
-        </button>{' '}
-        <button
-          type="button"
-          className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-          onClick={handleClose}
-        >
-          Cancel
-        </button>
+        <Button color={'blue'} label={'Save'} onClick={handleClose} />{' '}
+        <Button color={'red'} label={'Cancel'} onClick={handleClose} />
       </div>
     </>
   );
