@@ -6,6 +6,7 @@ import {
 } from '../../context/Modal/ModalProvider';
 import AddPaymentModal from '../AddPaymentModal/AddPaymentModal';
 import { IModal, ModalType } from '../../types/modal';
+import SettingsModal from '../Settings/SettingsModal';
 
 interface ModalProps {
   modal: IModal | null;
@@ -23,6 +24,8 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
     switch (type) {
       case ModalType.ADD_PAYMENT:
         return <AddPaymentModal handleClose={handleClose} />;
+      case ModalType.SETTINGS:
+        return <SettingsModal handleClose={handleClose} />;
       default:
         return null;
     }

@@ -3,14 +3,28 @@ import Image from 'next/image';
 import { trpc } from '../../utils/trpc';
 import UpcomingPaymentsList from '../UpcomingPayment/UpcomingPaymentsList';
 import { BiLogOut } from 'react-icons/bi';
+import { FiSettings } from 'react-icons/fi';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { signOut } from 'next-auth/react';
+import {
+  ModalActionType,
+  useModalDispatch,
+} from '../../context/Modal/ModalProvider';
+import { ModalType } from '../../types/modal';
 
 const RightMenu: FC = () => {
   const { data, isLoading } = trpc.useQuery(['account.get-user']);
+  const dispatch = useModalDispatch();
 
   const handleSignOut = async () => {
     await signOut();
+  };
+
+  const openSettings = () => {
+    dispatch({
+      type: ModalActionType.ADD_MODAL,
+      payload: { type: ModalType.SETTINGS },
+    });
   };
 
   return (
@@ -31,15 +45,25 @@ const RightMenu: FC = () => {
             )}
           </>
         )}
-        <h1 className={'font-bold text-lg mt-5'}>{data?.name}</h1>
-        <button
-          onClick={handleSignOut}
-          className={
-            'flex justify-center items-center bg-primary shadow-md w-8 h-8 rounded-lg mt-5'
-          }
-        >
-          <BiLogOut />
-        </button>
+        <h1 className={'font-bold text-lg my-3'}>{data?.name}</h1>
+        <div className={'flex flex-row gap-5'}>
+          <button
+            onClick={openSettings}
+            className={
+              'flex justify-center items-center bg-primary shadow-md w-8 h-8 rounded-lg '
+            }
+          >
+            <FiSettings />
+          </button>
+          <button
+            onClick={handleSignOut}
+            className={
+              'flex justify-center items-center bg-primary shadow-md w-8 h-8 rounded-lg'
+            }
+          >
+            <BiLogOut />
+          </button>
+        </div>
         <UpcomingPaymentsList />
       </div>
     </div>
