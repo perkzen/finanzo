@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Dialog } from '@headlessui/react';
-import { ModalType } from '../Modal/Modal';
 
 interface ModalProps {
   handleClose: () => void;
@@ -13,7 +12,7 @@ const AddPaymentModal: FC<ModalProps> = ({ handleClose }) => {
         as="h3"
         className="text-lg font-medium leading-6 text-gray-900"
       >
-        Payment successful
+        Add upcoming payment
       </Dialog.Title>
       <div className="mt-2">
         <p className="text-sm text-gray-500">

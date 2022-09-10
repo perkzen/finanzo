@@ -9,7 +9,7 @@ import {
   ModalActionType,
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
-import { ModalType } from '../Modal/Modal';
+import { ModalType } from '../../types/modal';
 
 const UpcomingPaymentsList: FC = () => {
   const dispatch = useModalDispatch();

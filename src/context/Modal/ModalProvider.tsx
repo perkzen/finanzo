@@ -48,7 +48,7 @@ export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     <ModalContext.Provider value={state}>
       <ModalDispatchContext.Provider value={dispatch}>
         {children}
-        <Modal modal={state.modal} isOpen={state.isOpen} />
+        {state.modal && <Modal modal={state.modal} isOpen={state.isOpen} />}
       </ModalDispatchContext.Provider>
     </ModalContext.Provider>
   );
