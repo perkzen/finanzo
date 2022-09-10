@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import Card from '../Card/Card';
 import { Statistic } from '../../types/statistics';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 
 interface StatCardProps {
   stat: Statistic;
@@ -16,7 +17,9 @@ const StatCard: FC<StatCardProps> = ({ stat, isLoading }) => {
       {isLoading ? (
         <LoadingSpinner height={'8'} width={'8'} />
       ) : (
-        <p className={'font-bold'}>{stat.value?.toFixed(2)} €</p>
+        <p className={'font-bold'}>
+          {stat.value ? formatNumberAsCurrency(stat.value) : '0,00 €'}
+        </p>
       )}
     </Card>
   );

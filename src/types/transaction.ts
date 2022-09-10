@@ -18,3 +18,11 @@ export interface UpcomingPayment {
   amount: number;
   createdAt?: Date;
 }
+
+export interface YearlyReportTable {
+  month: string;
+  income: string;
+  expense: string;
+  balance: string;
+  numberOfTransactions: number;
+}

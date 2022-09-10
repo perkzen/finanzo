@@ -1,5 +1,6 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { UpcomingPayment } from '../../types/transaction';
+import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 
 interface UpcomingPaymentProps {
   payment: UpcomingPayment;
@@ -17,7 +18,9 @@ const UpcomingPayment: FC<UpcomingPaymentProps> = ({ payment }) => {
       </div>
 
       <h1 className={'mx-3'}>{payment.description}</h1>
-      <p className={'ml-3 font-bold ml-auto'}>{payment.amount.toFixed(2)} €</p>
+      <p className={'ml-3 font-bold ml-auto'}>
+        {formatNumberAsCurrency(payment.amount)}
+      </p>
     </div>
   );
 };

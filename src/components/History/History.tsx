@@ -3,6 +3,7 @@ import Table, { TableHeader } from '../Table/Table';
 import { TransactionTable } from '../../types/transaction';
 import { format } from 'date-fns';
 import { trpc } from '../../utils/trpc';
+import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 
 const headers: TableHeader<TransactionTable>[] = [
   { label: 'Description', accessor: 'description' },
@@ -19,7 +20,7 @@ const History: FC = () => {
   const transactions = data?.map((item) => {
     return {
       ...item,
-      amount: item.amount.toFixed(2) + ' €',
+      amount: formatNumberAsCurrency(item.amount),
       createdAt: format(new Date(item.createdAt), 'dd.MM.yyyy'),
     };
   });
