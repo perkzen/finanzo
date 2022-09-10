@@ -3,8 +3,8 @@ import { format } from 'date-fns';
 import Title from '../Title/Title';
 import { HiOutlineHome } from 'react-icons/hi';
 import { RiCarLine } from 'react-icons/ri';
-import UpcomingPayment from './UpcomingPayment';
 import { BsPlusLg } from 'react-icons/bs';
+import UpcomingPayment from './UpcomingPayment';
 import {
   ModalActionType,
   useModalDispatch,

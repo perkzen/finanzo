@@ -1,11 +1,29 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Dialog } from '@headlessui/react';
+import { TbFileInvoice } from 'react-icons/tb';
+import { RiCarLine, RiAccountCircleLine } from 'react-icons/ri';
+import { HiOutlineHome } from 'react-icons/hi';
 
 interface ModalProps {
   handleClose: () => void;
 }
 
+const paymentTypes = [
+  { icon: <RiCarLine />, description: 'Car' },
+  { icon: <HiOutlineHome />, description: 'Home' },
+  { icon: <RiAccountCircleLine />, description: 'Personal' },
+  { icon: <TbFileInvoice />, description: 'Other' },
+];
+
 const AddPaymentModal: FC<ModalProps> = ({ handleClose }) => {
+  const [selectedPaymentType, setSelectedPaymentType] = useState(
+    paymentTypes[0]?.description
+  );
+
+  const handleChangeType = (type: string) => {
+    setSelectedPaymentType(type);
+  };
+
   return (
     <>
       <Dialog.Title
@@ -15,19 +33,64 @@ const AddPaymentModal: FC<ModalProps> = ({ handleClose }) => {
         Add upcoming payment
       </Dialog.Title>
       <div className="mt-2">
-        <p className="text-sm text-gray-500">
-          Your payment has been successfully submitted. We’ve sent you an email
-          with all of the details of your order.
-        </p>
+        <h3 className="leading-6 text-gray-500 my-2">Payment type</h3>
+        <div className={'flex flex-row gap-10'}>
+          {paymentTypes.map((paymentType, index) => (
+            <div
+              key={index}
+              className={'flex flex-col justify-center items-center'}
+            >
+              <button
+                onClick={() => handleChangeType(paymentType.description)}
+                className={`flex justify-center items-center  ${
+                  paymentType.description === selectedPaymentType
+                    ? ' bg-blue-100'
+                    : 'bg-primary'
+                } shadow-md w-8 h-8 rounded-lg`}
+              >
+                {paymentType.icon}
+              </button>
+              <p className={'text-xs mt-2'}>{paymentType.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="leading-6 text-gray-500 text-sm mt-2">Title</h3>
+        <input
+          className={
+            'outline outline-1 shadow-md px-2 py-2 mt-2 outline-neutral-800 rounded-lg w-full'
+          }
+        />
+        <h3 className="leading-6 text-gray-500 text-sm mt-2">Amount</h3>
+        <input
+          type={'number'}
+          className={
+            'outline outline-1 shadow-md px-2 py-2 mt-2 outline-neutral-800 rounded-lg w-full'
+          }
+        />
+        <h3 className="leading-6 text-gray-500 text-sm mt-2">Date</h3>
+        <input
+          type={'date'}
+          className={
+            'outline outline-1 shadow-md px-2 py-2 mt-2 outline-neutral-800 rounded-lg w-full'
+          }
+        />
       </div>
 
-      <div className="mt-4">
+      <div className="mt-8">
         <button
           type="button"
           className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
           onClick={handleClose}
         >
-          Got it, thanks!
+          Save
+        </button>{' '}
+        <button
+          type="button"
+          className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+          onClick={handleClose}
+        >
+          Cancel
         </button>
       </div>
     </>
