@@ -1,8 +1,6 @@
 import type { NextPage } from 'next';
-import classes from '../styles/index.module.scss';
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
-import Card from '../components/Card/Card';
 import Footer from '../components/Footer/Footer';
 
 const Home: NextPage = () => {

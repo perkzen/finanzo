@@ -6,7 +6,8 @@ import {
   useContext,
   useReducer,
 } from 'react';
-import Modal, { IModal } from '../../components/Modal/Modal';
+import { IModal } from '../../types/modal';
+import Modal from '../../components/Modal/Modal';
 
 export enum ModalActionType {
   ADD_MODAL = 'ADD_MODAL',
@@ -15,7 +16,7 @@ export enum ModalActionType {
 
 interface ModalAction {
   type: ModalActionType;
-  payload: IModal;
+  payload: IModal | null;
 }
 
 interface ModalState {

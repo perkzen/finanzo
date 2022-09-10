@@ -5,14 +5,7 @@ import {
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
 import AddPaymentModal from '../AddPaymentModal/AddPaymentModal';
-
-export enum ModalType {
-  ADD_PAYMENT = 'ADD_PAYMENT',
-}
-
-export interface IModal {
-  type?: ModalType;
-}
+import { IModal, ModalType } from '../../types/modal';
 
 interface ModalProps {
   modal: IModal | null;
@@ -23,10 +16,10 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
   const dispatch = useModalDispatch();
 
   const handleClose = () => {
-    dispatch({ type: ModalActionType.REMOVE_MODAL, payload: {} });
+    dispatch({ type: ModalActionType.REMOVE_MODAL, payload: null });
   };
 
-  const renderModal = (type: ModalType) => {
+  const renderModal = (type?: ModalType) => {
     switch (type) {
       case ModalType.ADD_PAYMENT:
         return <AddPaymentModal handleClose={handleClose} />;
@@ -62,7 +55,7 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                {renderModal(ModalType.ADD_PAYMENT)}
+                {renderModal(modal?.type)}
               </Dialog.Panel>
             </Transition.Child>
           </div>
