@@ -2,6 +2,7 @@ import NextAuth, { Session } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
+import { createMonthlyReports } from '../../../server/helpers/createMonthlyReports';
 
 const prisma = new PrismaClient();
 
@@ -38,25 +39,12 @@ export default NextAuth({
   },
   events: {
     signIn: async ({ user, isNewUser }) => {
+      if (!isNewUser) return;
       const currentYear = new Date().getFullYear();
-      if (isNewUser) {
-        await prisma.monthlyReport.createMany({
-          data: [
-            { month: 'January', year: currentYear, userId: user.id },
-            { month: 'February', year: currentYear, userId: user.id },
-            { month: 'March', year: currentYear, userId: user.id },
-            { month: 'April', year: currentYear, userId: user.id },
-            { month: 'May', year: currentYear, userId: user.id },
-            { month: 'June', year: currentYear, userId: user.id },
-            { month: 'July', year: currentYear, userId: user.id },
-            { month: 'August', year: currentYear, userId: user.id },
-            { month: 'September', year: currentYear, userId: user.id },
-            { month: 'October', year: currentYear, userId: user.id },
-            { month: 'November', year: currentYear, userId: user.id },
-            { month: 'December', year: currentYear, userId: user.id },
-          ],
-        });
-      }
+      const reports = createMonthlyReports(user.id, currentYear);
+      await prisma.monthlyReport.createMany({
+        data: reports,
+      });
     },
   },
 });

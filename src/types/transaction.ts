@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Prisma } from '@prisma/client';
 
 export interface TransactionTable {
   description: string;
@@ -22,7 +23,7 @@ export interface UpcomingPayment {
 export interface YearlyReportTable {
   month: string;
   income: string;
-  expense: string;
+  expenses: string;
   balance: string;
-  numberOfTransactions: number;
+  transactions: number;
 }

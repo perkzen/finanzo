@@ -11,39 +11,9 @@ import { trpc } from '../../../utils/trpc';
 const headers: TableHeader<YearlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
   { label: 'Income', accessor: 'income' },
-  { label: 'Expenses', accessor: 'expense' },
+  { label: 'Expenses', accessor: 'expenses' },
   { label: 'Differance', accessor: 'balance' },
-  { label: 'Transactions', accessor: 'numberOfTransactions' },
-];
-const tdata = [
-  {
-    month: 'January',
-    income: 100,
-    expense: 50,
-    balance: 50,
-    numberOfTransactions: 10,
-  },
-  {
-    month: 'February',
-    income: 100,
-    expense: 50,
-    balance: 50,
-    numberOfTransactions: 10,
-  },
-  {
-    month: 'March',
-    income: 100,
-    expense: 50,
-    balance: 50,
-    numberOfTransactions: 10,
-  },
-  {
-    month: 'April',
-    income: 100,
-    expense: 50,
-    balance: 50,
-    numberOfTransactions: 10,
-  },
+  { label: 'Transactions', accessor: 'transactions' },
 ];
 
 const YearlyReport: NextPage = () => {
@@ -51,14 +21,16 @@ const YearlyReport: NextPage = () => {
   const query =
     typeof router.query.year === 'string' ? +router.query.year : undefined;
   const [year, setYear] = useState(query || new Date().getFullYear());
-  const { data } = trpc.useQuery(['transactions.get-yearly-report', { year }]);
-  console.log(data);
-  // TODO: do this on backend
-  const tableData = tdata.map((data) => {
+  const { data, isLoading } = trpc.useQuery([
+    'reports.get-yearly-report',
+    { year },
+  ]);
+
+  const months = data?.map((data) => {
     return {
       ...data,
       income: formatNumberAsCurrency(data.income),
-      expense: formatNumberAsCurrency(data.expense),
+      expenses: formatNumberAsCurrency(data.expenses),
       balance: formatNumberAsCurrency(data.balance),
     };
   });
@@ -82,7 +54,7 @@ const YearlyReport: NextPage = () => {
         </div>
 
         <Table
-          data={tableData}
+          data={months || []}
           headers={headers}
           align={'center'}
           onRowClick={handleRowClick}

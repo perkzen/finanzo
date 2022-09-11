@@ -65,7 +65,7 @@ model VerificationToken {
 model Transaction {
   id              String        @id @default(cuid())
   description     String
-  amount          Int
+  amount          Float
   createdAt       DateTime      @default(now())
   monthlyReportId String
   userId          String

@@ -1,6 +1,9 @@
-import { prisma } from '../../db/client';
+import { PrismaClient } from '@prisma/client';
 
-export const getMonthlyReportAccountInfo = async (monthId: string) => {
+export const getMonthlyReportAccountInfo = async (
+  prisma: PrismaClient,
+  monthId: string
+) => {
   const balance = await prisma.transaction.aggregate({
     where: { monthlyReportId: monthId },
     _sum: { amount: true },
