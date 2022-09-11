@@ -7,4 +7,10 @@ export enum ModalType {
 
 export interface IModal {
   type: ModalType;
+  callback?: () => void;
+}
+
+export interface ModalProps {
+  modal: IModal;
+  handleClose: () => void;
 }

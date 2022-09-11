@@ -4,12 +4,14 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { trpc } from '../../utils/trpc';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { ModalProps } from '../../types/modal';
 
-interface ModalProps {
-  handleClose: () => void;
-}
-
-const CreateYearlyReportModal: FC<ModalProps> = ({ handleClose }) => {
+const CreateYearlyReportModal: FC<ModalProps> = ({
+  handleClose,
+  modal: { callback },
+}) => {
+  const router = useRouter();
   const [year, setYear] = useState(new Date().getFullYear() + 1);
   const { mutateAsync } = trpc.useMutation('reports.create-yearly-report');
 
@@ -22,6 +24,9 @@ const CreateYearlyReportModal: FC<ModalProps> = ({ handleClose }) => {
         error: (err) => err.message,
       });
       handleClose();
+      if (callback) {
+        callback();
+      }
     } catch (e) {
       console.error(e);
     }

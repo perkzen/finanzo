@@ -5,10 +5,7 @@ import { RiCarLine, RiAccountCircleLine } from 'react-icons/ri';
 import { HiOutlineHome } from 'react-icons/hi';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-
-interface ModalProps {
-  handleClose: () => void;
-}
+import { ModalProps } from '../../types/modal';
 
 const paymentTypes = [
   { icon: <RiCarLine />, description: 'Car' },
@@ -64,8 +61,8 @@ const AddPaymentModal: FC<ModalProps> = ({ handleClose }) => {
       </div>
 
       <div className="mt-8">
-        <Button color={'blue'} label={'Save'} onClick={handleClose} />{' '}
-        <Button color={'red'} label={'Cancel'} onClick={handleClose} />
+        <Button label={'Save'} onClick={handleClose} />{' '}
+        <Button label={'Cancel'} onClick={handleClose} />
       </div>
     </>
   );

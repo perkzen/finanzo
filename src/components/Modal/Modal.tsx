@@ -10,7 +10,7 @@ import SettingsModal from '../Settings/SettingsModal';
 import CreateYearlyReportModal from '../CreateYearlyReportModal/CreateYearlyReportModal';
 
 interface ModalProps {
-  modal: IModal | null;
+  modal: IModal;
   isOpen: boolean;
 }
 
@@ -24,11 +24,13 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
   const renderModal = (type?: ModalType) => {
     switch (type) {
       case ModalType.ADD_PAYMENT:
-        return <AddPaymentModal handleClose={handleClose} />;
+        return <AddPaymentModal handleClose={handleClose} modal={modal} />;
       case ModalType.SETTINGS:
-        return <SettingsModal handleClose={handleClose} />;
+        return <SettingsModal handleClose={handleClose} modal={modal} />;
       case ModalType.CREATE_YEARLY_REPORT:
-        return <CreateYearlyReportModal handleClose={handleClose} />;
+        return (
+          <CreateYearlyReportModal handleClose={handleClose} modal={modal} />
+        );
       default:
         return null;
     }

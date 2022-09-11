@@ -2,10 +2,7 @@ import React, { FC } from 'react';
 import { Dialog } from '@headlessui/react';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import Button from '../Button/Button';
-
-interface ModalProps {
-  handleClose: () => void;
-}
+import { ModalProps } from '../../types/modal';
 
 const SettingsModal: FC<ModalProps> = ({ handleClose }) => {
   return (
