@@ -2,11 +2,12 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,scss}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#F3F4FD',
+        secondary: '#ECEDF6',
+      },
+    },
   },
-  daisyui: {
-    themes: false,
-    base: false,
-  },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [require('@tailwindcss/typography')],
 };

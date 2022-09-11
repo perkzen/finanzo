@@ -12,3 +12,5 @@ type Context = trpc.inferAsyncReturnType<typeof createContext>;
 export function createRouter() {
   return trpc.router<Context>();
 }
+
+// TODO:  implement authorization middleware https://trpc.io/docs/v9/authorization

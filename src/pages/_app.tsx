@@ -7,6 +7,8 @@ import superjson from 'superjson';
 import { AppRouter } from '../server/router';
 import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
 import AuthProvider from '../components/AuthProvider/AuthProvider';
+import { ModalProvider } from '../context/Modal/ModalProvider';
+import '../i18next/i18next';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -18,11 +20,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="description" content="Self finance management app." />
       </Head>
+
       <SessionProvider>
         <AuthProvider>
-          <LayoutProvider>
-            <Component {...pageProps} />
-          </LayoutProvider>
+          <ModalProvider>
+            <LayoutProvider>
+              <Component {...pageProps} />
+            </LayoutProvider>
+          </ModalProvider>
         </AuthProvider>
       </SessionProvider>
     </>

@@ -17,6 +17,10 @@ interface TableProps<T> {
   onRowClick?: (item: T) => void;
   onDelete?: (item: T) => void;
   isLoading?: boolean;
+  showHeader?: boolean;
+  align?: 'left' | 'center' | 'right';
+  buttonLabel?: string;
+  buttonAction?: () => void;
 }
 
 const Table = <T,>({
@@ -26,21 +30,30 @@ const Table = <T,>({
   onRowClick,
   onDelete,
   isLoading,
+  align,
+  buttonAction,
+  buttonLabel,
+  showHeader = true,
 }: TableProps<T>) => {
   return (
     <>
       <h1 className={'text-2xl text-center font-bold my-2'}>{title}</h1>
+      <div>
+        {buttonLabel && <button onClick={buttonAction}>{buttonLabel}</button>}
+      </div>
       <div
         className={classNames(classes.Container as string, 'overflow-x-auto')}
       >
-        <table className=" table shadow w-full">
+        <table className="w-full">
           <thead>
-            <tr>
-              {headers.map(({ label }) => (
-                <th key={label}>{label}</th>
-              ))}
-              {onDelete && <th />}
-            </tr>
+            {showHeader && (
+              <tr>
+                {headers.map(({ label }) => (
+                  <th key={label}>{label}</th>
+                ))}
+                {onDelete && <th />}
+              </tr>
+            )}
           </thead>
 
           <tbody>
@@ -49,10 +62,10 @@ const Table = <T,>({
                 <td colSpan={headers.length + 1}>
                   <div
                     className={
-                      'flex flex-col justify-center items-center h-[400px]'
+                      'flex flex-col justify-center items-center h-[100px]'
                     }
                   >
-                    <LoadingSpinner />
+                    <LoadingSpinner width={'8'} height={'8'} />
                   </div>
                 </td>
               </tr>
@@ -62,12 +75,15 @@ const Table = <T,>({
                   <>
                     {data.map((dataItem, index) => (
                       <tr
-                        className={onRowClick && 'hover:cursor-pointer hover'}
+                        className={
+                          onRowClick &&
+                          'hover:cursor-pointer hover:bg-primary hover:shadow-sm'
+                        }
                         key={index}
                         onClick={() => onRowClick && onRowClick(dataItem)}
                       >
                         {headers.map((header, index) => (
-                          <td key={index}>
+                          <td key={index} align={align}>
                             {dataItem[header.accessor] as unknown as string}
                           </td>
                         ))}
