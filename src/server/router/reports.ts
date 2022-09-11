@@ -4,7 +4,6 @@ import { UserSession } from '../../pages/api/auth/[...nextauth]';
 import { prisma } from '../../db/client';
 import { getMonthlyReportAccountInfo } from '../helpers/transactions';
 import { createMonthlyReports } from '../helpers/createMonthlyReports';
-import { TRPCError } from '@trpc/server';
 
 export const reportsRouter = createRouter()
   .query('get-yearly-report-by-id', {
