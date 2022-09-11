@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-
 import { useRouter } from 'next/router';
 import { YearlyReportTable } from '../../../types/transaction';
 import Table, { TableHeader } from '../../../components/Table/Table';
 import { formatNumberAsCurrency } from '../../../utils/formatNumberAsCurrency';
 import Button from '../../../components/Button/Button';
 import Title from '../../../components/Title/Title';
+import { trpc } from '../../../utils/trpc';
 
 const headers: TableHeader<YearlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
@@ -49,9 +49,11 @@ const tdata = [
 const YearlyReport: NextPage = () => {
   const router = useRouter();
   const query =
-    typeof router.query.year === 'string' ? router.query.year : undefined;
-
+    typeof router.query.year === 'string' ? +router.query.year : undefined;
   const [year, setYear] = useState(query || new Date().getFullYear());
+  const { data } = trpc.useQuery(['transactions.get-yearly-report', { year }]);
+  console.log(data);
+  // TODO: do this on backend
   const tableData = tdata.map((data) => {
     return {
       ...data,
