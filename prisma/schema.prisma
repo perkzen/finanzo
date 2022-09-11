@@ -22,9 +22,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
@@ -35,7 +33,6 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@map("sessions")
 }
 
@@ -49,7 +46,6 @@ model User {
   sessions      Session[]
   MonthlyReport MonthlyReport[]
   Transaction   Transaction[]
-
   @@map("users")
 }
 
@@ -57,7 +53,6 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
   @@map("verification_tokens")
 }
@@ -71,7 +66,6 @@ model Transaction {
   userId          String
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   monthlyReport   MonthlyReport @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
-
   @@map("transactions")
 }
 
@@ -82,16 +76,5 @@ model MonthlyReport {
   userId      String
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   Transaction Transaction[]
-
   @@map("monthly_reports")
-}
-
-model YearlyReport {
-  id          String        @id @default(cuid())
-  year        Int
-  userId      String
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  MonthlyReport MonthlyReport[]
-
-  @@map("yearly_reports")
 }
