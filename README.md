@@ -101,11 +101,8 @@ $ pscale connect finanzo
 
 # Todo
 
-- [ ] change expense schema from int to float
-- [ ] add i18n
-- [ ] prettier ui
-- [ ] fix multiTypeChart (doesn't work in production)
-- [ ] optimize prisma schema and queries
+- [ ] add transalations
 - [ ] add tests
-- [ ] make reusable components
-- [ ] create production and development database
+- [ ] add auth middleware
+- [ ] add mobile responsivness
+- [ ] fix login when revisitting site
