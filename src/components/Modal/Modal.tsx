@@ -7,6 +7,7 @@ import {
 import AddPaymentModal from '../AddPaymentModal/AddPaymentModal';
 import { IModal, ModalType } from '../../types/modal';
 import SettingsModal from '../Settings/SettingsModal';
+import CreateYearlyReportModal from '../CreateYearlyReportModal/CreateYearlyReportModal';
 
 interface ModalProps {
   modal: IModal | null;
@@ -26,6 +27,8 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
         return <AddPaymentModal handleClose={handleClose} />;
       case ModalType.SETTINGS:
         return <SettingsModal handleClose={handleClose} />;
+      case ModalType.CREATE_YEARLY_REPORT:
+        return <CreateYearlyReportModal handleClose={handleClose} />;
       default:
         return null;
     }

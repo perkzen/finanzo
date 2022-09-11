@@ -4,9 +4,10 @@ import { UserSession } from '../../pages/api/auth/[...nextauth]';
 import { prisma } from '../../db/client';
 import { getMonthlyReportAccountInfo } from '../helpers/transactions';
 import { createMonthlyReports } from '../helpers/createMonthlyReports';
+import { TRPCError } from '@trpc/server';
 
 export const reportsRouter = createRouter()
-  .query('get-yearly-report', {
+  .query('get-yearly-report-by-id', {
     input: z.object({
       year: z.number(),
     }),
@@ -59,6 +60,14 @@ export const reportsRouter = createRouter()
     async resolve({ input, ctx }) {
       const userId = (ctx.session as UserSession).user.id;
       if (!userId) return new Error('User not found');
+
+      //check if monthly reports for this year already exist
+      const report = await prisma.monthlyReport.findFirst({
+        where: { userId, year: input.year },
+      });
+
+      if (report) throw new Error("This year's reports already exist");
+
       const reports = createMonthlyReports(userId, input.year);
       return await prisma.monthlyReport.createMany({
         data: reports,
@@ -77,6 +86,20 @@ export const reportsRouter = createRouter()
           userId,
           year: input.year,
         },
+      });
+    },
+  })
+  .query('get-years', {
+    async resolve({ ctx }) {
+      const userId = (ctx.session as UserSession).user.id;
+      if (!userId) return [];
+      // this is used for select options
+      return await prisma.monthlyReport.findMany({
+        where: { userId },
+        select: {
+          year: true,
+        },
+        distinct: ['year'],
       });
     },
   });

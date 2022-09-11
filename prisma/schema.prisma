@@ -85,3 +85,13 @@ model MonthlyReport {
 
   @@map("monthly_reports")
 }
+
+model YearlyReport {
+  id          String        @id @default(cuid())
+  year        Int
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  MonthlyReport MonthlyReport[]
+
+  @@map("yearly_reports")
+}
