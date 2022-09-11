@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import Image, { ImageLoader } from 'next/image';
+import Image from 'next/image';
 import { trpc } from '../../utils/trpc';
 import UpcomingPaymentsList from '../UpcomingPayment/UpcomingPaymentsList';
 import { BiLogOut } from 'react-icons/bi';
