@@ -101,8 +101,8 @@ $ pscale connect finanzo
 
 # Todo
 
-- [ ] add transalations
+- [ ] add translations
 - [ ] add tests
 - [ ] add auth middleware
-- [ ] add mobile responsivness
-- [ ] fix login when revisitting site
+- [ ] add mobile responsiveness
+- [ ] fix login when revisiting site (if already logged in redirect to dashboard)
