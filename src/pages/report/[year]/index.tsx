@@ -93,7 +93,7 @@ const YearlyReport: NextPage = () => {
   };
 
   return (
-    <div className={'py-5 mt-10 px-20 flex flex-col w-5/6 gap-8'}>
+    <div className={'py-5 mt-10 px-20 flex flex-col w-5/6 gap-8 w-full'}>
       <Title
         title={'Yearly report'}
         subtitle={'All finances information for selected year'}
