@@ -3,9 +3,8 @@ import { prisma } from '../../db/client';
 import { createRouter } from './context';
 import { UserSession } from '../../pages/api/auth/[...nextauth]';
 
-export const transactionsRouter = createRouter().query(
-  'get-transaction-history',
-  {
+export const transactionsRouter = createRouter()
+  .query('get-transaction-history', {
     input: z.object({
       limit: z.number(),
     }),
@@ -24,5 +23,24 @@ export const transactionsRouter = createRouter().query(
         orderBy: { createdAt: 'desc' },
       });
     },
-  }
-);
+  })
+  .query('get-transactions-by-month', {
+    input: z.object({
+      month: z.string(),
+      year: z.number(),
+    }),
+    async resolve({ input, ctx }) {
+      const userId = (ctx.session as UserSession).user.id;
+      if (!userId) return [];
+
+      return await prisma.transaction.findMany({
+        where: {
+          userId,
+          monthlyReport: {
+            month: input.month,
+            year: input.year,
+          },
+        },
+      });
+    },
+  });

@@ -28,6 +28,7 @@ const UpcomingPaymentsList: FC = () => {
     { icon: <HiOutlineHome />, description: 'rent', amount: 500 },
   ];
 
+  // TODO : add repeating payment
   return (
     <div className={'mt-20'}>
       <Title
