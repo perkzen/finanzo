@@ -6,7 +6,7 @@ import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 import { formatDate } from '../../utils/date';
 
 const headers: TableHeader<TransactionTable>[] = [
-  { label: 'Description', accessor: 'description' },
+  { label: 'Display name', accessor: 'displayName' },
   { label: 'Date', accessor: 'createdAt' },
   { label: 'Amount', accessor: 'amount' },
 ];

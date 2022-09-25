@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface TransactionTable {
-  description: string;
+  displayName: string;
   amount: string;
   createdAt: string;
 }
