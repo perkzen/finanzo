@@ -14,7 +14,7 @@ export interface Transaction {
 
 export interface UpcomingPayment {
   icon: ReactNode;
-  description: string;
+  displayName: string;
   amount: number;
   createdAt?: Date;
 }
