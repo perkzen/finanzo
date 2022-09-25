@@ -65,7 +65,7 @@ model Transaction {
   id              String        @id @default(cuid())
   category        String
   recurring       Boolean?      @default(false)
-  description     String
+  displayName     String
   amount          Float
   createdAt       DateTime      @default(now())
   monthlyReportId String

@@ -1,5 +1,5 @@
 export enum ModalType {
-  ADD_PAYMENT = 'ADD_PAYMENT',
+  ADD_TRANSACTION = 'ADD_TRANSACTION',
   SETTINGS = 'SETTINGS',
   CREATE_YEARLY_REPORT = 'CREATE_YEARLY_REPORT',
   DELETE = 'DELETE',
@@ -7,6 +7,7 @@ export enum ModalType {
 
 export interface IModal {
   type: ModalType;
+  title?: string;
   callback?: () => void;
 }
 

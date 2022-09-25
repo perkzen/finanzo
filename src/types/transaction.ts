@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { Prisma } from '@prisma/client';
 
 export interface TransactionTable {
   description: string;
@@ -8,7 +7,7 @@ export interface TransactionTable {
 }
 
 export interface Transaction {
-  description: string;
+  displayName: string;
   amount: number;
   createdAt: Date;
 }

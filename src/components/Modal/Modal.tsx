@@ -4,7 +4,7 @@ import {
   ModalActionType,
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
-import AddPaymentModal from '../AddPaymentModal/AddPaymentModal';
+import AddTransactionModal from '../AddTransactionModal/AddTransactionModal';
 import { IModal, ModalType } from '../../types/modal';
 import SettingsModal from '../Settings/SettingsModal';
 import CreateYearlyReportModal from '../CreateYearlyReportModal/CreateYearlyReportModal';
@@ -23,8 +23,8 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
 
   const renderModal = (type?: ModalType) => {
     switch (type) {
-      case ModalType.ADD_PAYMENT:
-        return <AddPaymentModal handleClose={handleClose} modal={modal} />;
+      case ModalType.ADD_TRANSACTION:
+        return <AddTransactionModal handleClose={handleClose} modal={modal} />;
       case ModalType.SETTINGS:
         return <SettingsModal handleClose={handleClose} modal={modal} />;
       case ModalType.CREATE_YEARLY_REPORT:

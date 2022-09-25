@@ -22,7 +22,7 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
         >
           <FiSettings />
         </div>
-        <h1 className={'text-2xl font-bold'}>{transaction.description}</h1>
+        <h1 className={'text-2xl font-bold'}>{transaction.displayName}</h1>
         <div className={'font-semibold'}>
           {formatDate(transaction.createdAt)}
         </div>

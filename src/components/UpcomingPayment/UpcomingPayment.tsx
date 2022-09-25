@@ -17,7 +17,7 @@ const UpcomingPayment: FC<UpcomingPaymentProps> = ({ payment }) => {
         {payment.icon}
       </div>
 
-      <h1 className={'mx-3'}>{payment.description}</h1>
+      <h1 className={'mx-3'}>{payment.displayName}</h1>
       <p className={'ml-3 font-bold ml-auto'}>
         {formatNumberAsCurrency(payment.amount)}
       </p>

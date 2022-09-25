@@ -43,12 +43,13 @@ const modalReducer = (state: ModalState, action: ModalAction) => {
 
 export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(modalReducer, initialState);
+  const { modal, isOpen } = state;
 
   return (
     <ModalContext.Provider value={state}>
       <ModalDispatchContext.Provider value={dispatch}>
         {children}
-        {state.modal && <Modal modal={state.modal} isOpen={state.isOpen} />}
+        {modal && <Modal modal={modal} isOpen={isOpen} />}
       </ModalDispatchContext.Provider>
     </ModalContext.Provider>
   );

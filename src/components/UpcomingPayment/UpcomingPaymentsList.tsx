@@ -18,14 +18,15 @@ const UpcomingPaymentsList: FC = () => {
     dispatch({
       type: ModalActionType.ADD_MODAL,
       payload: {
-        type: ModalType.ADD_PAYMENT,
+        type: ModalType.ADD_TRANSACTION,
+        title: 'Add upcoming payment',
       },
     });
   };
 
   const payments = [
-    { icon: <RiCarLine />, description: 'car insurance', amount: 1500 },
-    { icon: <HiOutlineHome />, description: 'rent', amount: 500 },
+    { icon: <RiCarLine />, displayName: 'car insurance', amount: 1500 },
+    { icon: <HiOutlineHome />, displayName: 'rent', amount: 500 },
   ];
 
   // TODO : add repeating payment

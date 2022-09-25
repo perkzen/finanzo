@@ -16,7 +16,7 @@ export const transactionsRouter = createRouter()
         take: input.limit,
         where: { userId: userId },
         select: {
-          description: true,
+          displayName: true,
           amount: true,
           createdAt: true,
         },
@@ -41,6 +41,62 @@ export const transactionsRouter = createRouter()
             year: input.year,
           },
         },
+      });
+    },
+  })
+  .mutation('create-transaction', {
+    input: z.object({
+      category: z.string(),
+      recurring: z.boolean(),
+      displayName: z.string(),
+      amount: z.number(),
+      createdAt: z.date(),
+    }),
+    async resolve({ input, ctx }) {
+      const userId = (ctx.session as UserSession).user.id;
+      if (!userId) return new Error('Authentication Required');
+
+      const { category, recurring, displayName, amount, createdAt } = input;
+
+      const month = createdAt.toLocaleString('default', { month: 'long' });
+      const year = input.createdAt.getFullYear();
+
+      const monthlyReport = await prisma.monthlyReport.findFirst({
+        where: {
+          month,
+          year,
+          userId,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (!monthlyReport) throw new Error('Monthly Report Not Found');
+
+      return await prisma.transaction.create({
+        data: {
+          category,
+          recurring,
+          displayName,
+          amount,
+          createdAt,
+          monthlyReportId: monthlyReport.id,
+          userId,
+        },
+      });
+    },
+  })
+  .mutation('delete-transaction', {
+    input: z.object({
+      transactionId: z.string(),
+    }),
+    async resolve({ input, ctx }) {
+      const userId = (ctx.session as UserSession).user.id;
+      if (!userId) return new Error('Authentication Required');
+
+      return await prisma.transaction.delete({
+        where: { id: input.transactionId },
       });
     },
   });

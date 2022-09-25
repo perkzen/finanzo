@@ -58,7 +58,7 @@ export const reportsRouter = createRouter()
     }),
     async resolve({ input, ctx }) {
       const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return new Error('User not found');
+      if (!userId) throw new Error('User not found');
 
       //check if monthly reports for this year already exist
       const report = await prisma.monthlyReport.findFirst({
@@ -79,7 +79,11 @@ export const reportsRouter = createRouter()
     }),
     async resolve({ input, ctx }) {
       const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return new Error('User not found');
+      if (!userId) throw new Error('User not found');
+
+      // can't delete last one
+      // should add year table
+
       return await prisma.monthlyReport.deleteMany({
         where: {
           userId,

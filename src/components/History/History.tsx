@@ -25,7 +25,6 @@ const History: FC = () => {
     };
   });
 
-  // TODO: add food, drinks, rent, car, phone, internet, electricity, gas, clothes, shoes,free time, other icons
   return (
     <div className={'flex flex-col py-5'}>
       <h1 className={'font-bold text-2xl'}>History</h1>
