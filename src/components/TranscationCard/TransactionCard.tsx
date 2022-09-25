@@ -4,8 +4,8 @@ import { Transaction } from '../../types/transaction';
 import Button from '../Button/Button';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
-import { FiSettings } from 'react-icons/fi';
 import { formatDate } from '../../utils/date';
+import { renderTransactionTypeIcons } from '../../utils/transactionTypeIcons';
 
 interface TransactionCardProps {
   transaction: Transaction;
@@ -24,7 +24,7 @@ const TransactionCard: FC<TransactionCardProps> = ({
             'flex justify-center items-center bg-white shadow-md w-8 h-8 rounded-lg '
           }
         >
-          <FiSettings />
+          {renderTransactionTypeIcons(transaction.category)}
         </div>
         <h1 className={'text-2xl font-bold'}>{transaction.displayName}</h1>
         <div className={'font-semibold'}>

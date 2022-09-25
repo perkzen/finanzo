@@ -41,6 +41,7 @@ export const transactionsRouter = createRouter()
             year: input.year,
           },
         },
+        orderBy: { createdAt: 'desc' },
       });
     },
   })

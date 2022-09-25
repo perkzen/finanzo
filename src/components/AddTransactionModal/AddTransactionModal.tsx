@@ -1,34 +1,19 @@
 import React, { FC, useState } from 'react';
 import { Dialog } from '@headlessui/react';
-import { TbFileInvoice } from 'react-icons/tb';
-import { RiCarLine, RiAccountCircleLine } from 'react-icons/ri';
-import { HiOutlineHome } from 'react-icons/hi';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { ModalProps } from '../../types/modal';
-import { IoFastFoodOutline } from 'react-icons/io5';
-import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 import Toggle from '../Toggle/Toogle';
 import { trpc } from '../../utils/trpc';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-
-const paymentTypes = [
-  { icon: <RiCarLine />, displayName: 'Car' },
-  { icon: <HiOutlineHome />, displayName: 'Home' },
-  { icon: <RiAccountCircleLine />, displayName: 'Personal' },
-  { icon: <MdOutlineLocalGroceryStore />, displayName: 'Shopping' },
-  { icon: <TbFileInvoice />, displayName: 'Bills' },
-  { icon: <IoFastFoodOutline />, displayName: 'Food & drinks' },
-];
+import { transactionTypes } from '../../utils/transactionTypeIcons';
 
 interface CreateTransactionForm {
-  //  category: string;
   recurring: boolean;
   displayName: string;
   amount: number;
   date: Date;
-  // monthReportId: string;
 }
 
 const defaultValues: CreateTransactionForm = {
@@ -43,7 +28,7 @@ const AddTransactionModal: FC<ModalProps> = ({
   modal: { title, callback },
 }) => {
   const [selectedType, setSelectedType] = useState(
-    paymentTypes[0]!.displayName
+    transactionTypes[0]!.category
   );
 
   const handleChangeType = (type: string) => {
@@ -93,22 +78,22 @@ const AddTransactionModal: FC<ModalProps> = ({
       <div className="mt-2">
         <h3 className="leading-6 text-gray-500 my-2">Type</h3>
         <div className={'flex flex-row gap-6'}>
-          {paymentTypes.map((paymentType, index) => (
+          {transactionTypes.map((paymentType, index) => (
             <div
               key={index}
               className={'flex flex-col justify-center items-center'}
             >
               <button
-                onClick={() => handleChangeType(paymentType.displayName)}
+                onClick={() => handleChangeType(paymentType.category)}
                 className={`flex justify-center items-center  ${
-                  paymentType.displayName === selectedType
+                  paymentType.category === selectedType
                     ? ' bg-blue-100'
                     : 'bg-primary'
                 } shadow-md w-8 h-8 rounded-lg`}
               >
                 {paymentType.icon}
               </button>
-              <p className={'text-xs mt-2'}>{paymentType.displayName}</p>
+              <p className={'text-xs mt-2'}>{paymentType.category}</p>
             </div>
           ))}
         </div>
