@@ -35,7 +35,6 @@ T3 stack - https://init.tips/other
 - tRPC
 - react hook form
 - Chart.js
-- DaisyUI
 - Zod
 - react-hot-toast
 
@@ -44,7 +43,6 @@ T3 stack - https://init.tips/other
 - NextAuth
 - tRPC
 - Prisma
-- superjson
 - PlanetScale MySQL Database
 
 # Env exmaple
