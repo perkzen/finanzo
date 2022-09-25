@@ -98,7 +98,9 @@ $ pscale connect finanzo
 ```
 
 # Todo
-
+- [ ] delete modal
+- [ ] add graphs
+- [ ] make recurring payments and upcoming payments
 - [ ] add translations
 - [ ] add tests
 - [ ] add auth middleware
