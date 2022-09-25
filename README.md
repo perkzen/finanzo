@@ -44,7 +44,6 @@ T3 stack - https://init.tips/other
 - NextAuth
 - tRPC
 - Prisma
-- superjson
 - PlanetScale MySQL Database
 
 # Env exmaple
