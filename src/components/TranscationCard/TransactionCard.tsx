@@ -9,9 +9,13 @@ import { formatDate } from '../../utils/date';
 
 interface TransactionCardProps {
   transaction: Transaction;
+  handleDelete: (id: string) => Promise<void>;
 }
 
-const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
+const TransactionCard: FC<TransactionCardProps> = ({
+  transaction,
+  handleDelete,
+}) => {
   return (
     <Card>
       <div className={'flex flex-row items-center gap-20'}>
@@ -29,7 +33,11 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
         <div className={'font-semibold'}>
           {formatNumberAsCurrency(transaction.amount)}
         </div>
-        <Button label={<FaRegTrashAlt />} classNames={'ml-auto'} />
+        <Button
+          label={<FaRegTrashAlt />}
+          classNames={'ml-auto'}
+          onClick={() => handleDelete(transaction.id)}
+        />
       </div>
     </Card>
   );

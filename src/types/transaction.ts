@@ -7,6 +7,7 @@ export interface TransactionTable {
 }
 
 export interface Transaction {
+  id: string;
   displayName: string;
   amount: number;
   createdAt: Date;

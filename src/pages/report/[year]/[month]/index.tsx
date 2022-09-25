@@ -9,6 +9,7 @@ import {
   useModalDispatch,
 } from '../../../../context/Modal/ModalProvider';
 import { ModalType } from '../../../../types/modal';
+import { toast } from 'react-hot-toast';
 
 const MonthlyReport = () => {
   const dispatch = useModalDispatch();
@@ -33,6 +34,21 @@ const MonthlyReport = () => {
     });
   };
 
+  const { mutateAsync } = trpc.useMutation(['transactions.delete-transaction']);
+
+  const handleDelete = async (id: string) => {
+    try {
+      await toast.promise(mutateAsync({ transactionId: id }), {
+        loading: 'Deleting transaction...',
+        success: 'Transaction deleted',
+        error: 'Failed to delete transaction',
+      });
+      await refetch();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className={'py-5 mt-10 px-20 flex flex-col gap-8 w-full'}>
       <Title
@@ -45,7 +61,11 @@ const MonthlyReport = () => {
         onClick={handleClick}
       />
       {transactions.map((transaction, index) => (
-        <TransactionCard key={index} transaction={transaction} />
+        <TransactionCard
+          key={index}
+          transaction={transaction}
+          handleDelete={handleDelete}
+        />
       ))}
     </div>
   );

@@ -63,7 +63,7 @@ const AddTransactionModal: FC<ModalProps> = ({
         mutateAsync({
           category: selectedType,
           displayName: data.displayName,
-          createdAt: data.date,
+          createdAt: new Date(data.date),
           recurring: data.recurring,
           amount: +data.amount,
         }),
