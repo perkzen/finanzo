@@ -8,7 +8,7 @@ import { trpc } from '../../utils/trpc';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { transactionTypes } from '../../utils/transactionTypeIcons';
-import { formatDate, getMonthFromString } from '../../utils/date';
+import { getDateMax, getDateMin } from '../../utils/date';
 
 interface CreateTransactionForm {
   recurring: boolean;
@@ -68,23 +68,9 @@ const AddTransactionModal: FC<ModalProps> = ({
     }
   };
 
-  const { year, month } = data as { year: string; month: string };
-
-  const dateMax = () => {
-    const date = new Date();
-    date.setFullYear(+year);
-    date.setMonth(getMonthFromString(month));
-    date.setDate(31);
-    return formatDate(date, 'yyyy-MM-dd');
-  };
-
-  const dateMin = () => {
-    const date = new Date();
-    date.setDate(1);
-    date.setMonth(getMonthFromString(month));
-    date.setFullYear(+year);
-    return formatDate(date, 'yyyy-MM-dd');
-  };
+  const { year, month } = data
+    ? (data as { year: string; month: string })
+    : { year: null, month: null };
 
   return (
     <>
@@ -123,8 +109,8 @@ const AddTransactionModal: FC<ModalProps> = ({
             {...register('date')}
             label={'Date'}
             type={'date'}
-            min={dateMin()}
-            max={dateMax()}
+            min={getDateMin(+year!, month)}
+            max={getDateMax(+year!, month)}
           />
           <Toggle {...register('recurring')} label={'Recurring'} />
           <div className="mt-8">
