@@ -30,6 +30,7 @@ const MonthlyReport = () => {
         type: ModalType.ADD_TRANSACTION,
         title: 'Add transaction',
         callback: refetch,
+        data: { year, month },
       },
     });
   };

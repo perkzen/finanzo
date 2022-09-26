@@ -9,6 +9,7 @@ export interface IModal {
   type: ModalType;
   title?: string;
   callback?: () => void;
+  data?: unknown;
 }
 
 export interface ModalProps {

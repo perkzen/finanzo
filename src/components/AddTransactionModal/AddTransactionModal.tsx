@@ -8,6 +8,7 @@ import { trpc } from '../../utils/trpc';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { transactionTypes } from '../../utils/transactionTypeIcons';
+import { formatDate, getMonthFromString } from '../../utils/date';
 
 interface CreateTransactionForm {
   recurring: boolean;
@@ -25,7 +26,7 @@ const defaultValues: CreateTransactionForm = {
 
 const AddTransactionModal: FC<ModalProps> = ({
   handleClose,
-  modal: { title, callback },
+  modal: { title, callback, data },
 }) => {
   const [selectedType, setSelectedType] = useState(
     transactionTypes[0]!.category
@@ -67,6 +68,24 @@ const AddTransactionModal: FC<ModalProps> = ({
     }
   };
 
+  const { year, month } = data as { year: string; month: string };
+
+  const dateMax = () => {
+    const date = new Date();
+    date.setFullYear(+year);
+    date.setMonth(getMonthFromString(month));
+    date.setDate(31);
+    return formatDate(date, 'yyyy-MM-dd');
+  };
+
+  const dateMin = () => {
+    const date = new Date();
+    date.setDate(1);
+    date.setMonth(getMonthFromString(month));
+    date.setFullYear(+year);
+    return formatDate(date, 'yyyy-MM-dd');
+  };
+
   return (
     <>
       <Dialog.Title
@@ -100,7 +119,13 @@ const AddTransactionModal: FC<ModalProps> = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input {...register('displayName')} label={'Display name'} />
           <Input {...register('amount')} label={'Amount'} type={'number'} />
-          <Input {...register('date')} label={'Date'} type={'date'} />
+          <Input
+            {...register('date')}
+            label={'Date'}
+            type={'date'}
+            min={dateMin()}
+            max={dateMax()}
+          />
           <Toggle {...register('recurring')} label={'Recurring'} />
           <div className="mt-8">
             <Button label={'Save'} type={'submit'} />{' '}
