@@ -1,6 +1,6 @@
 # Finanzo - A financial management tool
 
-<img src="pictures/Screenshot 2022-06-12 at 22.30.22 (2).png" alt="logo"/>
+<img src="pictures/login.png" alt="logo"/>
 
 # Why Finanzo?
 Just as a company needs to take care of their finances, so each individual must take responsibility for their finances
