@@ -16,6 +16,7 @@ export const transactionsRouter = createRouter()
         take: input.limit,
         where: { userId: userId },
         select: {
+          id: true,
           displayName: true,
           amount: true,
           createdAt: true,

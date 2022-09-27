@@ -3,7 +3,8 @@ import Table, { TableHeader } from '../Table/Table';
 import { TransactionTable } from '../../types/transaction';
 import { trpc } from '../../utils/trpc';
 import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
-import { formatDate } from '../../utils/date';
+import { formatDate, getMonthName } from '../../utils/date';
+import { useRouter } from 'next/router';
 
 const headers: TableHeader<TransactionTable>[] = [
   { label: 'Display name', accessor: 'displayName' },
@@ -12,6 +13,7 @@ const headers: TableHeader<TransactionTable>[] = [
 ];
 
 const History: FC = () => {
+  const router = useRouter();
   const { data, isLoading } = trpc.useQuery([
     'transactions.get-transaction-history',
     { limit: 3 },
@@ -25,6 +27,15 @@ const History: FC = () => {
     };
   });
 
+  const handleOnRowClick = async (item: { id: string }) => {
+    if (!data) return;
+    const found = data.find((i) => i.id === item.id);
+    if (!found) return;
+    const year = found?.createdAt.getFullYear();
+    const month = getMonthName(found.createdAt.getMonth());
+    await router.push(`/report/${year}/${month}`);
+  };
+
   return (
     <div className={'flex flex-col py-5'}>
       <h1 className={'font-bold text-2xl'}>History</h1>
@@ -34,7 +45,7 @@ const History: FC = () => {
         isLoading={isLoading}
         headers={headers}
         showHeader={false}
-        onRowClick={(item) => console.log(item)}
+        onRowClick={(item) => handleOnRowClick(item)}
       />
     </div>
   );
