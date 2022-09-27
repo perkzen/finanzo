@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { prisma } from '../../db/client';
-import { createRouter } from './context';
-import { UserSession } from '../../pages/api/auth/[...nextauth]';
+import { prisma } from '../../../db/client';
+import { createRouter } from '../context';
+import { UserSession } from '../../../pages/api/auth/[...nextauth]';
 
 export const transactionsRouter = createRouter()
   .query('get-transaction-history', {

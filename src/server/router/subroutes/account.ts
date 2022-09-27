@@ -1,6 +1,6 @@
-import { createRouter } from './context';
-import { prisma } from '../../db/client';
-import { UserSession } from '../../pages/api/auth/[...nextauth]';
+import { createRouter } from '../context';
+import { prisma } from '../../../db/client';
+import { UserSession } from '../../../pages/api/auth/[...nextauth]';
 
 export const accountRouter = createRouter()
   .query('get-balance', {
