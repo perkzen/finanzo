@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { prisma } from '../../../db/client';
 import { createRouter } from '../context';
 import { UserSession } from '../../../pages/api/auth/[...nextauth]';
+import { Transaction } from '../../../types/transaction';
 
 export const transactionsRouter = createRouter()
   .query('get-transaction-history', {
@@ -40,6 +41,9 @@ export const transactionsRouter = createRouter()
           monthlyReport: {
             month: input.month,
             year: input.year,
+          },
+          createdAt: {
+            lte: new Date(),
           },
         },
         orderBy: { createdAt: 'desc' },
@@ -100,5 +104,34 @@ export const transactionsRouter = createRouter()
       return await prisma.transaction.delete({
         where: { id: input.transactionId },
       });
+    },
+  })
+  .query('get-upcoming-transactions', {
+    async resolve({ ctx }) {
+      const userId = (ctx.session as UserSession).user.id;
+      if (!userId) return null;
+
+      const transactions = await prisma.transaction.findMany({
+        where: {
+          userId,
+          createdAt: {
+            gt: new Date(),
+          },
+        },
+      });
+
+      const payments: { [key: string]: Transaction[] } = {};
+      const dates: Date[] = [];
+      transactions.forEach((t) => {
+        if (!payments.hasOwnProperty(`${t.createdAt}`)) {
+          dates.push(t.createdAt);
+          Object.assign(payments, { [`${t.createdAt}`]: [] });
+          payments[`${t.createdAt}`]?.push(t);
+          return;
+        }
+        payments[`${t.createdAt}`]?.push(t);
+      });
+
+      return { payments, dates };
     },
   });

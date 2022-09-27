@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 export interface TransactionTable {
   id: string;
   displayName: string;
@@ -13,13 +11,6 @@ export interface Transaction {
   amount: number;
   category: string;
   createdAt: Date;
-}
-
-export interface UpcomingPayment {
-  icon: ReactNode;
-  displayName: string;
-  amount: number;
-  createdAt?: Date;
 }
 
 export interface YearlyReportTable {

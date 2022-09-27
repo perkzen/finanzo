@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { format } from 'date-fns';
 import Title from '../Title/Title';
-import { HiOutlineHome } from 'react-icons/hi';
-import { RiCarLine } from 'react-icons/ri';
 import { BsPlusLg } from 'react-icons/bs';
 import UpcomingPayment from './UpcomingPayment';
 import {
@@ -10,9 +8,13 @@ import {
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
 import { ModalType } from '../../types/modal';
+import { trpc } from '../../utils/trpc';
 
 const UpcomingPaymentsList: FC = () => {
   const dispatch = useModalDispatch();
+  const { data, refetch } = trpc.useQuery([
+    'transactions.get-upcoming-transactions',
+  ]);
 
   const openModal = () => {
     dispatch({
@@ -20,29 +22,37 @@ const UpcomingPaymentsList: FC = () => {
       payload: {
         type: ModalType.ADD_TRANSACTION,
         title: 'Add upcoming payment',
+        callback: refetch,
       },
     });
   };
 
-  const payments = [
-    { icon: <RiCarLine />, displayName: 'car insurance', amount: 1500 },
-    { icon: <HiOutlineHome />, displayName: 'rent', amount: 500 },
-  ];
-
   return (
-    <div className={'mt-20'}>
+    <div className={'mt-20 px-4 w-full'}>
       <Title
         title={'Upcoming Payments'}
         titleSize={'text-lg'}
         subtitleSize={'text-sm'}
-        subtitle={format(new Date(), 'dd MMM yyyy')}
         className={'mb-5'}
       />
-      <div className={'flex flex-col gap-5'}>
-        {payments.map((item, index) => (
-          <UpcomingPayment key={index} payment={item} />
-        ))}
-      </div>
+
+      {data ? (
+        <>
+          {data.dates.map((date, index) => (
+            <div className={'w-full flex flex-col gap-5 mt-8'} key={index}>
+              <h2 className={'text-gray-500 text-base'}>
+                {format(date, 'dd MMM yyyy')}
+              </h2>
+              {data.payments[`${date}`]?.map((payment, index) => (
+                <UpcomingPayment key={index} payment={payment} />
+              ))}
+            </div>
+          ))}
+        </>
+      ) : (
+        'no data'
+      )}
+
       <button
         onClick={openModal}
         className={

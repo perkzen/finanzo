@@ -67,7 +67,7 @@ model Transaction {
   recurring       Boolean?      @default(false)
   displayName     String
   amount          Float
-  createdAt       DateTime      @default(now())
+  createdAt       DateTime      @default(dbgenerated()) @db.Date
   monthlyReportId String
   userId          String
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
