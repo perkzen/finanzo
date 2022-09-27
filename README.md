@@ -100,7 +100,10 @@ $ pscale connect finanzo
 # Todo
 - [ ] delete modal
 - [ ] add graphs
-- [ ] make recurring payments and upcoming payments
+- [ ] fix account balance calculations
+- [ ] add date constrains for upcoming payments
+- [ ] make that you cant submit empty forms 
+- [ ] make recurring payments 
 - [ ] add translations
 - [ ] add tests
 - [ ] add auth middleware
