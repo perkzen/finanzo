@@ -102,6 +102,8 @@ $ pscale connect finanzo
 - [ ] add graphs
 - [ ] fix account balance calculations
 - [ ] add date constrains for upcoming payments
+- [ ] delete upcoming payment option
+- [ ] fix transaction  history
 - [ ] make that you cant submit empty forms 
 - [ ] make recurring payments 
 - [ ] add translations
