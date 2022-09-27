@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { HiOutlineCalendar, HiOutlineHome } from 'react-icons/hi';
 import { GoGraph } from 'react-icons/go';
 import Link from 'next/link';
@@ -10,6 +10,12 @@ const items: { icon: ReactNode; url: string }[] = [
 ];
 
 const LeftMenu = () => {
+  const [active, setActive] = useState(0);
+
+  const handleClick = (index: number) => {
+    setActive(index);
+  };
+
   return (
     <div className={'w-1/12 bg-secondary h-screen sticky top-0'}>
       <div
@@ -18,7 +24,13 @@ const LeftMenu = () => {
         }
       >
         {items.map((item, index) => (
-          <div className={'text-2xl hover:cursor-pointer'} key={index}>
+          <div
+            onClick={() => handleClick(index)}
+            className={`text-2xl inline-flex justify-center hover:cursor-pointer m-auto w-full ${
+              index === active ? ' border-r-2 border-neutral-800' : ''
+            }`}
+            key={index}
+          >
             <Link href={item.url}>
               <a>{item.icon}</a>
             </Link>
