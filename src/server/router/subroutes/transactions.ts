@@ -15,7 +15,12 @@ export const transactionsRouter = createRouter()
 
       return await prisma.transaction.findMany({
         take: input.limit,
-        where: { userId: userId },
+        where: {
+          userId: userId,
+          createdAt: {
+            lte: new Date(),
+          },
+        },
         select: {
           id: true,
           displayName: true,
