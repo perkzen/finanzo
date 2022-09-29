@@ -100,7 +100,6 @@ $ pscale connect finanzo
 # Todo
 - [ ] delete modal
 - [ ] add graphs
-- [ ] fix account balance calculations
 - [ ] add date constrains for upcoming payments
 - [ ] delete upcoming payment option
 - [ ] fix transaction  history

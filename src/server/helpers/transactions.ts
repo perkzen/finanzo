@@ -5,17 +5,34 @@ export const getMonthlyReportAccountInfo = async (
   monthId: string
 ) => {
   const balance = await prisma.transaction.aggregate({
-    where: { monthlyReportId: monthId },
+    where: {
+      monthlyReportId: monthId,
+      createdAt: {
+        lte: new Date(),
+      },
+    },
     _sum: { amount: true },
   });
 
   const expenses = await prisma.transaction.aggregate({
-    where: { amount: { lt: 0 }, monthlyReportId: monthId },
+    where: {
+      amount: { lt: 0 },
+      monthlyReportId: monthId,
+      createdAt: {
+        lte: new Date(),
+      },
+    },
     _sum: { amount: true },
   });
 
   const income = await prisma.transaction.aggregate({
-    where: { amount: { gt: 0 }, monthlyReportId: monthId },
+    where: {
+      amount: { gt: 0 },
+      monthlyReportId: monthId,
+      createdAt: {
+        lte: new Date(),
+      },
+    },
     _sum: { amount: true },
   });
 

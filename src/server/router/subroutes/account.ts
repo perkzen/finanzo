@@ -9,17 +9,34 @@ export const accountRouter = createRouter()
       if (!userId) return;
 
       const balance = await prisma.transaction.aggregate({
-        where: { userId },
+        where: {
+          userId,
+          createdAt: {
+            lte: new Date(),
+          },
+        },
         _sum: { amount: true },
       });
 
       const expenses = await prisma.transaction.aggregate({
-        where: { amount: { lt: 0 }, userId },
+        where: {
+          amount: { lt: 0 },
+          userId,
+          createdAt: {
+            lte: new Date(),
+          },
+        },
         _sum: { amount: true },
       });
 
       const income = await prisma.transaction.aggregate({
-        where: { amount: { gt: 0 }, userId },
+        where: {
+          amount: { gt: 0 },
+          userId,
+          createdAt: {
+            lte: new Date(),
+          },
+        },
         _sum: { amount: true },
       });
 
