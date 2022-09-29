@@ -1,8 +1,8 @@
 import superjson from 'superjson';
 import { createRouter } from './context';
-import { transactionsRouter } from './subroutes/transactions';
-import { accountRouter } from './subroutes/account';
-import { reportsRouter } from './subroutes/reports';
+import { transactionsRouter } from './subroutes/transactions-router';
+import { accountRouter } from './subroutes/account-router';
+import { reportsRouter } from './subroutes/reports-router';
 
 export const appRouter = createRouter()
   .transformer(superjson)

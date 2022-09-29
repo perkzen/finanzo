@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-export const getMonthlyReportAccountInfo = async (
+export const getMonthlyReportBalanceInfo = async (
   prisma: PrismaClient,
   monthId: string
 ) => {
