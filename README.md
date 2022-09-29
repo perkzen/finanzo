@@ -102,7 +102,7 @@ $ pscale connect finanzo
 - [ ] add graphs
 - [ ] add date constrains for upcoming payments
 - [ ] make that you cant submit empty forms 
-- [ ] make recurring payments 
+- [ ] better error handling
 - [ ] add translations
 - [ ] add tests
 - [ ] add auth middleware

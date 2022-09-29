@@ -91,7 +91,7 @@ export class TransactionService {
 
     const payments: { [key: string]: Transaction[] } = {};
     const dates: Date[] = [];
-
+    // format to {"2022-09-26": [payment1,payment2, ...]}
     transactions.forEach((t) => {
       if (!payments.hasOwnProperty(`${t.createdAt}`)) {
         dates.push(t.createdAt);
