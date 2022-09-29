@@ -18,24 +18,33 @@ const TransactionCard: FC<TransactionCardProps> = ({
 }) => {
   return (
     <Card>
-      <div className={'flex flex-row items-center gap-20'}>
-        <div
-          className={
-            'flex justify-center items-center bg-white shadow-md w-8 h-8 rounded-lg '
-          }
-        >
-          {renderTransactionTypeIcons(transaction.category)}
+      <div
+        className={'flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-20'}
+      >
+        <div className={'gap-3 flex flex-row'}>
+          <div
+            className={
+              'flex justify-center items-center bg-white shadow-md  w-8 h-8 rounded-lg '
+            }
+          >
+            {renderTransactionTypeIcons(transaction.category)}
+          </div>
+          <h1 className={'text-2xl font-bold'}>{transaction.displayName}</h1>
         </div>
-        <h1 className={'text-2xl font-bold'}>{transaction.displayName}</h1>
-        <div className={'font-semibold'}>
-          {formatDate(transaction.createdAt)}
+        <div className={'flex ml-3 sm:ml-0'}>
+          <div className={'flex font-semibold'}>
+            <p className={'sm:invisible'}>Created at:&nbsp; </p>
+            {formatDate(transaction.createdAt)}
+          </div>
+          <div className={'flex font-semibold'}>
+            <p className={'sm:invisible'}>Amount:&nbsp; </p>
+            {formatNumberAsCurrency(transaction.amount)}
+          </div>
         </div>
-        <div className={'font-semibold'}>
-          {formatNumberAsCurrency(transaction.amount)}
-        </div>
+
         <Button
           label={<FaRegTrashAlt />}
-          classNames={'ml-auto'}
+          classNames={'inline-flex justify-center w-full sm:ml-auto sm:w-fit'}
           onClick={() => handleDelete(transaction.id)}
         />
       </div>

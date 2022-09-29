@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import StatCard from './StatCard';
 import { Statistic } from '../../types/statistics';
 import { trpc } from '../../utils/trpc';
@@ -14,7 +14,7 @@ const Statistics: FC = () => {
   ];
 
   return (
-    <div className={'flex flex-row gap-10'}>
+    <div className={'flex flex-col sm:flex-row gap-5 sm:gap-10'}>
       {stats.map((item, index) => (
         <StatCard key={index} stat={item} isLoading={isLoading} />
       ))}

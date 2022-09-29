@@ -6,7 +6,7 @@ import Title from '../components/Title/Title';
 
 const Dashboard: NextPage = () => {
   return (
-    <div className={'py-5 mt-10 px-20 flex flex-col w-full gap-8'}>
+    <>
       <Title
         title={'Dashboard'}
         subtitle={'Payments updates'}
@@ -15,7 +15,7 @@ const Dashboard: NextPage = () => {
       <Statistics />
       <History />
       {/*<BarChart />*/}
-    </div>
+    </>
   );
 };
 

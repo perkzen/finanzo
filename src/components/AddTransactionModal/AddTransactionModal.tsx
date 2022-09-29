@@ -82,7 +82,9 @@ const AddTransactionModal: FC<ModalProps> = ({
       </Dialog.Title>
       <div className="mt-2">
         <h3 className="leading-6 text-gray-500 my-2">Type</h3>
-        <div className={'flex flex-row gap-6'}>
+        <div
+          className={'flex flex-row justify-evenly gap-4 flex-wrap sm:gap-6'}
+        >
           {transactionTypes.map((paymentType, index) => (
             <div
               key={index}

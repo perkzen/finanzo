@@ -33,7 +33,7 @@ const RightMenu: FC = () => {
   };
 
   return (
-    <div className={'w-1/4 bg-secondary h-screen sticky top-0'}>
+    <div className={'hidden sm:block w-1/4 bg-secondary h-screen sticky top-0'}>
       <div className={'flex flex-col justify-center items-center mt-20 px-6'}>
         {isImageLoading && <LoadingSpinner width={'8'} height={'8'} />}
         {typeof data?.image === 'string' && (

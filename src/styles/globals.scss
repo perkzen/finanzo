@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body,html {
-  min-height: 100vh !important;
+body,html,main {
+  height: 100vh !important;
   @apply bg-primary w-full;
 }

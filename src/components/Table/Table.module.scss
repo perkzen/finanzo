@@ -1,5 +1,5 @@
 .Container {
-  @apply py-5 bg-secondary shadow-lg rounded-lg;
+  @apply py-5 bg-secondary shadow-lg rounded-lg max-h-[60vh] max-h-full overflow-y-auto;
 
   td {
     @apply py-3 px-5;

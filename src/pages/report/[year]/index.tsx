@@ -93,18 +93,18 @@ const YearlyReport: NextPage = () => {
   };
 
   return (
-    <div className={'py-5 mt-10 px-20 flex flex-col gap-8 w-full'}>
+    <>
       <Title
         title={'Yearly report'}
         subtitle={'All finances information for selected year'}
       />
       <div className={'flex flex-col w-full'}>
-        <div className={'flex flex-row justify-between'}>
-          <div className={'w-1/2'}>
+        <div className={'flex flex-col sm:flex-row justify-between'}>
+          <div className={'sm:w-1/2'}>
             <select
               onChange={handleYearChange}
               disabled={isLoadingOptions && !years}
-              className={'w-1/2  shadow-md p-2 mt-2 rounded-lg'}
+              className={'w-full sm:w-1/2 shadow-md p-2 mt-2 rounded-lg'}
               value={year}
             >
               {years && (
@@ -119,7 +119,7 @@ const YearlyReport: NextPage = () => {
             </select>
             <Button
               label={'Delete report'}
-              classNames={'ml-4'}
+              classNames={'w-full sm:w-fit sm:ml-4 mt-2'}
               onClick={handleDeleteYearlyReport}
             />
           </div>
@@ -137,7 +137,7 @@ const YearlyReport: NextPage = () => {
           onRowClick={handleRowClick}
         />
       </div>
-    </div>
+    </>
   );
 };
 export default YearlyReport;

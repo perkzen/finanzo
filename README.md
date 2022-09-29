@@ -105,6 +105,5 @@ $ pscale connect finanzo
 - [ ] better error handling
 - [ ] add translations
 - [ ] add tests
-- [ ] add auth middleware
 - [ ] add mobile responsiveness
 - [ ] fix login when revisiting site (if already logged in redirect to dashboard)

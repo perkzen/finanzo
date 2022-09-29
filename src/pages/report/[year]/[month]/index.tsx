@@ -51,14 +51,14 @@ const MonthlyReport = () => {
   };
 
   return (
-    <div className={'py-5 mt-10 px-20 flex flex-col gap-8 w-full'}>
+    <>
       <Title
         title={`${month} ${year}`}
         subtitle={'Transactions of selected month'}
       />
       <Button
         label={'Add transaction'}
-        classNames={'ml-auto'}
+        classNames={'ml-auto w-full sm:w-auto'}
         onClick={handleClick}
       />
       {transactions.map((transaction, index) => (
@@ -68,7 +68,7 @@ const MonthlyReport = () => {
           handleDelete={handleDelete}
         />
       ))}
-    </div>
+    </>
   );
 };
 

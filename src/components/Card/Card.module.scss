@@ -1,4 +1,4 @@
 .Container {
-  @apply flex flex-col gap-5 shadow-lg bg-white rounded-2xl py-5 px-10;
+  @apply flex flex-col gap-5 shadow-lg bg-white rounded-2xl py-5 px-5 sm:px-10;
   min-width: 250px;
 }

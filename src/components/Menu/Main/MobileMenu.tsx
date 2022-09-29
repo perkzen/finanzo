@@ -9,7 +9,7 @@ const items: { icon: ReactNode; url: string }[] = [
   { icon: <GoGraph />, url: '/analytics' },
 ];
 
-const LeftMenu = () => {
+const MobileMenu = () => {
   const [active, setActive] = useState(0);
 
   const handleClick = (index: number) => {
@@ -17,17 +17,17 @@ const LeftMenu = () => {
   };
 
   return (
-    <div className={'w-1/12 bg-secondary h-screen sticky top-0'}>
-      <div
-        className={
-          'w-full flex flex-col justify-center items-center gap-10 mt-20'
-        }
-      >
+    <div
+      className={
+        'sm:hidden flex flex-row w-full justify-center items-center bottom-4 sticky'
+      }
+    >
+      <div className={'flex bg-neutral-900 w-5/6 p-2 rounded-full'}>
         {items.map((item, index) => (
           <div
             onClick={() => handleClick(index)}
-            className={`text-2xl inline-flex justify-center hover:cursor-pointer m-auto w-full ${
-              index === active ? ' border-r-2 border-neutral-800' : ''
+            className={`text-2xl p-2 inline-flex justify-center hover:cursor-pointer m-auto text-primary ${
+              index === active ? ' border-b-2 border-primary' : ''
             }`}
             key={index}
           >
@@ -41,4 +41,4 @@ const LeftMenu = () => {
   );
 };
 
-export default LeftMenu;
+export default MobileMenu;
