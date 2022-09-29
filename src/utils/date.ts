@@ -31,3 +31,8 @@ export const getMonthName = (month: number): string => {
   date.setMonth(month);
   return formatDate(date, 'MMMM');
 };
+
+export const addMonthsToDate = (date: Date, numOfMonths: number): Date => {
+  date.setMonth(date.getMonth() + numOfMonths);
+  return date;
+};

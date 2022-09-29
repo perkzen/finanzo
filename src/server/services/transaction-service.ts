@@ -1,6 +1,7 @@
 import { prisma } from '../../db/client';
 import { CreateTransactionProps } from '../validators/create-transaction-validator';
 import { Transaction } from '../../types/transaction';
+import { addMonthsToDate } from '../../utils/date';
 
 export class TransactionService {
   async getTransactionHistory(limit: number, userId: string) {
@@ -86,9 +87,11 @@ export class TransactionService {
       },
     });
 
-    const payments: { [key: string]: Transaction[] } = {};
+    await this.refreshPayment(userId);
 
+    const payments: { [key: string]: Transaction[] } = {};
     const dates: Date[] = [];
+
     transactions.forEach((t) => {
       if (!payments.hasOwnProperty(`${t.createdAt}`)) {
         dates.push(t.createdAt);
@@ -100,5 +103,30 @@ export class TransactionService {
     });
 
     return { payments, dates };
+  }
+
+  async refreshPayment(userId: string) {
+    const outdatedPayments = await prisma.transaction.findMany({
+      where: {
+        userId,
+        recurring: true,
+        createdAt: {
+          lte: new Date(),
+        },
+      },
+    });
+
+    // refresh outdated payments
+    return await Promise.all(
+      outdatedPayments.map(
+        async (payment) =>
+          await prisma.transaction.create({
+            data: {
+              ...payment,
+              createdAt: addMonthsToDate(payment.createdAt, 1),
+            },
+          })
+      )
+    );
   }
 }
