@@ -11,7 +11,7 @@ export interface UserSession extends Session {
     name?: string | null | undefined;
     email?: string | null | undefined;
     image?: string | null | undefined;
-    id?: string | null | undefined;
+    id: string;
   };
 }
 

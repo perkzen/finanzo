@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { createRouter } from '../context';
-import { UserSession } from '../../../pages/api/auth/[...nextauth]';
 import { TransactionService } from '../../services/transaction-service';
 import { createTransactionValidator } from '../../validators/create-transaction-validator';
+import { getUserId } from '../../helpers/getUserId';
 
 const service = new TransactionService();
 
@@ -12,9 +12,7 @@ export const transactionsRouter = createRouter()
       limit: z.number(),
     }),
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return [];
-
+      const userId = getUserId(ctx);
       return await service.getTransactionHistory(input.limit, userId);
     },
   })
@@ -24,9 +22,7 @@ export const transactionsRouter = createRouter()
       year: z.number(),
     }),
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return [];
-
+      const userId = getUserId(ctx);
       return await service.getTransactionsByMonth(
         input.month,
         input.year,
@@ -37,9 +33,7 @@ export const transactionsRouter = createRouter()
   .mutation('create-transaction', {
     input: createTransactionValidator,
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return new Error('Authentication Required');
-
+      const userId = getUserId(ctx);
       return await service.createTransaction(input, userId);
     },
   })
@@ -48,17 +42,13 @@ export const transactionsRouter = createRouter()
       transactionId: z.string(),
     }),
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return new Error('Authentication Required');
-
+      const userId = getUserId(ctx);
       return await service.deleteTransaction(input.transactionId, userId);
     },
   })
   .query('get-upcoming-transactions', {
     async resolve({ ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return null;
-
+      const userId = getUserId(ctx);
       return await service.getUpcomingTransactions(userId);
     },
   });

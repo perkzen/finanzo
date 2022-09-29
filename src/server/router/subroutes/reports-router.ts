@@ -1,7 +1,7 @@
 import { createRouter } from '../context';
 import { z } from 'zod';
-import { UserSession } from '../../../pages/api/auth/[...nextauth]';
 import { ReportService } from '../../services/report-service';
+import { getUserId } from '../../helpers/getUserId';
 
 const service = new ReportService();
 
@@ -11,8 +11,7 @@ export const reportsRouter = createRouter()
       year: z.number(),
     }),
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return [];
+      const userId = getUserId(ctx);
 
       return await service.getYearlyReportById(userId, input.year);
     },
@@ -22,8 +21,7 @@ export const reportsRouter = createRouter()
       year: z.number(),
     }),
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) throw new Error('User not found');
+      const userId = getUserId(ctx);
 
       return await service.createYearlyReport(userId, input.year);
     },
@@ -33,15 +31,13 @@ export const reportsRouter = createRouter()
       year: z.number(),
     }),
     async resolve({ input, ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) throw new Error('User not found');
+      const userId = getUserId(ctx);
       return await service.deleteYearlyReport(userId, input.year);
     },
   })
   .query('get-years', {
     async resolve({ ctx }) {
-      const userId = (ctx.session as UserSession).user.id;
-      if (!userId) return [];
+      const userId = getUserId(ctx);
       return await service.getYearsFromReports(userId);
     },
   });
