@@ -12,7 +12,6 @@ export const reportsRouter = createRouter()
     }),
     async resolve({ input, ctx }) {
       const userId = getUserId(ctx);
-
       return await service.getYearlyReportById(userId, input.year);
     },
   })
@@ -22,7 +21,6 @@ export const reportsRouter = createRouter()
     }),
     async resolve({ input, ctx }) {
       const userId = getUserId(ctx);
-
       return await service.createYearlyReport(userId, input.year);
     },
   })
