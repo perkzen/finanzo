@@ -31,7 +31,7 @@ const TransactionCard: FC<TransactionCardProps> = ({
           </div>
           <h1 className={'text-2xl font-bold'}>{transaction.displayName}</h1>
         </div>
-        <div className={'flex ml-3 sm:ml-0'}>
+        <div className={'flex flex-col sm:flex-row ml-3 sm:ml-0'}>
           <div className={'flex font-semibold'}>
             <p className={'sm:invisible'}>Created at:&nbsp; </p>
             {formatDate(transaction.createdAt)}
