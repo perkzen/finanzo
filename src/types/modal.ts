@@ -8,6 +8,8 @@ export enum ModalType {
 export interface IModal {
   type: ModalType;
   title?: string;
+  action?: () => void;
+  body?: string;
   callback?: () => void;
   data?: unknown;
 }

@@ -44,7 +44,11 @@ const UpcomingPaymentsList: FC = () => {
                 {format(date, 'dd MMM yyyy')}
               </h2>
               {data.payments[`${date}`]?.map((payment, index) => (
-                <UpcomingPayment key={index} payment={payment} />
+                <UpcomingPayment
+                  key={index}
+                  payment={payment}
+                  callback={refetch}
+                />
               ))}
             </div>
           ))}

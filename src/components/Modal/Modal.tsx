@@ -8,6 +8,7 @@ import AddTransactionModal from '../AddTransactionModal/AddTransactionModal';
 import { IModal, ModalType } from '../../types/modal';
 import SettingsModal from '../Settings/SettingsModal';
 import CreateYearlyReportModal from '../CreateYearlyReportModal/CreateYearlyReportModal';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 interface ModalProps {
   modal: IModal;
@@ -31,6 +32,8 @@ const Modal: FC<ModalProps> = ({ modal, isOpen }) => {
         return (
           <CreateYearlyReportModal handleClose={handleClose} modal={modal} />
         );
+      case ModalType.DELETE:
+        return <DeleteModal handleClose={handleClose} modal={modal} />;
       default:
         return null;
     }
