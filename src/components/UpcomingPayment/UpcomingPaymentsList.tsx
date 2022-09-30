@@ -33,6 +33,7 @@ const UpcomingPaymentsList: FC = () => {
         title={'Upcoming Payments'}
         titleSize={'text-lg'}
         subtitleSize={'text-sm'}
+        subtitle={'Add future payment that will happen'}
         className={'mb-5'}
       />
 

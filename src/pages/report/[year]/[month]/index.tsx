@@ -10,6 +10,8 @@ import {
 } from '../../../../context/Modal/ModalProvider';
 import { ModalType } from '../../../../types/modal';
 import { toast } from 'react-hot-toast';
+import Card from '../../../../components/Card/Card';
+import { GrTransaction } from 'react-icons/gr';
 
 const MonthlyReport = () => {
   const dispatch = useModalDispatch();
@@ -61,13 +63,26 @@ const MonthlyReport = () => {
         classNames={'ml-auto w-full sm:w-auto'}
         onClick={handleClick}
       />
-      {transactions.map((transaction, index) => (
-        <TransactionCard
-          key={index}
-          transaction={transaction}
-          handleDelete={handleDelete}
-        />
-      ))}
+      <>
+        {transactions.length > 0 ? (
+          transactions.map((transaction, index) => (
+            <TransactionCard
+              key={index}
+              transaction={transaction}
+              handleDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <Card>
+            <h1
+              className={'flex flex-row items-center gap-4 font-bold text-xl'}
+            >
+              <GrTransaction className={'text-2xl'} />
+              No transactions were made this month.
+            </h1>
+          </Card>
+        )}
+      </>
     </>
   );
 };

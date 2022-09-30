@@ -1,8 +1,47 @@
 import { prisma } from '../../db/client';
-import { getMonthlyReportBalanceInfo } from '../helpers/getMonthlyReportBalanceInfo';
 import { createMonthlyReports } from '../helpers/createMonthlyReports';
 
 export class ReportService {
+  private async getMonthlyReportBalanceInfo(monthId: string) {
+    const balance = await prisma.transaction.aggregate({
+      where: {
+        monthlyReportId: monthId,
+        createdAt: {
+          lte: new Date(),
+        },
+      },
+      _sum: { amount: true },
+    });
+
+    const expenses = await prisma.transaction.aggregate({
+      where: {
+        amount: { lt: 0 },
+        monthlyReportId: monthId,
+        createdAt: {
+          lte: new Date(),
+        },
+      },
+      _sum: { amount: true },
+    });
+
+    const income = await prisma.transaction.aggregate({
+      where: {
+        amount: { gt: 0 },
+        monthlyReportId: monthId,
+        createdAt: {
+          lte: new Date(),
+        },
+      },
+      _sum: { amount: true },
+    });
+
+    return {
+      balance: balance._sum.amount || 0,
+      expenses: expenses._sum.amount || 0,
+      income: income._sum.amount || 0,
+    };
+  }
+
   async getYearlyReportByYear(userId: string, year: number) {
     const reports = await prisma.yearlyReport.findFirst({
       where: { year, userId },
@@ -39,7 +78,7 @@ export class ReportService {
         return {
           month: report.month,
           transactions: report.Transaction.length,
-          ...(await getMonthlyReportBalanceInfo(prisma, report.id)),
+          ...(await this.getMonthlyReportBalanceInfo(report.id)),
         };
       })
     );
