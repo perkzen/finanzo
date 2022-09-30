@@ -18,7 +18,9 @@ const StatCard: FC<StatCardProps> = ({ stat, isLoading }) => {
         <LoadingSpinner height={'8'} width={'8'} />
       ) : (
         <p className={'font-bold'}>
-          {stat.value ? formatNumberAsCurrency(stat.value) : '0,00 €'}
+          {stat.type === 'number'
+            ? stat.value
+            : formatNumberAsCurrency(stat.value)}
         </p>
       )}
     </Card>

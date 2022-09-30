@@ -34,10 +34,20 @@ export class AccountService {
       _sum: { amount: true },
     });
 
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        userId,
+        createdAt: {
+          lte: new Date(),
+        },
+      },
+    });
+
     return {
       balance: balance._sum.amount || 0,
       expenses: expenses._sum.amount || 0,
       income: income._sum.amount || 0,
+      transactions: transactions.length || 0,
     };
   }
 
