@@ -13,10 +13,10 @@ const months = [
   'December',
 ];
 
-export const createMonthlyReports = (userId: string, year: number) => {
+export const createMonthlyReports = (userId: string, reportId: string) => {
   return months.map((month) => ({
     month,
-    year,
+    yearlyReportId: reportId,
     userId,
   }));
 };

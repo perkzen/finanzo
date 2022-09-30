@@ -12,7 +12,7 @@ export const reportsRouter = createRouter()
     }),
     async resolve({ input, ctx }) {
       const userId = getUserId(ctx);
-      return await service.getYearlyReportById(userId, input.year);
+      return await service.getYearlyReportByYear(userId, input.year);
     },
   })
   .mutation('create-yearly-report', {
@@ -26,11 +26,11 @@ export const reportsRouter = createRouter()
   })
   .mutation('delete-yearly-report', {
     input: z.object({
-      year: z.number(),
+      reportId: z.string().cuid(),
     }),
     async resolve({ input, ctx }) {
       const userId = getUserId(ctx);
-      return await service.deleteYearlyReport(userId, input.year);
+      return await service.deleteYearlyReport(input.reportId, userId);
     },
   })
   .query('get-years', {

@@ -47,6 +47,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   MonthlyReport MonthlyReport[]
+  YearlyReport  YearlyReport[]
   Transaction   Transaction[]
 
   @@map("users")
@@ -77,12 +78,23 @@ model Transaction {
 }
 
 model MonthlyReport {
-  id          String        @id @default(cuid())
-  month       String
-  year        Int
-  userId      String
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Transaction Transaction[]
+  id             String        @id @default(cuid())
+  month          String
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Transaction    Transaction[]
+  yearlyReportId String
+  yearlyReport   YearlyReport  @relation(fields: [yearlyReportId], references: [id], onDelete: Cascade)
 
   @@map("monthly_reports")
+}
+
+model YearlyReport {
+  id            String          @id @default(cuid())
+  year          Int             @unique
+  userId        String
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  MonthlyReport MonthlyReport[]
+
+  @@map("yearly_reports")
 }

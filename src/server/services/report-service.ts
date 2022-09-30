@@ -3,25 +3,30 @@ import { getMonthlyReportBalanceInfo } from '../helpers/getMonthlyReportBalanceI
 import { createMonthlyReports } from '../helpers/createMonthlyReports';
 
 export class ReportService {
-  async getYearlyReportById(userId: string, year: number) {
-    const reports = await prisma.monthlyReport.findMany({
-      where: { userId, year: year },
+  async getYearlyReportByYear(userId: string, year: number) {
+    const reports = await prisma.yearlyReport.findFirst({
+      where: { year, userId },
       select: {
         id: true,
-        month: true,
-        Transaction: {
-          where: {
-            createdAt: { lt: new Date() },
-          },
+        MonthlyReport: {
           select: {
-            amount: true,
+            id: true,
+            month: true,
+            Transaction: {
+              where: {
+                createdAt: { lte: new Date() },
+              },
+              select: { amount: true },
+            },
           },
         },
       },
     });
 
-    return await Promise.all(
-      reports.map(async (report) => {
+    if (!reports) throw new Error('Report not found');
+
+    const monthsData = await Promise.all(
+      reports.MonthlyReport.map(async (report) => {
         if (report.Transaction.length === 0) {
           return {
             month: report.month,
@@ -38,41 +43,35 @@ export class ReportService {
         };
       })
     );
+
+    return { id: reports.id, months: monthsData };
   }
 
   async createYearlyReport(userId: string, year: number) {
-    //check if monthly reports for this year already exist
-    const report = await prisma.monthlyReport.findFirst({
-      where: { userId, year },
-    });
+    const { id } = await prisma.yearlyReport.create({ data: { userId, year } });
 
-    if (report) throw new Error("This year's reports already exist");
-
-    const reports = createMonthlyReports(userId, year);
+    const reports = createMonthlyReports(userId, id);
     return await prisma.monthlyReport.createMany({
       data: reports,
     });
   }
 
-  async deleteYearlyReport(userId: string, year: number) {
+  async deleteYearlyReport(reportId: string, userId: string) {
     // can't delete last one
     // should add year table
+    const reports = await prisma.yearlyReport.findMany({ where: { userId } });
+    if (reports.length === 1) throw new Error('Cannot delete last one');
 
-    return await prisma.monthlyReport.deleteMany({
-      where: {
-        userId,
-        year,
-      },
-    });
+    return await prisma.yearlyReport.delete({ where: { id: reportId } });
   }
+
   async getYearsFromReports(userId: string) {
     // this is used for select options
-    return await prisma.monthlyReport.findMany({
+    return await prisma.yearlyReport.findMany({
       where: { userId },
       select: {
         year: true,
       },
-      distinct: ['year'],
     });
   }
 }

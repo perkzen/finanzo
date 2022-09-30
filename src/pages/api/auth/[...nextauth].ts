@@ -41,10 +41,17 @@ export default NextAuth({
     signIn: async ({ user, isNewUser }) => {
       if (!isNewUser) return;
       const currentYear = new Date().getFullYear();
-      const reports = createMonthlyReports(user.id, currentYear);
-      await prisma.monthlyReport.createMany({
-        data: reports,
-      });
+      try {
+        const { id } = await prisma.yearlyReport.create({
+          data: { userId: user.id, year: currentYear },
+        });
+        const reports = createMonthlyReports(user.id, id);
+        await prisma.monthlyReport.createMany({
+          data: reports,
+        });
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 });

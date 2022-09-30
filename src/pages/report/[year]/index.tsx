@@ -36,7 +36,7 @@ const YearlyReport: NextPage = () => {
     refetch: fetchReports,
   } = trpc.useQuery(['reports.get-yearly-report-by-id', { year }]);
 
-  const months = data?.map((data) => {
+  const months = data?.months.map((data) => {
     return {
       ...data,
       income: formatNumberAsCurrency(data.income),
@@ -77,16 +77,16 @@ const YearlyReport: NextPage = () => {
   };
 
   const handleDeleteYearlyReport = async () => {
-    if (!query) return;
+    if (!query || !data || !years) return;
     try {
-      await toast.promise(mutateAsync({ year: query }), {
+      await toast.promise(mutateAsync({ reportId: data.id }), {
         loading: 'Deleting...',
         success: 'Deleted',
         error: (err) => err.message,
       });
       await refetchOptions();
-      await router.push(`/report/${query - 1}`);
-      setYear(query - 1);
+      await router.push(`/report/${years[0].year}`);
+      setYear(years[0].year);
     } catch (e) {
       console.error(e);
     }
