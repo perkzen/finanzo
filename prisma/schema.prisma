@@ -91,7 +91,7 @@ model MonthlyReport {
 
 model YearlyReport {
   id            String          @id @default(cuid())
-  year          Int             @unique
+  year          Int
   userId        String
   user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   MonthlyReport MonthlyReport[]
