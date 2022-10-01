@@ -28,14 +28,13 @@ const MainNavigation = () => {
         >
           {items.map((item, index) => (
             <div
-              onClick={() => handleClick(index)}
-              className={`text-2xl p-4 inline-flex justify-center hover:cursor-pointer m-auto w-full ${
+              className={`text-2xl p-4 inline-flex justify-center m-auto w-full ${
                 index === active ? ' border-r-2 border-neutral-800' : ''
               }`}
               key={index}
             >
-              <Link href={item.url}>
-                <a>{item.icon}</a>
+              <Link href={item.url} className={'hover:cursor-pointer'}>
+                <a onClick={() => handleClick(index)}>{item.icon}</a>
               </Link>
             </div>
           ))}
