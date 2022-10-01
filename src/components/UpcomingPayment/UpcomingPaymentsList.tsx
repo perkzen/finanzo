@@ -8,7 +8,6 @@ import {
 } from '../../context/Modal/ModalProvider';
 import { ModalType } from '../../types/modal';
 import { trpc } from '../../utils/trpc';
-import { format } from 'date-fns';
 import { formatDate } from '../../utils/date';
 
 const UpcomingPaymentsList: FC = () => {
@@ -27,7 +26,7 @@ const UpcomingPaymentsList: FC = () => {
       },
     });
   };
-  console.log(data);
+
   return (
     <div className={'mt-20 px-4 w-full'}>
       <Title
@@ -42,9 +41,7 @@ const UpcomingPaymentsList: FC = () => {
         <>
           {data.dates.map((date, index) => (
             <div className={'w-full flex flex-col gap-5 mt-8'} key={index}>
-              <h2 className={'text-gray-500 text-base'}>
-                {format(date, 'dd MMM yyyy')}
-              </h2>
+              <h2 className={'text-gray-500 text-base'}>{formatDate(date)}</h2>
               {data.payments[`${formatDate(date)}`]?.map((payment, index) => (
                 <UpcomingPayment
                   key={index}

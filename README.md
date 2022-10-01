@@ -99,6 +99,7 @@ $ pscale connect finanzo
 
 # Todo
 - [ ] graph responsiveness
+- [ ] create skeleton loading
 - [ ] add better loader
 - [ ] make that you cant submit empty forms 
 - [ ] better error handling

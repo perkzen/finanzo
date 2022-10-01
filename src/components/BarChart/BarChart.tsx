@@ -30,6 +30,7 @@ interface BarChartProps {
 const BarChart: FC<BarChartProps> = ({ title, data, height = '70px' }) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,

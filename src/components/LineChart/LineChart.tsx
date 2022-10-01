@@ -32,6 +32,7 @@ interface LineChartProps {
 const LineChart: FC<LineChartProps> = ({ title, data, height }) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,

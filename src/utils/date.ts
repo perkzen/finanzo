@@ -20,7 +20,7 @@ export const getPastMonthsAsArray = (currentMonth: number): string[] => {
 };
 
 export const formatDate = (date: Date, formatter?: string): string => {
-  if (!formatter) formatter = 'dd.MM.yyyy';
+  if (!formatter) formatter = 'dd MMM yyyy';
   return format(date, formatter);
 };
 
