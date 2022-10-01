@@ -6,6 +6,7 @@ import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 import { formatDate, getMonthName } from '../../utils/date';
 import { useRouter } from 'next/router';
 import { renderTransactionTypeIcons } from '../../utils/transactionTypeIcons';
+import { useTranslation } from 'react-i18next';
 
 const headers: TableHeader<TransactionTable>[] = [
   { label: 'Category', accessor: 'category' },
@@ -15,6 +16,7 @@ const headers: TableHeader<TransactionTable>[] = [
 ];
 
 const History: FC = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const { data, isLoading } = trpc.useQuery([
     'transactions.get-transaction-history',
@@ -41,8 +43,8 @@ const History: FC = () => {
 
   return (
     <div className={'flex flex-col py-5'}>
-      <h1 className={'font-bold text-2xl'}>History</h1>
-      <h2 className={'text-gray-500'}>Last 3 transactions</h2>
+      <h1 className={'font-bold text-2xl'}>{t('history')}</h1>
+      <h2 className={'text-gray-500'}>{t('history_subtitle')}</h2>
       <Table
         data={transactions || []}
         isLoading={isLoading}

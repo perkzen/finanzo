@@ -5,8 +5,10 @@ import BarChart from '../components/BarChart/BarChart';
 import { monthsArray } from '../utils/date';
 import { ChartData } from 'chart.js';
 import { trpc } from '../utils/trpc';
+import { useTranslation } from 'react-i18next';
 
 const Analytics: NextPage = () => {
+  const { t } = useTranslation();
   const { data: years, isLoading: isLoadingOptions } = trpc.useQuery([
     'reports.get-years',
   ]);
@@ -23,12 +25,12 @@ const Analytics: NextPage = () => {
     labels: monthsArray,
     datasets: [
       {
-        label: 'Expenses',
+        label: t('expenses'),
         data: data ? data.expenses : [],
         backgroundColor: '#da2653',
       },
       {
-        label: 'Incomes',
+        label: t('incomes'),
         data: data ? data.incomes : [],
         backgroundColor: '#35e178',
       },
@@ -39,7 +41,7 @@ const Analytics: NextPage = () => {
     labels: monthsArray,
     datasets: [
       {
-        label: 'Transactions',
+        label: t('transactions'),
         data: data ? data.transactions : [],
         backgroundColor: '#313030',
       },
@@ -49,10 +51,7 @@ const Analytics: NextPage = () => {
   return (
     <>
       <div>
-        <Title
-          title={'Finance analytics'}
-          subtitle={'Data about your finance through time'}
-        />
+        <Title title={t('analytics')} subtitle={t('analytics_subtitle')} />
         <select
           onChange={handleYearChange}
           disabled={isLoadingOptions && !years}
@@ -92,28 +91,20 @@ const Analytics: NextPage = () => {
       {/*</div>*/}
       <div className={'flex flex-col gap-4'}>
         <Title
-          title={'Incomes and expenses'}
+          title={t('income_and_expenses')}
           titleSize={'text-lg'}
-          subtitle={'Your incomes and expenses over the year'}
+          subtitle={t('income_and_expenses_subtitle')}
         />
-        <BarChart
-          data={chartData}
-          title={'Income and expense graph'}
-          height={'100px'}
-        />
+        <BarChart data={chartData} height={'100px'} />
       </div>
 
       <div className={'flex flex-col gap-4'}>
         <Title
-          title={'Transactions graph'}
+          title={t('transactions')}
           titleSize={'text-lg'}
-          subtitle={'Your transactions over the year'}
+          subtitle={t('transactions_subtitle')}
         />
-        <BarChart
-          data={transactionData}
-          title={'Transaction graph'}
-          height={'100px'}
-        />
+        <BarChart data={transactionData} height={'100px'} />
       </div>
     </>
   );

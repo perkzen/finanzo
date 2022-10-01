@@ -12,8 +12,10 @@ import { ModalType } from '../../../../types/modal';
 import { toast } from 'react-hot-toast';
 import Card from '../../../../components/Card/Card';
 import { GrTransaction } from 'react-icons/gr';
+import { useTranslation } from 'react-i18next';
 
 const MonthlyReport = () => {
+  const { t } = useTranslation();
   const dispatch = useModalDispatch();
   const router = useRouter();
   const { year, month } = router.query;
@@ -56,10 +58,10 @@ const MonthlyReport = () => {
     <>
       <Title
         title={`${month} ${year}`}
-        subtitle={'Transactions of selected month'}
+        subtitle={t('monthly_report_subtitle')}
       />
       <Button
-        label={'Add transaction'}
+        label={t('add_transaction')}
         classNames={'ml-auto w-full sm:w-auto'}
         onClick={handleClick}
       />
@@ -78,7 +80,7 @@ const MonthlyReport = () => {
               className={'flex flex-row items-center gap-4 font-bold text-xl'}
             >
               <GrTransaction className={'text-2xl'} />
-              No transactions were made this month.
+              {t('no_transactions')}
             </h1>
           </Card>
         )}

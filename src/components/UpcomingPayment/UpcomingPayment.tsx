@@ -9,6 +9,7 @@ import {
 import { ModalType } from '../../types/modal';
 import { trpc } from '../../utils/trpc';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface UpcomingPaymentProps {
   payment: Transaction;
@@ -16,14 +17,15 @@ interface UpcomingPaymentProps {
 }
 
 const UpcomingPayment: FC<UpcomingPaymentProps> = ({ payment, callback }) => {
+  const { t } = useTranslation();
   const dispatch = useModalDispatch();
   const { mutateAsync } = trpc.useMutation('transactions.delete-transaction');
 
   const handleDelete = async () => {
     try {
       await toast.promise(mutateAsync({ transactionId: payment.id }), {
-        loading: 'Deleting payment...',
-        success: 'Payment deleted!',
+        loading: t('deleting'),
+        success: t('deleted'),
         error: (err) => err.message,
       });
       await callback();
@@ -37,8 +39,8 @@ const UpcomingPayment: FC<UpcomingPaymentProps> = ({ payment, callback }) => {
       type: ModalActionType.ADD_MODAL,
       payload: {
         type: ModalType.DELETE,
-        title: 'Delete upcoming payment',
-        body: 'Are your sure you want to delete this upcoming payment?',
+        title: t('delete_payment'),
+        body: t('delete_payment_body'),
         action: handleDelete,
       },
     });

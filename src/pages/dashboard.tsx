@@ -7,8 +7,10 @@ import { trpc } from '../utils/trpc';
 import { ChartData } from 'chart.js';
 import { getPastMonthsAsArray } from '../utils/date';
 import LineChart from '../components/LineChart/LineChart';
+import { useTranslation } from 'react-i18next';
 
 const Dashboard: NextPage = () => {
+  const { t } = useTranslation();
   const { data } = trpc.useQuery([
     'analytics.get-account-balance-data-over-year',
     { year: new Date().getFullYear() },
@@ -17,7 +19,7 @@ const Dashboard: NextPage = () => {
     labels: getPastMonthsAsArray(new Date().getMonth() + 1),
     datasets: [
       {
-        label: 'Balance',
+        label: t('account_balance'),
         data: data ? data : [],
         borderColor: '#171617',
         backgroundColor: '#171617',
@@ -28,15 +30,18 @@ const Dashboard: NextPage = () => {
   return (
     <>
       <Title
-        title={'Dashboard'}
-        subtitle={'Payments updates'}
+        title={t('dashboard')}
+        subtitle={t('dashboard_subtitle')}
         className={'mb-5'}
       />
       <Statistics />
       <History />
       <div className={'flex flex-col gap-4'}>
-        <Title title={'Balance'} subtitle={'Your balance over the year'} />
-        <LineChart data={chartData} title={'Balance graph'} height={'100px'} />
+        <Title
+          title={t('account_balance')}
+          subtitle={t('account_balance_subtitle')}
+        />
+        <LineChart data={chartData} height={'100px'} />
       </div>
     </>
   );

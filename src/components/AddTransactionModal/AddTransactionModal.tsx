@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { transactionTypes } from '../../utils/transactionTypeIcons';
 import { getDateMax, getDateMin } from '../../utils/date';
+import { useTranslation } from 'react-i18next';
 
 interface CreateTransactionForm {
   recurring: boolean;
@@ -28,6 +29,7 @@ const AddTransactionModal: FC<ModalProps> = ({
   handleClose,
   modal: { title, callback, data },
 }) => {
+  const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState(
     transactionTypes[0]!.category
   );
@@ -54,8 +56,8 @@ const AddTransactionModal: FC<ModalProps> = ({
           amount: +data.amount,
         }),
         {
-          loading: 'Creating transaction...',
-          success: 'Transaction created!',
+          loading: t('creating'),
+          success: t('created'),
           error: (err) => err.message,
         }
       );
@@ -81,7 +83,7 @@ const AddTransactionModal: FC<ModalProps> = ({
         {title}
       </Dialog.Title>
       <div className="mt-2">
-        <h3 className="leading-6 text-gray-500 my-2">Type</h3>
+        <h3 className="leading-6 text-gray-500 my-2">{t('type')}</h3>
         <div
           className={'flex flex-row justify-evenly gap-4 flex-wrap sm:gap-6'}
         >
@@ -105,19 +107,19 @@ const AddTransactionModal: FC<ModalProps> = ({
           ))}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input {...register('displayName')} label={'Display name'} />
-          <Input {...register('amount')} label={'Amount'} type={'number'} />
+          <Input {...register('displayName')} label={t('display_name')} />
+          <Input {...register('amount')} label={t('amount')} type={'number'} />
           <Input
             {...register('date')}
-            label={'Date'}
+            label={t('date')}
             type={'date'}
             min={getDateMin(+year!, month)}
             max={getDateMax(+year!, month)}
           />
-          <Toggle {...register('recurring')} label={'Recurring'} />
+          <Toggle {...register('recurring')} label={t('recurring')} />
           <div className="mt-8">
-            <Button label={'Save'} type={'submit'} />{' '}
-            <Button label={'Cancel'} onClick={handleClose} />
+            <Button label={t('save')} type={'submit'} />{' '}
+            <Button label={t('close')} onClick={handleClose} />
           </div>
         </form>
       </div>

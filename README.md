@@ -3,10 +3,12 @@
 <img src="pictures/login.png" alt="logo"/>
 
 # Why Finanzo?
+
 Just as a company needs to take care of their finances, so each individual must take responsibility for their finances
 if they want to make some progress in the financial field.
 
 # Features
+
 - Create expense item
 - Create income item
 - Delete expense item
@@ -93,15 +95,20 @@ $ brew install planetscale/tap/pscale
 ```
 
 You need privileges from admin to connect to the database :
+
 ```bash
 $ pscale connect finanzo
 ```
 
 # Todo
+
+- [ ] translations for months
+- [ ] back button on months
+- [ ] delete warning for deleting report
 - [ ] graph responsiveness
 - [ ] create skeleton loading
 - [ ] add better loader
-- [ ] make that you cant submit empty forms 
+- [ ] make that you cant submit empty forms
 - [ ] better error handling
 - [ ] add translations
 - [ ] add tests

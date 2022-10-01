@@ -13,18 +13,20 @@ import {
 } from '../../../context/Modal/ModalProvider';
 import { ModalType } from '../../../types/modal';
 import { toast } from 'react-hot-toast';
-
-const headers: TableHeader<YearlyReportTable>[] = [
-  { label: 'Month', accessor: 'month' },
-  { label: 'Income', accessor: 'income' },
-  { label: 'Expenses', accessor: 'expenses' },
-  { label: 'Balance', accessor: 'balance' },
-  { label: 'Transactions', accessor: 'transactions' },
-];
+import { useTranslation } from 'react-i18next';
 
 const YearlyReport: NextPage = () => {
+  const { t } = useTranslation();
   const dispatch = useModalDispatch();
   const router = useRouter();
+
+  const headers: TableHeader<YearlyReportTable>[] = [
+    { label: t('month'), accessor: 'month' },
+    { label: t('income'), accessor: 'income' },
+    { label: t('expenses'), accessor: 'expenses' },
+    { label: t('balance'), accessor: 'balance' },
+    { label: t('transactions'), accessor: 'transactions' },
+  ];
 
   const query =
     typeof router.query.year === 'string' ? +router.query.year : undefined;
@@ -80,8 +82,8 @@ const YearlyReport: NextPage = () => {
     if (!query || !data || !years) return;
     try {
       await toast.promise(mutateAsync({ reportId: data.id }), {
-        loading: 'Deleting...',
-        success: 'Deleted',
+        loading: t('deleting'),
+        success: t('deleted'),
         error: (err) => err.message,
       });
       await refetchOptions();
@@ -95,8 +97,8 @@ const YearlyReport: NextPage = () => {
   return (
     <>
       <Title
-        title={'Yearly report'}
-        subtitle={'All finances information for selected year'}
+        title={t('yearly_report')}
+        subtitle={t('yearly_report_subtitle')}
       />
       <div className={'flex flex-col w-full'}>
         <div className={'flex flex-col sm:flex-row justify-between'}>
@@ -118,7 +120,7 @@ const YearlyReport: NextPage = () => {
               )}
             </select>
             <Button
-              label={'Delete report'}
+              label={t('delete_report')}
               classNames={'w-full sm:w-fit sm:ml-4 mt-2'}
               onClick={handleDeleteYearlyReport}
             />
@@ -126,7 +128,7 @@ const YearlyReport: NextPage = () => {
           <Button
             onClick={handleButtonClick}
             classNames={'mt-2'}
-            label={'Create report'}
+            label={t('create_report')}
           />
         </div>
         <Table

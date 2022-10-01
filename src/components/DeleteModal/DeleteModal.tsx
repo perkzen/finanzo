@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { IModal } from '../../types/modal';
 import { Dialog } from '@headlessui/react';
 import Button from '../Button/Button';
+import { useTranslation } from 'react-i18next';
 
 interface DeleteModalProps {
   handleClose: () => void;
@@ -12,6 +13,7 @@ const DeleteModal: FC<DeleteModalProps> = ({
   modal: { title, action, body },
   handleClose,
 }) => {
+  const { t } = useTranslation();
   const handleDelete = async () => {
     if (!action) return;
     await action();
@@ -29,8 +31,8 @@ const DeleteModal: FC<DeleteModalProps> = ({
       <div className={'flex flex-col gap-4'}>
         <p>{body}</p>
         <div className={'flex flex-row gap-2'}>
-          <Button label={'Delete'} onClick={handleDelete} />
-          <Button label={'Close'} onClick={handleClose} />
+          <Button label={t('delete')} onClick={handleDelete} />
+          <Button label={t('close')} onClick={handleClose} />
         </div>
       </div>
     </>

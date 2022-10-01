@@ -24,22 +24,17 @@ ChartJS.register(
 );
 
 interface LineChartProps {
-  title: string;
   data: ChartData<'line', number[], string>;
   height?: string;
 }
 
-const LineChart: FC<LineChartProps> = ({ title, data, height }) => {
+const LineChart: FC<LineChartProps> = ({ data, height }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,
-      },
-      title: {
-        display: true,
-        text: title,
       },
     },
   };

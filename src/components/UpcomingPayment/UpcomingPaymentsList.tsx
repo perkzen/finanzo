@@ -9,8 +9,10 @@ import {
 import { ModalType } from '../../types/modal';
 import { trpc } from '../../utils/trpc';
 import { formatDate } from '../../utils/date';
+import { useTranslation } from 'react-i18next';
 
 const UpcomingPaymentsList: FC = () => {
+  const { t } = useTranslation();
   const dispatch = useModalDispatch();
   const { data, refetch } = trpc.useQuery([
     'transactions.get-upcoming-transactions',
@@ -21,7 +23,7 @@ const UpcomingPaymentsList: FC = () => {
       type: ModalActionType.ADD_MODAL,
       payload: {
         type: ModalType.ADD_TRANSACTION,
-        title: 'Add upcoming payment',
+        title: t('add_upcoming_payments'),
         callback: refetch,
       },
     });
@@ -30,10 +32,10 @@ const UpcomingPaymentsList: FC = () => {
   return (
     <div className={'mt-20 px-4 w-full'}>
       <Title
-        title={'Upcoming Payments'}
+        title={t('upcoming_payments')}
         titleSize={'text-lg'}
         subtitleSize={'text-sm'}
-        subtitle={'Add future payment that will happen'}
+        subtitle={t('upcoming_payments_subtitle')}
         className={'mb-5'}
       />
 

@@ -22,22 +22,17 @@ ChartJS.register(
 );
 
 interface BarChartProps {
-  title: string;
   data: ChartData<'bar', number[], string>;
   height?: string;
 }
 
-const BarChart: FC<BarChartProps> = ({ title, data, height = '70px' }) => {
+const BarChart: FC<BarChartProps> = ({ data, height = '70px' }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,
-      },
-      title: {
-        display: true,
-        text: title,
       },
     },
   };

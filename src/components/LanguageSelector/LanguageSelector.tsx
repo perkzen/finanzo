@@ -3,7 +3,7 @@ import { languages } from '../../i18next/languages';
 import { useTranslation } from 'react-i18next';
 
 const LanguageSelector = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
 
   const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -13,7 +13,7 @@ const LanguageSelector = () => {
 
   return (
     <div>
-      <h2 className="leading-6 text-gray-500">Language</h2>
+      <h2 className="leading-6 text-gray-500">{t('language')}</h2>
       <select
         value={language}
         onChange={handleChange}

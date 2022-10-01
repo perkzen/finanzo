@@ -4,32 +4,34 @@ import { Statistic } from '../../types/statistics';
 import { trpc } from '../../utils/trpc';
 import { GiMoneyStack, GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
 import { GrTransaction } from 'react-icons/gr';
+import { useTranslation } from 'react-i18next';
 
 const Statistics: FC = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = trpc.useQuery(['account.get-balance']);
 
   const stats: Statistic[] = [
     {
       icon: <GiPayMoney />,
-      title: 'Expenses',
+      title: t('expenses'),
       value: data?.expenses,
       type: 'currency',
     },
     {
       icon: <GiReceiveMoney />,
-      title: 'Income',
+      title: t('income'),
       value: data?.income,
       type: 'currency',
     },
     {
       icon: <GiMoneyStack />,
-      title: 'Balance',
+      title: t('balance'),
       value: data?.balance,
       type: 'currency',
     },
     {
       icon: <GrTransaction />,
-      title: 'Transactions',
+      title: t('transactions'),
       value: data?.transactions,
       type: 'number',
     },
