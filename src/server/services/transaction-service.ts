@@ -27,9 +27,9 @@ export class TransactionService {
     return await prisma.transaction.findMany({
       where: {
         userId,
-        monthlyReport: {
-          month: month,
-          year: year,
+        MonthlyReport: {
+          month,
+          YearlyReport: { year },
         },
         createdAt: {
           lte: new Date(),
@@ -48,8 +48,10 @@ export class TransactionService {
     const monthlyReport = await prisma.monthlyReport.findFirst({
       where: {
         month,
-        year,
         userId,
+        YearlyReport: {
+          year,
+        },
       },
       select: {
         id: true,

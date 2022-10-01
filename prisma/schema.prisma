@@ -69,10 +69,10 @@ model Transaction {
   displayName     String
   amount          Float
   createdAt       DateTime      @default(dbgenerated()) @db.Date
-  monthlyReportId String
   userId          String
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  monthlyReport   MonthlyReport @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
+  monthlyReportId String
+  MonthlyReport   MonthlyReport @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
 
   @@map("transactions")
 }
@@ -84,7 +84,7 @@ model MonthlyReport {
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   Transaction    Transaction[]
   yearlyReportId String
-  yearlyReport   YearlyReport  @relation(fields: [yearlyReportId], references: [id], onDelete: Cascade)
+  YearlyReport   YearlyReport  @relation(fields: [yearlyReportId], references: [id], onDelete: Cascade)
 
   @@map("monthly_reports")
 }
