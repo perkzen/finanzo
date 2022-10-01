@@ -1,7 +1,7 @@
 import { prisma } from '../../db/client';
 import { CreateTransactionProps } from '../validators/create-transaction-validator';
 import { Transaction } from '../../types/transaction';
-import { addMonthsToDate } from '../../utils/date';
+import { addMonthsToDate, formatDate } from '../../utils/date';
 import { Service } from './abstract-service';
 
 export class TransactionService implements Service {
@@ -94,16 +94,16 @@ export class TransactionService implements Service {
     await this.refreshPayment(userId);
 
     const payments: { [key: string]: Transaction[] } = {};
-    const dates: Date[] = [];
+    const dates: string[] = [];
     // format to {"2022-09-26": [payment1,payment2, ...]}
     transactions.forEach((t) => {
-      if (!payments.hasOwnProperty(`${t.createdAt}`)) {
-        dates.push(t.createdAt);
-        Object.assign(payments, { [`${t.createdAt}`]: [] });
-        payments[`${t.createdAt}`]?.push(t);
+      if (!payments.hasOwnProperty(`${formatDate(t.createdAt)}`)) {
+        dates.push(formatDate(t.createdAt));
+        Object.assign(payments, { [`${formatDate(t.createdAt)}`]: [] });
+        payments[`${formatDate(t.createdAt)}`]?.push(t);
         return;
       }
-      payments[`${t.createdAt}`]?.push(t);
+      payments[`${formatDate(t.createdAt)}`]?.push(t);
     });
 
     return { payments, dates };

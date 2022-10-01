@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { format } from 'date-fns';
 import Title from '../Title/Title';
 import { BsPlusLg } from 'react-icons/bs';
 import UpcomingPayment from './UpcomingPayment';
@@ -41,9 +40,7 @@ const UpcomingPaymentsList: FC = () => {
         <>
           {data.dates.map((date, index) => (
             <div className={'w-full flex flex-col gap-5 mt-8'} key={index}>
-              <h2 className={'text-gray-500 text-base'}>
-                {format(date, 'dd MMM yyyy')}
-              </h2>
+              <h2 className={'text-gray-500 text-base'}>{date}</h2>
               {JSON.stringify(data.payments)}
               {data.payments[`${date}`]?.map((payment, index) => (
                 <UpcomingPayment
