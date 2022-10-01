@@ -5,8 +5,10 @@ import { trpc } from '../../utils/trpc';
 import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 import { formatDate, getMonthName } from '../../utils/date';
 import { useRouter } from 'next/router';
+import { renderTransactionTypeIcons } from '../../utils/transactionTypeIcons';
 
 const headers: TableHeader<TransactionTable>[] = [
+  { label: 'Category', accessor: 'category' },
   { label: 'Display name', accessor: 'displayName' },
   { label: 'Date', accessor: 'createdAt' },
   { label: 'Amount', accessor: 'amount' },
@@ -22,6 +24,7 @@ const History: FC = () => {
   const transactions = data?.map((item) => {
     return {
       ...item,
+      category: renderTransactionTypeIcons(item.category),
       amount: formatNumberAsCurrency(item.amount),
       createdAt: formatDate(item.createdAt),
     };

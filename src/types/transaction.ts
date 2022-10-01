@@ -1,8 +1,11 @@
+import { ReactNode } from 'react';
+
 export interface TransactionTable {
   id: string;
   displayName: string;
   amount: string;
   createdAt: string;
+  category: ReactNode;
 }
 
 export interface Transaction {

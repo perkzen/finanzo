@@ -12,14 +12,11 @@ export const getMonthFromString = (month: string): number => {
 export const getDateMax = (year: number | null, month: string | null) => {
   if (!year || !month) return undefined;
   const date = new Date();
-
   if (getMonthFromString(month) < date.getMonth()) {
     date.setDate(0);
   }
-
   date.setFullYear(year);
   date.setMonth(getMonthFromString(month));
-  console.log(formatDate(date, 'yyyy-MM-dd'));
   return formatDate(date, 'yyyy-MM-dd');
 };
 
@@ -29,7 +26,6 @@ export const getDateMin = (year: number | null, month: string | null) => {
   date.setDate(1);
   date.setMonth(getMonthFromString(month));
   date.setFullYear(year);
-  console.log(formatDate(date, 'yyyy-MM-dd'));
   return formatDate(date, 'yyyy-MM-dd');
 };
 

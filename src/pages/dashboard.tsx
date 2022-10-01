@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import Statistics from '../components/Statistics/Statistics';
 import History from '../components/History/History';
 import Title from '../components/Title/Title';
+import BarChart from '../components/BarChart/BarChart';
 
 const Dashboard: NextPage = () => {
   return (
@@ -14,7 +15,7 @@ const Dashboard: NextPage = () => {
       />
       <Statistics />
       <History />
-      {/*<BarChart />*/}
+      <BarChart />
     </>
   );
 };

@@ -1,15 +1,17 @@
 import React, { FC, ReactNode } from 'react';
-import classes from './Card.module.scss';
-import { classNames } from '../../utils/classNames';
 
 interface CardProps {
   children: ReactNode;
-  className?: string;
+  color?: 'primary' | 'secondary' | 'white';
 }
 
-const Card: FC<CardProps> = ({ children, className = '' }) => {
+const Card: FC<CardProps> = ({ children, color = 'white' }) => {
   return (
-    <div className={classNames(className, classes.Container as string)}>
+    <div
+      style={{ minWidth: '250px' }}
+      className={`flex flex-col gap-5 shadow-lg bg-${color} 
+      rounded-2xl py-5 px-5 sm:px-10`}
+    >
       {children}
     </div>
   );

@@ -18,6 +18,7 @@ export class TransactionService {
         displayName: true,
         amount: true,
         createdAt: true,
+        category: true,
       },
       orderBy: { createdAt: 'desc' },
     });

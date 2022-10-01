@@ -100,7 +100,6 @@ $ pscale connect finanzo
 # Todo
 
 - [ ] add graphs
-- [ ] add date constrains for upcoming payments
 - [ ] make that you cant submit empty forms 
 - [ ] better error handling
 - [ ] add translations
