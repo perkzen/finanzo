@@ -35,11 +35,7 @@ const Dashboard: NextPage = () => {
       <Statistics />
       <History />
       <div className={'flex flex-col gap-4'}>
-        <Title
-          title={'Balance'}
-          titleSize={'text-lg'}
-          subtitle={'Your balance over the year'}
-        />
+        <Title title={'Balance'} subtitle={'Your balance over the year'} />
         <LineChart data={chartData} title={'Balance graph'} height={'100px'} />
       </div>
     </>
