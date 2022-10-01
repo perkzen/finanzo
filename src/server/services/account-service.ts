@@ -1,6 +1,7 @@
 import { prisma } from '../../db/client';
+import { Service } from './abstract-service';
 
-export class AccountService {
+export class AccountService implements Service {
   async getBalance(userId: string) {
     const balance = await prisma.transaction.aggregate({
       where: {

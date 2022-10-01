@@ -2,8 +2,9 @@ import { prisma } from '../../db/client';
 import { CreateTransactionProps } from '../validators/create-transaction-validator';
 import { Transaction } from '../../types/transaction';
 import { addMonthsToDate } from '../../utils/date';
+import { Service } from './abstract-service';
 
-export class TransactionService {
+export class TransactionService implements Service {
   async getTransactionHistory(limit: number, userId: string) {
     return await prisma.transaction.findMany({
       take: limit,

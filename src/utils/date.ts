@@ -1,5 +1,20 @@
 import { format } from 'date-fns';
 
+export const monthsArray = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 export const formatDate = (date: Date, formatter?: string): string => {
   if (!formatter) formatter = 'dd.MM.yyyy';
   return format(date, formatter);

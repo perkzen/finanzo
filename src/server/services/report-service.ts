@@ -1,7 +1,8 @@
 import { prisma } from '../../db/client';
 import { createMonthlyReports } from '../helpers/createMonthlyReports';
+import { Service } from './abstract-service';
 
-export class ReportService {
+export class ReportService implements Service {
   private async getMonthlyReportBalanceInfo(monthId: string) {
     const balance = await prisma.transaction.aggregate({
       where: {
@@ -88,7 +89,6 @@ export class ReportService {
 
   async createYearlyReport(userId: string, year: number) {
     const { id } = await prisma.yearlyReport.create({ data: { userId, year } });
-
     const reports = createMonthlyReports(userId, id);
     return await prisma.monthlyReport.createMany({
       data: reports,
@@ -96,11 +96,8 @@ export class ReportService {
   }
 
   async deleteYearlyReport(reportId: string, userId: string) {
-    // can't delete last one
-    // should add year table
     const reports = await prisma.yearlyReport.findMany({ where: { userId } });
     if (reports.length === 1) throw new Error('Cannot delete last one');
-
     return await prisma.yearlyReport.delete({ where: { id: reportId } });
   }
 

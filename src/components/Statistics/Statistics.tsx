@@ -36,7 +36,11 @@ const Statistics: FC = () => {
   ];
 
   return (
-    <div className={'flex flex-col sm:flex-row flex-wrap gap-5'}>
+    <div
+      className={
+        'flex flex-col w-full sm:flex-row justify-evenly flex-wrap gap-5'
+      }
+    >
       {stats.map((item, index) => (
         <StatCard key={index} stat={item} isLoading={isLoading} />
       ))}
