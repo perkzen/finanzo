@@ -44,7 +44,7 @@ const UpcomingPaymentsList: FC = () => {
               <h2 className={'text-gray-500 text-base'}>
                 {format(date, 'dd MMM yyyy')}
               </h2>
-              {JSON.stringify(data.payments[`${date}`])}
+              {JSON.stringify(data.payments)}
               {data.payments[`${date}`]?.map((payment, index) => (
                 <UpcomingPayment
                   key={index}
