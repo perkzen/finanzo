@@ -98,8 +98,8 @@ $ pscale connect finanzo
 ```
 
 # Todo
-
-- [ ] add graphs
+- [ ] graph responsiveness
+- [ ] add better loader
 - [ ] make that you cant submit empty forms 
 - [ ] better error handling
 - [ ] add translations

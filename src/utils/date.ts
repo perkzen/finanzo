@@ -15,6 +15,10 @@ export const monthsArray = [
   'December',
 ];
 
+export const getPastMonthsAsArray = (currentMonth: number): string[] => {
+  return monthsArray.slice(0, currentMonth);
+};
+
 export const formatDate = (date: Date, formatter?: string): string => {
   if (!formatter) formatter = 'dd.MM.yyyy';
   return format(date, formatter);

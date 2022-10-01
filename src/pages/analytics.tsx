@@ -70,7 +70,26 @@ const Analytics: NextPage = () => {
           )}
         </select>
       </div>
-
+      {/*<div className={'grid grid-cols-2 gap-8'}>*/}
+      {/*  <div>*/}
+      {/*    <Title*/}
+      {/*      title={'Income categories'}*/}
+      {/*      titleSize={'text-lg'}*/}
+      {/*      subtitle={'Where do you get most of your income from'}*/}
+      {/*      className={'mb-4'}*/}
+      {/*    />*/}
+      {/*    <PieChart labels={['test']} numbers={[12]} />*/}
+      {/*  </div>*/}
+      {/*  <div>*/}
+      {/*    <Title*/}
+      {/*      title={'Expense categories'}*/}
+      {/*      titleSize={'text-lg'}*/}
+      {/*      subtitle={'Where do you spend your money on'}*/}
+      {/*      className={'mb-4'}*/}
+      {/*    />*/}
+      {/*    <PieChart labels={['test', 'dsa']} numbers={[12, 23]} />*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className={'flex flex-col gap-4'}>
         <Title
           title={'Incomes and expenses'}
@@ -83,6 +102,7 @@ const Analytics: NextPage = () => {
           height={'100px'}
         />
       </div>
+
       <div className={'flex flex-col gap-4'}>
         <Title
           title={'Transactions graph'}

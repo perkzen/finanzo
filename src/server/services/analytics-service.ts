@@ -26,4 +26,19 @@ export class AnalyticsService implements Service {
 
     return res;
   }
+
+  async getAccountBalanceOverTheYearData(userId: string, year: number) {
+    const data = await new ReportService().getYearlyReportByYear(userId, year);
+    const balancesByMonth: number[] = [];
+
+    data.months.forEach((month, index) => {
+      if (index === 0) {
+        balancesByMonth.push(month.balance);
+      } else {
+        balancesByMonth.push(month.balance + balancesByMonth[index - 1]);
+      }
+    });
+
+    return balancesByMonth;
+  }
 }

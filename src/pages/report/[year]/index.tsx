@@ -18,7 +18,7 @@ const headers: TableHeader<YearlyReportTable>[] = [
   { label: 'Month', accessor: 'month' },
   { label: 'Income', accessor: 'income' },
   { label: 'Expenses', accessor: 'expenses' },
-  { label: 'Differance', accessor: 'balance' },
+  { label: 'Balance', accessor: 'balance' },
   { label: 'Transactions', accessor: 'transactions' },
 ];
 

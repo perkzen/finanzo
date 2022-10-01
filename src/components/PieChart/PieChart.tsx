@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import Card from '../Card/Card';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -36,7 +37,11 @@ const PieChart: FC<Props> = ({ labels, numbers }) => {
     ],
   };
 
-  return <Pie data={data} width={500} height={500} />;
+  return (
+    <Card color={'secondary'} classNames={'w-full'}>
+      <Pie data={data} width={'250px'} height={'250px'} />
+    </Card>
+  );
 };
 
 export default PieChart;
