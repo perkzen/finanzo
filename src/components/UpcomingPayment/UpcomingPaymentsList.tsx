@@ -8,6 +8,7 @@ import {
 } from '../../context/Modal/ModalProvider';
 import { ModalType } from '../../types/modal';
 import { trpc } from '../../utils/trpc';
+import { format } from 'date-fns';
 
 const UpcomingPaymentsList: FC = () => {
   const dispatch = useModalDispatch();
@@ -40,8 +41,9 @@ const UpcomingPaymentsList: FC = () => {
         <>
           {data.dates.map((date, index) => (
             <div className={'w-full flex flex-col gap-5 mt-8'} key={index}>
-              <h2 className={'text-gray-500 text-base'}>{date}</h2>
-              {JSON.stringify(data.payments)}
+              <h2 className={'text-gray-500 text-base'}>
+                {format(date, 'dd MMM yyyy')}
+              </h2>
               {data.payments[`${date}`]?.map((payment, index) => (
                 <UpcomingPayment
                   key={index}

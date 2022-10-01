@@ -94,11 +94,11 @@ export class TransactionService implements Service {
     await this.refreshPayment(userId);
 
     const payments: { [key: string]: Transaction[] } = {};
-    const dates: string[] = [];
+    const dates: Date[] = [];
     // format to {"2022-09-26": [payment1,payment2, ...]}
     transactions.forEach((t) => {
       if (!payments.hasOwnProperty(`${formatDate(t.createdAt)}`)) {
-        dates.push(formatDate(t.createdAt));
+        dates.push(t.createdAt);
         Object.assign(payments, { [`${formatDate(t.createdAt)}`]: [] });
         payments[`${formatDate(t.createdAt)}`]?.push(t);
         return;
