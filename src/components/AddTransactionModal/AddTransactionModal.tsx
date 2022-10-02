@@ -7,9 +7,9 @@ import Toggle from '../Toggle/Toogle';
 import { trpc } from '../../utils/trpc';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { transactionTypes } from '../../utils/transactionTypeIcons';
 import { getDateMax, getDateMin } from '../../utils/date';
 import { useTranslation } from 'react-i18next';
+import { useTransactionTypeIcons } from '../../utils/transactionTypeIcons';
 
 interface CreateTransactionForm {
   recurring: boolean;
@@ -30,6 +30,7 @@ const AddTransactionModal: FC<ModalProps> = ({
   modal: { title, callback, data },
 }) => {
   const { t } = useTranslation();
+  const transactionTypes = useTransactionTypeIcons();
   const [selectedType, setSelectedType] = useState(
     transactionTypes[0]!.category
   );
@@ -85,7 +86,9 @@ const AddTransactionModal: FC<ModalProps> = ({
       <div className="mt-2">
         <h3 className="leading-6 text-gray-500 my-2">{t('type')}</h3>
         <div
-          className={'flex flex-row justify-evenly gap-4 flex-wrap sm:gap-6'}
+          className={
+            'flex flex-row justify-evenly gap-4 flex-wrap sm:gap-6 mb-2'
+          }
         >
           {transactionTypes.map((paymentType, index) => (
             <div
@@ -102,11 +105,13 @@ const AddTransactionModal: FC<ModalProps> = ({
               >
                 {paymentType.icon}
               </button>
-              <p className={'text-xs mt-2'}>{paymentType.category}</p>
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={'flex flex-col gap-2'}
+        >
           <Input {...register('displayName')} label={t('display_name')} />
           <Input {...register('amount')} label={t('amount')} type={'number'} />
           <Input

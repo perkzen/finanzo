@@ -17,6 +17,7 @@ const headers: TableHeader<TransactionTable>[] = [
 
 const History: FC = () => {
   const { t } = useTranslation();
+
   const router = useRouter();
   const { data, isLoading } = trpc.useQuery([
     'transactions.get-transaction-history',
