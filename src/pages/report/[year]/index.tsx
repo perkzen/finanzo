@@ -94,6 +94,18 @@ const YearlyReport: NextPage = () => {
     }
   };
 
+  const openDeleteModal = () => {
+    dispatch({
+      type: ModalActionType.ADD_MODAL,
+      payload: {
+        type: ModalType.DELETE,
+        title: t('delete_report'),
+        body: t('delete_report_warning'),
+        action: handleDeleteYearlyReport,
+      },
+    });
+  };
+
   return (
     <>
       <Title
@@ -122,7 +134,7 @@ const YearlyReport: NextPage = () => {
             <Button
               label={t('delete_report')}
               classNames={'w-full sm:w-fit sm:ml-4 mt-2'}
-              onClick={handleDeleteYearlyReport}
+              onClick={openDeleteModal}
             />
           </div>
           <Button

@@ -40,6 +40,7 @@
   "food_and_drinks": "Food & drinks",
   "month": "Month",
   "delete_report": "Delete report",
+  "delete_report_warning": "Are you sure you want to delete this report?",
   "create_report": "Create report",
   "delete": "Delete",
   "delete_payment_body": "Are your sure you want to delete this upcoming payment?",
@@ -49,6 +50,5 @@
   "deleted": "Deleted",
   "creating": "Creating...",
   "created": "Created",
-  "no_data": "No data to display",
-  "loading": "Loading..."
+  "no_data": "No data to display"
 }

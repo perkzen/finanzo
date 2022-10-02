@@ -40,19 +40,15 @@
   "food_and_drinks": "Hrana & pijača",
   "month": "Mesec",
   "delete_report": "Izbriši poročilo",
+  "delete_report_warning": "Ali si prepričan, da želiš izbrisati to poročilo?",
   "create_report": "Ustvari poročilo",
   "delete": "Izbriši",
   "delete_payment_body": "Ali ste prepričani, da želite izbrisati to plačilo?",
   "delete_payment": "Izbriši prihajajoče plačilo",
   "add_transaction": "Dodaj transakcijo",
-  "creating_report": "Ustvarjanje poročila",
-  "report_created": "Pročilo ustvarjeno",
-  "creating_transaction": "Ustvarjanje transakcije",
-  "transaction_created": "Transakcija ustvarjena",
   "deleting": "Brisanje...",
   "deleted": "Izbrisano",
   "creating": "Ustvarjanje...",
   "created": "Ustvarjeno",
-  "no_data": "Ni podatkov za prikaz",
-  "loading": "Nalaganje..."
+  "no_data": "Ni podatkov za prikaz"
 }

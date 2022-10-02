@@ -88,6 +88,12 @@ export class ReportService implements Service {
   }
 
   async createYearlyReport(userId: string, year: number) {
+    const found = await prisma.yearlyReport.findFirst({
+      where: { userId, year },
+    });
+
+    if (found) throw new Error('Report already exists');
+
     const { id } = await prisma.yearlyReport.create({ data: { userId, year } });
     const reports = createMonthlyReports(userId, id);
     return await prisma.monthlyReport.createMany({

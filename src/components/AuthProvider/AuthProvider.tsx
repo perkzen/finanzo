@@ -3,14 +3,12 @@ import { useSession } from 'next-auth/react';
 import Home from '../../pages';
 import Image from 'next/image';
 import Loader from '../../assets/loader.gif';
-import { useTranslation } from 'react-i18next';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const { t } = useTranslation();
   const { status } = useSession();
 
   if (status === 'loading') {
@@ -19,7 +17,6 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         className={'flex flex-col gap-4 justify-center items-center h-screen'}
       >
         <Image src={Loader} alt={'loader'} />
-        <h1 className={'text-2xl font-bold'}>{t('loading')}</h1>
       </div>
     );
   }
