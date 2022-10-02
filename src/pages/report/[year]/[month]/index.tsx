@@ -14,6 +14,7 @@ import Card from '../../../../components/Card/Card';
 import { GrTransaction } from 'react-icons/gr';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import TransactionSkeleton from '../../../../components/TranscationCard/TransactionSkeleton';
 
 const MonthlyReport = () => {
   const { t } = useTranslation();
@@ -21,7 +22,7 @@ const MonthlyReport = () => {
   const router = useRouter();
   const { year, month } = router.query;
 
-  const { data, refetch } = trpc.useQuery([
+  const { data, isLoading, refetch } = trpc.useQuery([
     'transactions.get-transactions-by-month',
     { month: String(month), year: Number(year) },
   ]);
@@ -45,9 +46,9 @@ const MonthlyReport = () => {
   const handleDelete = async (id: string) => {
     try {
       await toast.promise(mutateAsync({ transactionId: id }), {
-        loading: 'Deleting transaction...',
-        success: 'Transaction deleted',
-        error: 'Failed to delete transaction',
+        loading: t('deleting'),
+        success: t('deleted'),
+        error: (err) => err.message,
       });
       await refetch();
     } catch (e) {
@@ -71,25 +72,32 @@ const MonthlyReport = () => {
           onClick={handleClick}
         />
       </div>
-
       <>
-        {transactions.length > 0 ? (
-          transactions.map((transaction, index) => (
-            <TransactionCard
-              key={index}
-              transaction={transaction}
-              handleDelete={handleDelete}
-            />
-          ))
+        {isLoading ? (
+          <TransactionSkeleton />
         ) : (
-          <Card>
-            <h1
-              className={'flex flex-row items-center gap-4 font-bold text-xl'}
-            >
-              <GrTransaction className={'text-2xl'} />
-              {t('no_transactions')}
-            </h1>
-          </Card>
+          <>
+            {transactions.length > 0 ? (
+              transactions.map((transaction, index) => (
+                <TransactionCard
+                  key={index}
+                  transaction={transaction}
+                  handleDelete={handleDelete}
+                />
+              ))
+            ) : (
+              <Card>
+                <h1
+                  className={
+                    'flex flex-row items-center gap-4 font-bold text-xl'
+                  }
+                >
+                  <GrTransaction className={'text-2xl'} />
+                  {t('no_transactions')}
+                </h1>
+              </Card>
+            )}
+          </>
         )}
       </>
     </>

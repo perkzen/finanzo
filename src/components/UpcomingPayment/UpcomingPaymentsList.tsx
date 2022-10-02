@@ -10,11 +10,12 @@ import { ModalType } from '../../types/modal';
 import { trpc } from '../../utils/trpc';
 import { formatDate } from '../../utils/date';
 import { useTranslation } from 'react-i18next';
+import Skeleton from 'react-loading-skeleton';
 
 const UpcomingPaymentsList: FC = () => {
   const { t } = useTranslation();
   const dispatch = useModalDispatch();
-  const { data, refetch } = trpc.useQuery([
+  const { data, isLoading, refetch } = trpc.useQuery([
     'transactions.get-upcoming-transactions',
   ]);
 
@@ -28,7 +29,6 @@ const UpcomingPaymentsList: FC = () => {
       },
     });
   };
-
   return (
     <div className={'mt-20 px-4 w-full'}>
       <Title
@@ -38,24 +38,31 @@ const UpcomingPaymentsList: FC = () => {
         subtitle={t('upcoming_payments_subtitle')}
         className={'mb-5'}
       />
-
-      {data ? (
-        <>
-          {data.dates.map((date, index) => (
-            <div className={'w-full flex flex-col gap-5 mt-8'} key={index}>
-              <h2 className={'text-gray-500 text-base'}>{formatDate(date)}</h2>
-              {data.payments[`${formatDate(date)}`]?.map((payment, index) => (
-                <UpcomingPayment
-                  key={index}
-                  payment={payment}
-                  callback={refetch}
-                />
-              ))}
-            </div>
-          ))}
-        </>
+      {isLoading ? (
+        <Skeleton count={3} className={'mt-4'} />
       ) : (
-        'no data'
+        <>
+          {data ? (
+            <>
+              {data.dates.map((date, index) => (
+                <div className={'w-full flex flex-col gap-5 mt-8'} key={index}>
+                  <h2 className={'text-gray-500 text-base'}>
+                    {formatDate(date)}
+                  </h2>
+                  {data.payments[`${formatDate(date)}`]?.map(
+                    (payment, index) => (
+                      <UpcomingPayment
+                        key={index}
+                        payment={payment}
+                        callback={refetch}
+                      />
+                    )
+                  )}
+                </div>
+              ))}
+            </>
+          ) : null}
+        </>
       )}
 
       <button

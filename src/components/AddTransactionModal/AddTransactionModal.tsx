@@ -123,8 +123,8 @@ const AddTransactionModal: FC<ModalProps> = ({
             {...register('date')}
             label={t('date')}
             type={'date'}
-            min={getDateMin(+year!, month)}
-            max={getDateMax(+year!, month)}
+            min={getDateMin(+year!, t(`${month}`, { lng: 'en' }))}
+            max={getDateMax(+year!, t(`${month}`, { lng: 'en' }))}
           />
           <Toggle {...register('recurring')} label={t('recurring')} />
           <div className="mt-8">

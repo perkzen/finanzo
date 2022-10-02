@@ -9,6 +9,8 @@ import LayoutProvider from '../components/LayoutProvider/LayoutProvider';
 import AuthProvider from '../components/AuthProvider/AuthProvider';
 import { ModalProvider } from '../context/Modal/ModalProvider';
 import '../i18next/i18next';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -20,16 +22,17 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="description" content="Self finance management app." />
       </Head>
-
-      <SessionProvider>
-        <AuthProvider>
-          <ModalProvider>
-            <LayoutProvider>
-              <Component {...pageProps} />
-            </LayoutProvider>
-          </ModalProvider>
-        </AuthProvider>
-      </SessionProvider>
+      <SkeletonTheme baseColor={'#e3e4ee'} highlightColor={'#ECEDF6'}>
+        <SessionProvider>
+          <AuthProvider>
+            <ModalProvider>
+              <LayoutProvider>
+                <Component {...pageProps} />
+              </LayoutProvider>
+            </ModalProvider>
+          </AuthProvider>
+        </SessionProvider>
+      </SkeletonTheme>
     </>
   );
 };
