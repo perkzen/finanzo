@@ -9,22 +9,11 @@ if they want to make some progress in the financial field.
 
 # Features
 
-- Create expense item
-- Create income item
-- Delete expense item
-- Delete income item
-- List all expenses and incomes for a specific month
-- List all expenses and incomes for a specific year
-- Expense analysis graph for year
-- Income analysis graph for year
-
-[//]: # (<img src="pictures/Screenshot 2022-06-12 at 22.54.16 &#40;2&#41;.png" />)
-
-[//]: # (<img src="pictures/Screenshot 2022-06-12 at 22.54.43 &#40;2&#41;.png"/>)
-
-[//]: # ()
-
-[//]: # ()
+- Create/Delete yearly report 
+- Create/Delete transaction item
+- Create/Delete upcoming payment
+- List all transactions by month
+- Finance analysis
 
 # Tech stack:
 
@@ -102,11 +91,7 @@ $ pscale connect finanzo
 
 # Todo
 
-- [ ] translations for months
-- [ ] delete warning for deleting report
 - [ ] create skeleton loading
-- [ ] make that you cant submit empty forms
-- [ ] better error handling
 - [ ] add tests
 - [ ] add details when click on transaction
 - [ ] fix login when revisiting site (if already logged in redirect to dashboard)

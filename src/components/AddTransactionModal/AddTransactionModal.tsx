@@ -41,10 +41,15 @@ const AddTransactionModal: FC<ModalProps> = ({
 
   const { mutateAsync } = trpc.useMutation(['transactions.create-transaction']);
 
-  const { register, handleSubmit } = useForm<CreateTransactionForm>({
+  const { register, handleSubmit, formState } = useForm<CreateTransactionForm>({
     defaultValues,
     reValidateMode: 'onSubmit',
   });
+
+  const { dirtyFields } = formState;
+
+  const isDisabled = () =>
+    !(dirtyFields.displayName && dirtyFields.amount && dirtyFields.date);
 
   const onSubmit = async (data: CreateTransactionForm) => {
     try {
@@ -123,8 +128,8 @@ const AddTransactionModal: FC<ModalProps> = ({
           />
           <Toggle {...register('recurring')} label={t('recurring')} />
           <div className="mt-8">
-            <Button label={t('save')} type={'submit'} />{' '}
-            <Button label={t('close')} onClick={handleClose} />
+            <Button label={t('save')} disabled={isDisabled()} type={'submit'} />{' '}
+            <Button label={t('close')} type={'button'} onClick={handleClose} />
           </div>
         </form>
       </div>
