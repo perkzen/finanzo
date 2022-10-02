@@ -63,16 +63,16 @@ model VerificationToken {
 }
 
 model Transaction {
-  id              String        @id @default(cuid())
+  id              String            @id @default(cuid())
   category        String
-  recurring       Boolean?      @default(false)
+  recurring       Boolean?          @default(false)
   displayName     String
   amount          Float
-  createdAt       DateTime      @default(dbgenerated()) @db.Date
+  createdAt       DateTime          @default(dbgenerated()) @db.Date
   userId          String
-  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   monthlyReportId String
-  MonthlyReport   MonthlyReport @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
+  MonthlyReport   MonthlyReport     @relation(fields: [monthlyReportId], references: [id], onDelete: Cascade)
 
   @@map("transactions")
 }

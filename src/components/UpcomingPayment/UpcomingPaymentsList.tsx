@@ -29,6 +29,7 @@ const UpcomingPaymentsList: FC = () => {
       },
     });
   };
+
   return (
     <div className={'mt-20 px-4 w-full'}>
       <Title

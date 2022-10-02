@@ -82,16 +82,18 @@ export class TransactionService implements Service {
   }
 
   async getUpcomingTransactions(userId: string) {
+    // get all upcoming
     const transactions = await prisma.transaction.findMany({
       where: {
         userId,
         createdAt: {
-          gt: new Date(),
+          gte: new Date(),
         },
       },
     });
 
-    await this.refreshPayment(userId);
+    // refresh recurring outdated payments
+    await this.refreshOutdatedRecurringPayments(userId);
 
     const payments: { [key: string]: Transaction[] } = {};
     const dates: Date[] = [];
@@ -109,28 +111,39 @@ export class TransactionService implements Service {
     return { payments, dates };
   }
 
-  async refreshPayment(userId: string) {
+  private async refreshOutdatedRecurringPayments(userId: string) {
     const outdatedPayments = await prisma.transaction.findMany({
       where: {
         userId,
         recurring: true,
         createdAt: {
-          lte: new Date(),
+          lt: new Date(),
         },
       },
     });
 
-    // refresh outdated payments
+    // update all old payments to not recurring
+    await prisma.transaction.updateMany({
+      where: {
+        userId,
+        recurring: true,
+        createdAt: {
+          lt: new Date(),
+        },
+      },
+      data: { recurring: false },
+    });
+
     return await Promise.all(
-      outdatedPayments.map(
-        async (payment) =>
-          await prisma.transaction.create({
-            data: {
-              ...payment,
-              createdAt: addMonthsToDate(payment.createdAt, 1),
-            },
-          })
-      )
+      await outdatedPayments.map(async (payment) => {
+        // create new payment and add 1 month
+        return await prisma.transaction.create({
+          data: {
+            ...payment,
+            createdAt: addMonthsToDate(payment.createdAt, 1),
+          },
+        });
+      })
     );
   }
 }
