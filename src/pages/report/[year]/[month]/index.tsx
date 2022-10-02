@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import Card from '../../../../components/Card/Card';
 import { GrTransaction } from 'react-icons/gr';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 const MonthlyReport = () => {
   const { t } = useTranslation();
@@ -60,11 +61,17 @@ const MonthlyReport = () => {
         title={`${month} ${year}`}
         subtitle={t('monthly_report_subtitle')}
       />
-      <Button
-        label={t('add_transaction')}
-        classNames={'ml-auto w-full sm:w-auto'}
-        onClick={handleClick}
-      />
+      <div className={'flex flex-row items-center'}>
+        <Link href={`/report/${year}`}>
+          <Button label={t('back_to_yearly_report')} />
+        </Link>
+        <Button
+          label={t('add_transaction')}
+          classNames={'ml-auto  sm:w-auto'}
+          onClick={handleClick}
+        />
+      </div>
+
       <>
         {transactions.length > 0 ? (
           transactions.map((transaction, index) => (

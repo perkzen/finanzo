@@ -103,7 +103,6 @@ $ pscale connect finanzo
 # Todo
 
 - [ ] translations for months
-- [ ] back button on months
 - [ ] delete warning for deleting report
 - [ ] create skeleton loading
 - [ ] make that you cant submit empty forms

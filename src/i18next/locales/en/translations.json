@@ -50,5 +50,6 @@
   "deleted": "Deleted",
   "creating": "Creating...",
   "created": "Created",
-  "no_data": "No data to display"
+  "no_data": "No data to display",
+  "back_to_yearly_report": "Back to yearly report"
 }
