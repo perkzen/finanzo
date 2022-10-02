@@ -4,14 +4,14 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { trpc } from '../../utils/trpc';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
 import { ModalProps } from '../../types/modal';
+import { useTranslation } from 'react-i18next';
 
 const CreateYearlyReportModal: FC<ModalProps> = ({
   handleClose,
   modal: { callback },
 }) => {
-  const router = useRouter();
+  const { t } = useTranslation();
   const [year, setYear] = useState(new Date().getFullYear() + 1);
   const { mutateAsync } = trpc.useMutation('reports.create-yearly-report');
 
@@ -19,8 +19,8 @@ const CreateYearlyReportModal: FC<ModalProps> = ({
     e.preventDefault();
     try {
       await toast.promise(mutateAsync({ year }), {
-        loading: 'Creating report...',
-        success: 'Report created!',
+        loading: t('creating'),
+        success: t('created'),
         error: (err) => err.message,
       });
       handleClose();
