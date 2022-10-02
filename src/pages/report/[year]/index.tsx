@@ -41,6 +41,7 @@ const YearlyReport: NextPage = () => {
   const months = data?.months.map((data) => {
     return {
       ...data,
+      month: t(`${data.month}`),
       income: formatNumberAsCurrency(data.income),
       expenses: formatNumberAsCurrency(data.expenses),
       balance: formatNumberAsCurrency(data.balance),

@@ -51,5 +51,17 @@
   "creating": "Ustvarjanje...",
   "created": "Ustvarjeno",
   "no_data": "Ni podatkov za prikaz",
-  "back_to_yearly_report": "Nazaj na letno poročilo"
+  "back_to_yearly_report": "Nazaj na letno poročilo",
+  "january": "Januar",
+  "february": "Februar",
+  "march": "Marec",
+  "april": "April",
+  "may": "Maj",
+  "june": "Junij",
+  "july": "Julij",
+  "august": "Avgust",
+  "september": "September",
+  "october": "Oktober",
+  "november": "November",
+  "december": "December"
 }

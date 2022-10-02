@@ -51,5 +51,17 @@
   "creating": "Creating...",
   "created": "Created",
   "no_data": "No data to display",
-  "back_to_yearly_report": "Back to yearly report"
+  "back_to_yearly_report": "Back to yearly report",
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "june": "June",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December"
 }
