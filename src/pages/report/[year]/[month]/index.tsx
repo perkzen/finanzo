@@ -68,7 +68,8 @@ const MonthlyReport = () => {
         </Link>
         <Button
           label={t('add_transaction')}
-          classNames={'ml-auto  sm:w-auto'}
+          classNames={'ml-auto sm:w-auto'}
+          type={'button'}
           onClick={handleClick}
         />
       </div>
