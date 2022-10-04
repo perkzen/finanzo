@@ -29,7 +29,6 @@ const MonthlyReport = () => {
 
   const transactions = data ? data : [];
 
-  // TODO: fix month and year problem on slovenian language
   const handleClick = () => {
     dispatch({
       type: ModalActionType.ADD_MODAL,
