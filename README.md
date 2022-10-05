@@ -92,4 +92,3 @@ $ pscale connect finanzo
 # Todo
 - [ ] add tests
 - [ ] add details when click on transaction
-- [ ] fix login when revisiting site (if already logged in redirect to dashboard)
