@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { useSession } from 'next-auth/react';
-import Home from '../../pages';
 import Image from 'next/image';
 import Loader from '../../assets/loader.gif';
+import Login from '../Login/Login';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -22,7 +22,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   }
 
   if (status === 'unauthenticated') {
-    return <Home />;
+    return <Login />;
   }
 
   return <>{children}</>;
