@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { trpc } from '../../utils/trpc';
 import { ChartData } from 'chart.js';
-import { getPastMonthsAsArray } from '../../utils/date';
+import { getPastMonthsAsArray, useMonths } from '../../utils/date';
 import Title from '../Title/Title';
 import Statistics from '../Statistics/Statistics';
 import History from '../History/History';
@@ -10,12 +10,13 @@ import LineChart from '../LineChart/LineChart';
 
 const Dashboard: FC = () => {
   const { t } = useTranslation();
+  const months = useMonths();
   const { data } = trpc.useQuery([
     'analytics.get-account-balance-data-over-year',
     { year: new Date().getFullYear() },
   ]);
   const chartData: ChartData<'line', number[], string> = {
-    labels: getPastMonthsAsArray(new Date().getMonth() + 1),
+    labels: getPastMonthsAsArray(months, new Date().getMonth() + 1),
     datasets: [
       {
         label: t('account_balance'),

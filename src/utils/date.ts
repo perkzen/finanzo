@@ -21,8 +21,11 @@ export const useMonths = () => {
   return monthsArray.map((month) => t(`${month}`));
 };
 
-export const getPastMonthsAsArray = (currentMonth: number): string[] => {
-  return monthsArray.slice(0, currentMonth);
+export const getPastMonthsAsArray = (
+  months: string[],
+  currentMonth: number
+): string[] => {
+  return months.slice(0, currentMonth);
 };
 
 export const formatDate = (date: Date, formatter?: string): string => {
