@@ -52,8 +52,6 @@ export default NextAuth({
       } catch (e) {
         console.error(e);
       }
-
-      // what if fail
     },
   },
 });
