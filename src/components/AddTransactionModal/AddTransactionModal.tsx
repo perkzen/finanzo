@@ -118,7 +118,12 @@ const AddTransactionModal: FC<ModalProps> = ({
           className={'flex flex-col gap-2'}
         >
           <Input {...register('displayName')} label={t('display_name')} />
-          <Input {...register('amount')} label={t('amount')} type={'number'} />
+          <Input
+            {...register('amount')}
+            label={t('amount')}
+            type={'number'}
+            step={'0.01'}
+          />
           <Input
             {...register('date')}
             label={t('date')}

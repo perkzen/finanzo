@@ -4,7 +4,7 @@ import { GoGraph } from 'react-icons/go';
 import Link from 'next/link';
 
 const items: { icon: ReactNode; url: string }[] = [
-  { icon: <HiOutlineHome />, url: '/dashboard' },
+  { icon: <HiOutlineHome />, url: '/' },
   { icon: <HiOutlineCalendar />, url: `/report/${new Date().getFullYear()}` },
   { icon: <GoGraph />, url: '/analytics' },
 ];

@@ -1,15 +1,14 @@
-import React from 'react';
-import { NextPage } from 'next';
-import Statistics from '../components/Statistics/Statistics';
-import History from '../components/History/History';
-import Title from '../components/Title/Title';
-import { trpc } from '../utils/trpc';
-import { ChartData } from 'chart.js';
-import { getPastMonthsAsArray } from '../utils/date';
-import LineChart from '../components/LineChart/LineChart';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { trpc } from '../../utils/trpc';
+import { ChartData } from 'chart.js';
+import { getPastMonthsAsArray } from '../../utils/date';
+import Title from '../Title/Title';
+import Statistics from '../Statistics/Statistics';
+import History from '../History/History';
+import LineChart from '../LineChart/LineChart';
 
-const Dashboard: NextPage = () => {
+const Dashboard: FC = () => {
   const { t } = useTranslation();
   const { data } = trpc.useQuery([
     'analytics.get-account-balance-data-over-year',
