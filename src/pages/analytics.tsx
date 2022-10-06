@@ -2,13 +2,14 @@ import React, { ChangeEvent, useState } from 'react';
 import { NextPage } from 'next';
 import Title from '../components/Title/Title';
 import BarChart from '../components/BarChart/BarChart';
-import { monthsArray } from '../utils/date';
 import { ChartData } from 'chart.js';
 import { trpc } from '../utils/trpc';
 import { useTranslation } from 'react-i18next';
+import { useMonths } from '../utils/date';
 
 const Analytics: NextPage = () => {
   const { t } = useTranslation();
+  const monthsArray = useMonths();
   const { data: years, isLoading: isLoadingOptions } = trpc.useQuery([
     'reports.get-years',
   ]);

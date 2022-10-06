@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 export const monthsArray = [
   'January',
@@ -14,6 +15,11 @@ export const monthsArray = [
   'November',
   'December',
 ];
+
+export const useMonths = () => {
+  const { t } = useTranslation();
+  return monthsArray.map((month) => t(`${month}`));
+};
 
 export const getPastMonthsAsArray = (currentMonth: number): string[] => {
   return monthsArray.slice(0, currentMonth);
