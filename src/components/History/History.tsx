@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import Table, { TableHeader } from '../Table/Table';
 import { TransactionTable } from '../../types/transaction';
-import { trpc } from '../../utils/trpc';
 import { formatNumberAsCurrency } from '../../utils/formatNumberAsCurrency';
 import { formatDate, getMonthName } from '../../utils/date';
 import { useRouter } from 'next/router';
 import { renderTransactionTypeIcons } from '../../utils/transactionTypeIcons';
 import { useTranslation } from 'react-i18next';
+import { useTransactionHistory } from '../../utils/useApi';
 
 const headers: TableHeader<TransactionTable>[] = [
   { label: 'Category', accessor: 'category' },
@@ -19,10 +19,7 @@ const History: FC = () => {
   const { t } = useTranslation();
 
   const router = useRouter();
-  const { data, isLoading } = trpc.useQuery([
-    'transactions.get-transaction-history',
-    { limit: 3 },
-  ]);
+  const { data, isLoading } = useTransactionHistory();
 
   const transactions = data?.map((item) => {
     return {

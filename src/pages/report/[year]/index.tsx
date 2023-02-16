@@ -6,7 +6,6 @@ import Table, { TableHeader } from '../../../components/Table/Table';
 import { formatNumberAsCurrency } from '../../../utils/formatNumberAsCurrency';
 import Button from '../../../components/Button/Button';
 import Title from '../../../components/Title/Title';
-import { trpc } from '../../../utils/trpc';
 import {
   ModalActionType,
   useModalDispatch,
@@ -14,6 +13,11 @@ import {
 import { ModalType } from '../../../types/modal';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import {
+  useDeleteYearlyReport,
+  useYearlyReport,
+  useYears,
+} from '../../../utils/useApi';
 
 const YearlyReport: NextPage = () => {
   const { t } = useTranslation();
@@ -32,11 +36,7 @@ const YearlyReport: NextPage = () => {
     typeof router.query.year === 'string' ? +router.query.year : undefined;
   const [year, setYear] = useState(query || new Date().getFullYear());
 
-  const {
-    data,
-    isLoading,
-    refetch: fetchReports,
-  } = trpc.useQuery(['reports.get-yearly-report-by-id', { year }]);
+  const { data, isLoading, refetch: fetchReports } = useYearlyReport(year);
 
   const months = data?.months.map((data) => {
     return {
@@ -61,13 +61,9 @@ const YearlyReport: NextPage = () => {
     data: years,
     isLoading: isLoadingOptions,
     refetch: refetchOptions,
-  } = trpc.useQuery(['reports.get-years']);
+  } = useYears();
 
-  const { mutateAsync } = trpc.useMutation('reports.delete-yearly-report', {
-    onSuccess: async () => {
-      await fetchReports();
-    },
-  });
+  const { mutateAsync } = useDeleteYearlyReport(fetchReports);
 
   const handleButtonClick = () => {
     dispatch({

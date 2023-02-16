@@ -7,17 +7,15 @@ import {
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
 import { ModalType } from '../../types/modal';
-import { trpc } from '../../utils/trpc';
 import { formatDate } from '../../utils/date';
 import { useTranslation } from 'react-i18next';
 import Skeleton from 'react-loading-skeleton';
+import { useUpcomingTransactions } from '../../utils/useApi';
 
 const UpcomingPaymentsList: FC = () => {
   const { t } = useTranslation();
   const dispatch = useModalDispatch();
-  const { data, isLoading, refetch } = trpc.useQuery([
-    'transactions.get-upcoming-transactions',
-  ]);
+  const { data, isLoading, refetch } = useUpcomingTransactions();
 
   const openModal = () => {
     dispatch({

@@ -9,7 +9,6 @@ import { useAccountBalanceDataOverYear } from '../../utils/useApi';
 const Dashboard: FC = () => {
   const { t } = useTranslation();
   const chartData = useAccountBalanceDataOverYear();
-
   return (
     <>
       <Title

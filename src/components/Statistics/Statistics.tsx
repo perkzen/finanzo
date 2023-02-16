@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import StatCard from './StatCard';
 import { Statistic } from '../../types/statistics';
-import { trpc } from '../../utils/trpc';
 import { GiMoneyStack, GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
 import { GrTransaction } from 'react-icons/gr';
 import { useTranslation } from 'react-i18next';
+import { useAccountBalance } from '../../utils/useApi';
 
 const Statistics: FC = () => {
   const { t } = useTranslation();
-  const { data, isLoading } = trpc.useQuery(['account.get-balance']);
+  const { data, isLoading } = useAccountBalance();
 
   const stats: Statistic[] = [
     {

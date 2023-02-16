@@ -3,13 +3,40 @@ import { ChartData } from 'chart.js';
 import { getPastMonthsAsArray, useMonths } from './date';
 import { useTranslation } from 'react-i18next';
 
+export const useAccountBalance = () => {
+  return trpc.accounts.getBalance.useQuery();
+};
+
+export const useTransactionHistory = () => {
+  return trpc.transactions.getTransactionHistory.useQuery({ limit: 3 });
+};
+
+export const useUpcomingTransactions = () => {
+  return trpc.transactions.getUpcomingTransactions.useQuery();
+};
+
+export const useUser = () => {
+  return trpc.accounts.getUser.useQuery();
+};
+
+export const useYearlyReport = (year: number) => {
+  return trpc.reports.getYearlyReportById.useQuery({ year });
+};
+
+export const useDeleteYearlyReport = (cb: () => any) => {
+  return trpc.reports.deleteYearlyReport.useMutation({
+    onSuccess: async () => {
+      await cb();
+    },
+  });
+};
+
 export const useAccountBalanceDataOverYear = (year?: number) => {
   const { t } = useTranslation();
   const months = useMonths();
-  const { data } = trpc.useQuery([
-    'analytics.get-account-balance-data-over-year',
-    { year: year || new Date().getFullYear() },
-  ]);
+  const { data } = trpc.analytics.getAccountBalanceDataOverYear.useQuery({
+    year: year || new Date().getFullYear(),
+  });
 
   const chartData: ChartData<'line', number[], string> = {
     labels: getPastMonthsAsArray(months, new Date().getMonth() + 1),
@@ -27,14 +54,13 @@ export const useAccountBalanceDataOverYear = (year?: number) => {
 };
 
 export const useYears = () => {
-  return trpc.useQuery(['reports.get-years']);
+  return trpc.reports.getYears.useQuery();
 };
 
 export const useYearlyReportData = (year: number) => {
   const { t } = useTranslation();
   const monthsArray = useMonths();
-
-  const { data } = trpc.useQuery(['analytics.get-data-by-year', { year }]);
+  const { data } = trpc.analytics.getDataByYear.useQuery({ year });
 
   const balanceData: ChartData<'bar', number[], string> = {
     labels: monthsArray,
@@ -67,20 +93,17 @@ export const useYearlyReportData = (year: number) => {
 };
 
 export const useTransactionsByMonth = (year: number, month: string) => {
-  return trpc.useQuery([
-    'transactions.get-transactions-by-month',
-    { month, year },
-  ]);
+  return trpc.transactions.getTransactionsByMonth.useQuery({ month, year });
 };
 
 export const useDeleteTransaction = () => {
-  return trpc.useMutation(['transactions.delete-transaction']);
+  return trpc.transactions.deleteTransaction.useMutation();
 };
 
 export const useCreateTransaction = () => {
-  return trpc.useMutation(['transactions.create-transaction']);
+  return trpc.transactions.createTransaction.useMutation();
 };
 
 export const useCreateYearlyReport = () => {
-  return trpc.useMutation('reports.create-yearly-report');
+  return trpc.reports.createYearlyReport.useMutation();
 };

@@ -1,4 +1,4 @@
-import { prisma } from '../db/client';
+import { prisma } from '../../db/client';
 import { createMonthlyReports } from '../helpers/createMonthlyReports';
 import { Service } from './abstract-service';
 

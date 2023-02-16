@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import Image from 'next/image';
-import { trpc } from '../../utils/trpc';
 import UpcomingPaymentsList from '../UpcomingPayment/UpcomingPaymentsList';
 import { BiLogOut } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
@@ -11,9 +10,10 @@ import {
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
 import { ModalType } from '../../types/modal';
+import { useUser } from '../../utils/useApi';
 
 const RightMenu: FC = () => {
-  const { data } = trpc.useQuery(['account.get-user']);
+  const { data } = useUser();
   const dispatch = useModalDispatch();
   const [isImageLoading, setIsImageLoading] = useState(true);
 
