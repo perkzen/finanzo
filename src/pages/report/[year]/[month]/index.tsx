@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Title from '../../../../components/Title/Title';
 import TransactionCard from '../../../../components/TranscationCard/TransactionCard';
-import { trpc } from '../../../../utils/trpc';
 import Button from '../../../../components/Button/Button';
 import {
   ModalActionType,
@@ -15,6 +14,10 @@ import { GrTransaction } from 'react-icons/gr';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import TransactionSkeleton from '../../../../components/TranscationCard/TransactionSkeleton';
+import {
+  useDeleteTransaction,
+  useTransactionsByMonth,
+} from '../../../../utils/useApi';
 
 const MonthlyReport = () => {
   const { t } = useTranslation();
@@ -22,10 +25,10 @@ const MonthlyReport = () => {
   const router = useRouter();
   const { year, month } = router.query;
 
-  const { data, isLoading, refetch } = trpc.useQuery([
-    'transactions.get-transactions-by-month',
-    { month: String(month), year: Number(year) },
-  ]);
+  const { data, isLoading, refetch } = useTransactionsByMonth(
+    Number(year),
+    String(month)
+  );
 
   const transactions = data ? data : [];
 
@@ -41,7 +44,7 @@ const MonthlyReport = () => {
     });
   };
 
-  const { mutateAsync } = trpc.useMutation(['transactions.delete-transaction']);
+  const { mutateAsync } = useDeleteTransaction();
 
   const handleDelete = async (id: string) => {
     try {

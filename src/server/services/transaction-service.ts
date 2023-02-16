@@ -1,4 +1,4 @@
-import { prisma } from '../../db/client';
+import { prisma } from '../db/client';
 import { CreateTransactionProps } from '../validators/create-transaction-validator';
 import { Transaction } from '../../types/transaction';
 import { addMonthsToDate, formatDate } from '../../utils/date';

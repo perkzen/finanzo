@@ -2,10 +2,10 @@ import React, { FC, FormEvent, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { trpc } from '../../utils/trpc';
 import { toast } from 'react-hot-toast';
 import { ModalProps } from '../../types/modal';
 import { useTranslation } from 'react-i18next';
+import { useCreateYearlyReport } from '../../utils/useApi';
 
 const CreateYearlyReportModal: FC<ModalProps> = ({
   handleClose,
@@ -13,7 +13,7 @@ const CreateYearlyReportModal: FC<ModalProps> = ({
 }) => {
   const { t } = useTranslation();
   const [year, setYear] = useState(new Date().getFullYear() + 1);
-  const { mutateAsync } = trpc.useMutation('reports.create-yearly-report');
+  const { mutateAsync } = useCreateYearlyReport();
 
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();

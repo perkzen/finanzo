@@ -1,4 +1,4 @@
-import { prisma } from '../../db/client';
+import { prisma } from '../db/client';
 import { Service } from './abstract-service';
 
 export class AccountService implements Service {

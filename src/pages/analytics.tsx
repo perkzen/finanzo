@@ -2,51 +2,17 @@ import React, { ChangeEvent, useState } from 'react';
 import { NextPage } from 'next';
 import Title from '../components/Title/Title';
 import BarChart from '../components/BarChart/BarChart';
-import { ChartData } from 'chart.js';
-import { trpc } from '../utils/trpc';
 import { useTranslation } from 'react-i18next';
-import { useMonths } from '../utils/date';
+import { useYearlyReportData, useYears } from '../utils/useApi';
 
 const Analytics: NextPage = () => {
   const { t } = useTranslation();
-  const monthsArray = useMonths();
-  const { data: years, isLoading: isLoadingOptions } = trpc.useQuery([
-    'reports.get-years',
-  ]);
-
+  const { data: years, isLoading: isLoadingOptions } = useYears();
   const [year, setYear] = useState(new Date().getFullYear());
+  const { transactionData, balanceData } = useYearlyReportData(year);
 
   const handleYearChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     setYear(+e.target.value);
-  };
-
-  const { data } = trpc.useQuery(['analytics.get-data-by-year', { year }]);
-
-  const chartData: ChartData<'bar', number[], string> = {
-    labels: monthsArray,
-    datasets: [
-      {
-        label: t('expenses'),
-        data: data ? data.expenses : [],
-        backgroundColor: '#da2653',
-      },
-      {
-        label: t('incomes'),
-        data: data ? data.incomes : [],
-        backgroundColor: '#35e178',
-      },
-    ],
-  };
-
-  const transactionData: ChartData<'bar', number[], string> = {
-    labels: monthsArray,
-    datasets: [
-      {
-        label: t('transactions'),
-        data: data ? data.transactions : [],
-        backgroundColor: '#313030',
-      },
-    ],
   };
 
   return (
@@ -96,7 +62,7 @@ const Analytics: NextPage = () => {
           titleSize={'text-lg'}
           subtitle={t('income_and_expenses_subtitle')}
         />
-        <BarChart data={chartData} height={'100px'} />
+        <BarChart data={balanceData} height={'100px'} />
       </div>
 
       <div className={'flex flex-col gap-4'}>

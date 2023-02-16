@@ -7,9 +7,9 @@ import {
   useModalDispatch,
 } from '../../context/Modal/ModalProvider';
 import { ModalType } from '../../types/modal';
-import { trpc } from '../../utils/trpc';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { useDeleteTransaction } from '../../utils/useApi';
 
 interface UpcomingPaymentProps {
   payment: Transaction;
@@ -19,7 +19,7 @@ interface UpcomingPaymentProps {
 const UpcomingPayment: FC<UpcomingPaymentProps> = ({ payment, callback }) => {
   const { t } = useTranslation();
   const dispatch = useModalDispatch();
-  const { mutateAsync } = trpc.useMutation('transactions.delete-transaction');
+  const { mutateAsync } = useDeleteTransaction();
 
   const handleDelete = async () => {
     try {

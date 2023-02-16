@@ -4,12 +4,12 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { ModalProps } from '../../types/modal';
 import Toggle from '../Toggle/Toogle';
-import { trpc } from '../../utils/trpc';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { getDateMax, getDateMin } from '../../utils/date';
 import { useTranslation } from 'react-i18next';
 import { useTransactionTypeIcons } from '../../utils/transactionTypeIcons';
+import { useCreateTransaction } from '../../utils/useApi';
 
 interface CreateTransactionForm {
   recurring: boolean;
@@ -39,7 +39,7 @@ const AddTransactionModal: FC<ModalProps> = ({
     setSelectedType(type);
   };
 
-  const { mutateAsync } = trpc.useMutation(['transactions.create-transaction']);
+  const { mutateAsync } = useCreateTransaction();
 
   const { register, handleSubmit, formState } = useForm<CreateTransactionForm>({
     defaultValues,
