@@ -1,28 +1,31 @@
 import { ReportService } from '../services/report-service';
 import { protectedProcedure, router } from '../trpc';
-import { z } from 'zod';
 import { getUserId } from '../helpers/getUserId';
+import {
+  getByIdValidator,
+  getByYearValidator,
+} from '../validators/common-validators';
 
 const service = new ReportService();
 
 export const reportsRouter = router({
   getYearlyReportById: protectedProcedure
-    .input(z.object({ year: z.number() }))
+    .input(getByYearValidator)
     .query(async ({ input, ctx }) => {
       const userId = getUserId(ctx);
       return await service.getYearlyReportByYear(userId, input.year);
     }),
   createYearlyReport: protectedProcedure
-    .input(z.object({ year: z.number() }))
+    .input(getByYearValidator)
     .mutation(async ({ input, ctx }) => {
       const userId = getUserId(ctx);
       return await service.createYearlyReport(userId, input.year);
     }),
   deleteYearlyReport: protectedProcedure
-    .input(z.object({ reportId: z.string().cuid() }))
+    .input(getByIdValidator)
     .mutation(async ({ input, ctx }) => {
       const userId = getUserId(ctx);
-      return await service.deleteYearlyReport(input.reportId, userId);
+      return await service.deleteYearlyReport(input.id, userId);
     }),
   getYears: protectedProcedure.query(async ({ ctx }) => {
     const userId = getUserId(ctx);

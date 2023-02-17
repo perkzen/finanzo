@@ -3,33 +3,16 @@ import { ChartData } from 'chart.js';
 import { getPastMonthsAsArray, useMonths } from './date';
 import { useTranslation } from 'react-i18next';
 
+// Accounts
 export const useAccountBalance = () => {
   return trpc.accounts.getBalance.useQuery();
-};
-
-export const useTransactionHistory = () => {
-  return trpc.transactions.getTransactionHistory.useQuery({ limit: 3 });
-};
-
-export const useUpcomingTransactions = () => {
-  return trpc.transactions.getUpcomingTransactions.useQuery();
 };
 
 export const useUser = () => {
   return trpc.accounts.getUser.useQuery();
 };
 
-export const useYearlyReport = (year: number) => {
-  return trpc.reports.getYearlyReportById.useQuery({ year });
-};
-
-export const useDeleteYearlyReport = (cb: () => any) => {
-  return trpc.reports.deleteYearlyReport.useMutation({
-    onSuccess: async () => {
-      await cb();
-    },
-  });
-};
+// Analytics
 
 export const useAccountBalanceDataOverYear = (year?: number) => {
   const { t } = useTranslation();
@@ -51,10 +34,6 @@ export const useAccountBalanceDataOverYear = (year?: number) => {
   };
 
   return chartData;
-};
-
-export const useYears = () => {
-  return trpc.reports.getYears.useQuery();
 };
 
 export const useYearlyReportData = (year: number) => {
@@ -92,6 +71,29 @@ export const useYearlyReportData = (year: number) => {
   return { balanceData, transactionData };
 };
 
+// Reports
+
+export const useYearlyReport = (year: number) => {
+  return trpc.reports.getYearlyReportById.useQuery({ year });
+};
+
+export const useDeleteYearlyReport = (cb: () => any) => {
+  return trpc.reports.deleteYearlyReport.useMutation({
+    onSuccess: async () => {
+      await cb();
+    },
+  });
+};
+
+export const useYears = () => {
+  return trpc.reports.getYears.useQuery();
+};
+
+export const useCreateYearlyReport = () => {
+  return trpc.reports.createYearlyReport.useMutation();
+};
+
+// Transactions
 export const useTransactionsByMonth = (year: number, month: string) => {
   return trpc.transactions.getTransactionsByMonth.useQuery({ month, year });
 };
@@ -104,6 +106,10 @@ export const useCreateTransaction = () => {
   return trpc.transactions.createTransaction.useMutation();
 };
 
-export const useCreateYearlyReport = () => {
-  return trpc.reports.createYearlyReport.useMutation();
+export const useTransactionHistory = () => {
+  return trpc.transactions.getTransactionHistory.useQuery({ limit: 3 });
+};
+
+export const useUpcomingTransactions = () => {
+  return trpc.transactions.getUpcomingTransactions.useQuery();
 };

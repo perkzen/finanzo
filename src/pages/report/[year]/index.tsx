@@ -78,7 +78,7 @@ const YearlyReport: NextPage = () => {
   const handleDeleteYearlyReport = async () => {
     if (!query || !data || !years) return;
     try {
-      await toast.promise(mutateAsync({ reportId: data.id }), {
+      await toast.promise(mutateAsync({ id: data.id }), {
         loading: t('deleting'),
         success: t('deleted'),
         error: (err) => err.message,

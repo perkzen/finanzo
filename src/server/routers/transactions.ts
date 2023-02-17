@@ -1,25 +1,24 @@
-import { z } from 'zod';
 import { TransactionService } from '../services/transaction-service';
 import { protectedProcedure, router } from '../trpc';
 import { getUserId } from '../helpers/getUserId';
 import { createTransactionValidator } from '../validators/create-transaction-validator';
+import {
+  getByIdValidator,
+  getTransactionByMonthValidator,
+  limitValidator,
+} from '../validators/common-validators';
 
 const service = new TransactionService();
 
 export const transactionsRouter = router({
   getTransactionHistory: protectedProcedure
-    .input(z.object({ limit: z.number() }))
+    .input(limitValidator)
     .query(async ({ input, ctx }) => {
       const userId = getUserId(ctx);
       return await service.getTransactionHistory(input.limit, userId);
     }),
   getTransactionsByMonth: protectedProcedure
-    .input(
-      z.object({
-        month: z.string(),
-        year: z.number(),
-      })
-    )
+    .input(getTransactionByMonthValidator)
     .query(async ({ input, ctx }) => {
       const userId = getUserId(ctx);
       return await service.getTransactionsByMonth(
@@ -35,10 +34,10 @@ export const transactionsRouter = router({
       return await service.createTransaction(input, userId);
     }),
   deleteTransaction: protectedProcedure
-    .input(z.object({ transactionId: z.string() }))
+    .input(getByIdValidator)
     .mutation(async ({ input, ctx }) => {
       const userId = getUserId(ctx);
-      return await service.deleteTransaction(input.transactionId, userId);
+      return await service.deleteTransaction(input.id, userId);
     }),
   getUpcomingTransactions: protectedProcedure.query(async ({ ctx }) => {
     const userId = getUserId(ctx);

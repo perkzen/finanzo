@@ -23,7 +23,7 @@ const UpcomingPayment: FC<UpcomingPaymentProps> = ({ payment, callback }) => {
 
   const handleDelete = async () => {
     try {
-      await toast.promise(mutateAsync({ transactionId: payment.id }), {
+      await toast.promise(mutateAsync({ id: payment.id }), {
         loading: t('deleting'),
         success: t('deleted'),
         error: (err) => err.message,

@@ -48,7 +48,7 @@ const MonthlyReport = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await toast.promise(mutateAsync({ transactionId: id }), {
+      await toast.promise(mutateAsync({ id: id }), {
         loading: t('deleting'),
         success: t('deleted'),
         error: (err) => err.message,
